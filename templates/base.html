@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SANscript</title>
+    <link rel="stylesheet" href="{% static "foundation-5.5.2/css/foundation.css" %}" />
+    <link rel="stylesheet" href="{% static "foundation-icons/foundation-icons.css" %}" />
+    <link rel="stylesheet" href="{% static "chosen/chosen.min.css" %}" />
+    <link rel="stylesheet" href="{% static "jsPlumb/jsPlumb.css" %}" />
+    <link rel="stylesheet" href="{% static "css/sanscript.css" %}" />
+    <script src="{% static "foundation-5.5.2/js/vendor/modernizr.js" %}"></script>
+    {% block style %}
+    {% endblock %}
+  </head>
+  <body>
+    <div id="wrapper">
+      {% include "header.html" %}
+      {% include "topbar.html" %}
+      {% include "appbar.html" %}
+      {% include "menubar.html" %}
+      {% block content %}
+      {% endblock %}
+      <div id="push"></div>
+    </div>
+    {% include "footer.html" %}
+    <script src="{% static "foundation-5.5.2/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "foundation-5.5.2/js/foundation.min.js" %}"></script>
+    <script src="{% static "Highcharts-4.1.8/js/highcharts.js" %}"></script>
+    <script src="{% static "chosen/chosen.jquery.min.js" %}"></script>
+    <script src="{% static "jsPlumb/jsPlumb-1.7.10-min.js" %}"></script>
+    <script src="{% static "js/sanscript.js" %}"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    {% block script %}
+    {% endblock %}
+  </body>
+</html>
+

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="item_name" style="display: none">{{ item_name }}</div>
+
+<div class="row fullWidth withTop">
+<div class="columns">
+
+{% if cols %}
+
+  <div id="dvData">
+  <table>
+    <thead>
+
+    <tr class="service">
+        <td colspan="{{ cols|length }}">
+              {% if datetime %}<span>{{ datetime }}</span>{% endif %}
+              <span>{{ rows|length }} records</span>
+              {% if integer %}<span>integer: {{ integer }}</span>{% endif %}
+              {% if request.GET|length %}<span><a href="{{ request.path }}" class="clear_filter">clear filter</a></span>{% endif %}
+              <span><a href="#" class="export">export to csv</a></span>
+              <span><a href="{{ request.build_absolute_uri }}">page link</a></span>
+        </td>
+    </tr>
+
+    <tr>
+        {% for cell in cols %}
+            <th>
+                {{ cell }}
+            </th>
+        {% endfor %}
+    </tr>
+
+    <form action="." method="get">
+      <tr class="filter">
+      {% for cell in cols %}
+        <th>
+        <input type="text" id="{{ cell }}" name="{{ cell }}")>
+        </th>
+      {% endfor %}
+      </tr>
+      <input type="submit" value="OK" class="filter_submit">
+    </form>
+
+    </thead>
+
+    <tbody>
+
+    {% for row in rows %}
+      <tr>
+        {% for cell in row %}
+          <td>
+            {{ cell|safe }}
+          </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+
+    </tbody>
+
+    {% if sum_row %}
+    <tfoot>
+      <tr>
+        {% for cell in sum_row %}
+          <td>
+            {{ cell|safe }}
+          </td>
+        {% endfor %}
+      </tr>
+    </tfoot>
+    {% endif %}
+
+
+  </table>
+  </div>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+// set filter values
+    $( ".filter input" ).each(function( index ) {
+      $(this).val(getUrlParameter(this.name));
+    });
+// export table to csv
+    $(".export").on('click', function (event) {
+      exportTableToCSV.apply(this, [$('#dvData>table'), $('#item_name').text()+'.csv']);
+    });
+</script>
+{% endblock %}
+
+

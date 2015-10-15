@@ -1,0 +1,28 @@
+<script>
+    // fix first row in top position (sanscript.js);
+
+    var wrapper1 = $(".wrapper1");
+    var wrapper2 = $(".wrapper2");
+    var toprow = $(".xtimes");
+
+    fixTableSizes(wrapper2);
+    scrollWrappers(wrapper1, wrapper2);
+    $(window).resize(function() {
+        resizeFirstWrapper(wrapper1, wrapper2)
+    });
+    $(window).scroll(function() {
+        fixDiv(wrapper1, wrapper2, toprow)
+    });
+
+
+    // export table to csv file (sanscript.js);
+
+    $(".export").on('click', function (event) {
+        exportTableToCSV.apply(this, [$('#dvData'), '{{ counter }}.csv']);
+    });
+
+    // scroll .inner table to right end;
+
+    $('.inner').scrollLeft(20000);
+</script>
+

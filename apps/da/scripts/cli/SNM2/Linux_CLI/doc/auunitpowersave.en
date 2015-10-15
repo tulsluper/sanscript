@@ -1,0 +1,25 @@
+
+Copyright (C) 2005, 2012, Hitachi, Ltd.
+
+Command name
+    auunitpowersave    Referencing the Unit Power Saving Information
+
+Format
+  AMS2000
+    auunitpowersave -unit unit_name -refer
+
+Description
+    This command references the unit power saving information.
+
+Options
+    -unit unit_name
+            Specify the name of the array unit for which to reference
+            the unit power saving information.
+            Specify the name in less than or equal to 64 characters using
+            alphanumeric characters, special symbols "- (minus)",
+            "_ (underline)", ". (period)", "@", or "  (space)". 
+            Space in front and in the rear of the character string is
+            removed. 
+    -refer
+            References the unit power saving information.
+

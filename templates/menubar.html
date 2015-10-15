@@ -1,0 +1,11 @@
+{% if items %}
+<div class="row fullWidth">
+    <div class="panel">
+    {% for item in items %}
+        {% if forloop.counter != 1 %}&nbsp;|&nbsp;{% endif %}
+        <a href="/{{ app_label }}{% if sa %}-sa{% endif %}/{{ page_label }}/{{ item.label }}"
+           {% if item_label == item.label %}style="color: black;"{% endif %}>{{ item.title }}</a>
+    {% endfor %}
+    </div>
+</div>
+{% endif %}

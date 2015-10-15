@@ -1,0 +1,23 @@
+{% for app, items in items_ext %}
+  {% for item in items %}
+
+  {% if item.name == item_name %}
+
+    {% if item.warning %}
+    <div data-alert class="alert-box warning">
+      {{ item.warning|safe }}
+      <a href="#" class="close">&times;</a>
+    </div>
+    {% endif %}
+
+    {% if item.info %}
+    <div data-alert class="alert-box info">
+      {{ item.info|safe }}
+      <a href="#" class="close">&times;</a>
+    </div>
+    {% endif %}
+
+  {% endif %}
+
+  {% endfor %}
+{% endfor %}

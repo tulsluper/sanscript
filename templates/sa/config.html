@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row fullWidth">
+<div class="columns">
+
+{% include "box.html" %}
+
+{% for app in apps %}
+  <p>
+  {{ app.verbose_name }}:
+  {% for item in app.config_models %}
+      <a href="/{{ app_label }}/{{ page_label }}/{{ app.label }}_{{ item.label }}/">{{ item.title }}</a>
+  {% endfor %}
+  </p>
+{% endfor %}
+
+{% if formset %}
+<form method="post" action="">{% csrf_token %}
+  {{ formset.non_form_errors.as_ul }}
+  {{ formset.management_form }}
+  <table id="formset" class="aform">
+  {% for form in formset.forms %}
+    {% if forloop.first %}
+    <thead><tr>
+      {% for field in form.visible_fields %}
+      <th>{{ field.label|capfirst }}</th>
+      {% endfor %}
+    </tr></thead>
+    {% endif %}
+    <tr class="{% cycle row1,row2 %}">
+    {% for field in form.visible_fields %}
+      <td>
+      {# Include the hidden fields in the form #}
+      {% if forloop.first %}
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+        {% endfor %}
+      {% endif %}
+        {{ field.errors.as_ul }}
+        {{ field }}
+      </td>
+    {% endfor %}
+    </tr>
+  {% endfor %}
+  </table>
+  <input type="submit" class="button" value="Save">
+</form>
+{% endif %}
+
+</div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,91 @@
+<script>
+$(function(){
+
+{% if ptype == 'port' %}
+
+  function onDate(datestring, callback) {
+      return $.ajax({
+          type: "POST",
+          url: ".",
+          data: {
+              csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+              datestring: datestring,
+          },
+          success: function(data) {
+              callback($.parseJSON(data));
+          },
+          error: function(xhr, textStatus, errorThrown) {
+              alert(textStatus + errorThrown + xhr.status + xhr.responseText);
+          }
+      });
+  };
+
+  function setfields(data) {
+      options = "";
+      $.each(['sum', 'max', 'median'], function() {
+          selected = (this == $("#f_sort").val()) ? ' selected' : '';
+          options += "<option value='"+this+"'"+selected+">"+this+"</option>"
+      });
+      $.each(data["xtimes"], function() {
+          selected = (this.join('-') == $("#f_sort").val()) ? ' selected' : '';
+          options += "<option value='"+this.join('-')+"'"+selected+">"+this.join(':')+"</option>"
+      });
+      $("#f_sort").html(options);
+
+      options = "";
+      $.each(data["counters"], function() {
+          selected = (this == $("#f_counter").val()) ? ' selected' : '';
+          options += "<option value='"+this+"'"+selected+">"+this+"</option>"
+      });
+      $("#f_counter").html(options);
+  };
+
+
+  $('#f_datestring').fdatepicker({
+      format: 'yyyy-mm-dd',
+      startDate: '2015-03-20',
+      endDate: '+0d',
+  }).on('changeDate', function (ev) {
+      datestring = ev.date.toJSON().substring(0,10);
+      onDate(datestring, setfields);
+  });
+
+
+  $( ".bc_filter input[type=submit]" ).click(function() {
+      var datestring = $('#f_datestring').val();
+      var counter = $('#f_counter').val();
+      url = '/bc/counter/' + '?date='+ datestring + '&counter=' + counter + '&sort=' + $('#f_sort').val() +'&filter=' + $('#f_filter').val() + '&quantity=' + $('#f_quantity').val();
+      window.location.replace(url);
+      return false;
+  });
+
+{% elif ptype == 'counter' %}
+
+/*
+  $('.chosen-select').chosen({max_select_options: 5});
+
+  $('#f_datestring').fdatepicker({
+      format: 'yyyy-mm-dd',
+      startDate: '2015-03-20',
+      endDate: '+0d',
+  });
+
+  $( ".bc_filter input[type=submit]" ).click(function() {
+      var datestring = $('#f_datestring').val();
+      var port = $('#f_port').val().replace(' ', '_');
+      if (port == '')
+          url = '/bc/' + datestring + '/';
+      else
+          url = '/bc/' + datestring + '/port/' + port + '/';
+      window.location.replace(url);
+      return false;
+  });
+*/
+
+{% endif %}
+
+})
+
+
+</script>
+

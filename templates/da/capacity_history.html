@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row fullWidth withTop">
+<div class="large-2 columns">
+  <div id="dvData">
+  <table>
+    <thead>
+        <tr class="service">
+          <td colspan="11">
+              {% if datetime %}<span>{{ datetime }}</span>{% endif %}
+              <span>{{ storages|length }} records</span>
+              {% if integer %}<span>integer: {{ integer }}</span>{% endif %}
+              {% if request.GET|length %}<span><a href="{{ request.path }}" class="clear_filter">clear filter</a></span>{% endif %}
+              <span><a href="{{ request.build_absolute_uri }}">page link</a></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Storage</td>
+      <form action="." method="get">
+        <tr class="filter">
+          <th><input type="text" id="Storage" name="Storage"></th>
+        </tr>
+        <input type="submit" value="OK" class="filter_submit">
+      </form>
+    </thead>
+    <tbody>
+      {% for storage in storages %}
+        <tr>
+          <td>{{ storage }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+
+</div>
+<div class="large-10 columns">
+    <div id="container" style="width:100%; height:500px;"></div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+$(function () { 
+    $('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: '',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: [{% for date in dates %}'{{ date }}', {% endfor %}]
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: 'TB'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [
+        {
+            name: 'RawTotal',
+            data: [{% for value in fieldsvalues.RawTotal %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'RawData',
+            data: [{% for value in fieldsvalues.RawData %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'RawSpare',
+            data: [{% for value in fieldsvalues.RawSpare %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'RawAllocated',
+            data: [{% for value in fieldsvalues.RawAllocated %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'RawFree',
+            data: [{% for value in fieldsvalues.RawFree %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'FormattedTotal',
+            data: [{% for value in fieldsvalues.FormattedTotal %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'FormattedUsed',
+            data: [{% for value in fieldsvalues.FormattedUsed %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'FormattedPresented',
+            data: [{% for value in fieldsvalues.FormattedPresented %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'FormattedNotPresented',
+            data: [{% for value in fieldsvalues.FormattedNotPresented %}{{ value }}, {% endfor %}]
+        }, {
+            name: 'FormattedAvailable',
+            data: [{% for value in fieldsvalues.FormattedAvailable %}{{ value }}, {% endfor %}]
+        }]
+    });
+});
+
+// set filter values
+    $( ".filter input" ).each(function( index ) {
+      $(this).val(getUrlParameter(this.name));
+    });
+</script>
+{% endblock %}
+
+

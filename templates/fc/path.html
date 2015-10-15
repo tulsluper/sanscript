@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load extras %}
+
+{% block style %}
+
+<style>
+
+.window {
+  position:static;
+  border:1px solid #346789;
+  box-shadow: 2px 2px 19px #aaa;
+  -o-box-shadow: 2px 2px 19px #aaa;
+  -webkit-box-shadow: 2px 2px 19px #aaa;
+  -moz-box-shadow: 2px 2px 19px #aaa;
+  -moz-border-radius:0.5em;
+  border-radius:0.5em;
+  opacity:0.8;
+  filter:alpha(opacity=80);
+  text-align:center;
+  z-index:20;
+  background-color:#eeeeef;
+  color:black;
+  font-family:helvetica;
+  font-size:0.9em;
+}
+.switch {
+  float:left;
+  margin-left:200px;
+  /*margin-right:100px;*/
+  line-height:120px;
+  height:180px;
+  width:140px;
+}
+.switch:first-of-type {
+  margin-left:0;
+}
+
+.switch_name {
+  float:left;
+  width:100%;
+  line-height:40px;
+  height:40px;
+}
+
+.ports_left {
+  float:left;
+}
+.ports_right {
+  float:right;
+}
+
+.port {
+  padding:0;
+  line-height:40px;
+  height:40px;
+  width:40px;
+}
+    </style>
+
+
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row fullWidth">
+    <div class="panel path_filter">
+
+    <form action="." method="get">
+        <div>
+            <select name="node1" id="node1" class="chosen-select" data-placeholder="from">
+            <option value=""></option>
+            {% for p in ports %}
+                <option value="{{ p.Swport }}" {% if node1 == p.Swport %}selected{% endif %}>{{ p.Swport }} | {{ p.Aliases|join:'; ' }}</option>
+            {% endfor %}
+            </select>
+        </div>
+    <div>
+        <select name="node2" {% if not ports2 %}disabled{% endif %} class="chosen-select" data-placeholder="to">
+        <option value=""></option>
+        {% for p in ports2 %}
+          <option value="{{ p.0 }}" {% if node2 == p.0 %}selected{% endif %}>{{ p.0 }} | {{ p.1|join:'; ' }}</option>
+        {% endfor %}
+        </select>
+    </div>
+        <div>
+            <input type="submit" value="show path" class="button">
+          {% if bcounters %}
+            <input type="submit" value="show counters" class="button" onclick='this.form.action="/fc/stat/"; this.form.target="_blank"'>
+          {% endif %}
+        </div>
+    </form>
+
+    </div>
+</div>
+
+
+<div class="row fullWidth">
+<div class="large-12 columns" style="margin-bottom:1em">
+
+ 
+    {% if warning %}{{ warning }}{% endif %}
+
+
+    {% for switch, ports in nodes %}
+        <div class="window switch" style="height:{{height}}px">
+            <div class="switch_name">
+                {{ switch }}
+            </div>
+            <div class="ports_left">
+            {% if forloop.first %}
+              {% for port in same_ports.left %}
+                  <abbr title="{{ port.1|join:'; ' }}">
+                  <div class="window port" id="{{ switch }}_{{ port }}">
+                      {{ port.0 }}
+                  </div>
+                  </abbr>
+              {% endfor %}
+            {% else %}
+              {% for port in ports.left %}
+                  <div class="window port" id="{{ switch }}_{{ port }}">
+                    {{ port }}
+                  </div>
+              {% endfor %}
+            {% endif %}
+            </div>
+            <div class="ports_right">
+            {% if forloop.last %}
+              {% for port in same_ports.right %}
+                  <abbr title="{{ port.1|join:'; ' }}">
+                  <div class="window port" id="{{ switch }}_{{ port }}">
+                      {{ port.0 }}
+                  </div>
+                  </abbr>
+              {% endfor %}
+            {% else %}
+              {% for port in ports.right %}
+                  <div class="window port" id="{{ switch }}_{{ port }}">
+                    {{ port }}
+                  </div>
+              {% endfor %}
+            {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+</div>
+
+
+{% csrf_token %}
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+$('.chosen-select').chosen({max_select_options: 5});
+
+jsPlumb.ready(function() {
+
+    var instance = jsPlumb.getInstance()
+
+	sourceEndpoint = {
+		connector: ["Straight"]
+                //connector : [ "Bezier", { curviness:50 } ],
+	},
+        targetEndpoint = {
+
+        };
+
+        {% for link in links %}
+        instance.addEndpoint("{{ link.node1 }}", sourceEndpoint, { anchor:"RightMiddle", uuid:"{{ link.node1 }}"});
+        instance.addEndpoint("{{ link.node2 }}", targetEndpoint, { anchor:"LeftMiddle", uuid:"{{ link.node2 }}"}); 
+        {% endfor %}
+
+        {% for link in internal %}
+                instance.addEndpoint("{{ link.Master }}", sourceEndpoint, { anchor:"{{ link.Position }}Middle", uuid:"{{ link.Master }}T"}); 
+            {% for node in link.Slave %}
+                instance.addEndpoint("{{ node }}", targetEndpoint, { anchor:"{{ link.Position }}Middle", uuid:"{{ node }}T"}); 
+            {% endfor %}
+        {% endfor %}
+
+        {% for link in links %}
+        instance.connect({uuids:["{{ link.node1 }}", "{{ link.node2 }}"], overlays:[[ "Label", {label:"{{ link.Speed }}G {% if link.E_Trunk == True %}E-Trunk ({{ link.TrunkId }}){% elif link.F_Trunk == True %}F-Trunk ({{ link.TrunkId }}){% endif %} {% if link.Master == True %}Master{% endif %}", id:"label", cssClass:"aLabel"}]]});
+        {% endfor %}
+
+        {% for link in internal %}
+            {% for node in link.Slave %}
+                instance.connect({
+                    source : "{{ link.Master }}",
+                    target : "{{ node }}",
+                    anchors: ["{{ link.Position }}", "{{ link.Position }}" ],
+                    connector : [ "Bezier", { curviness:20 } ],
+                });
+            {% endfor %}
+        {% endfor %}
+
+});
+
+$('select[name="node1"]').on('change', function(e) {
+    option_text = $('select[name="node1"] option:selected').text();
+    aliname = option_text.split(' ').pop();
+    $.ajax({
+        type: "POST",
+        url: ".",
+        data: {
+            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+            node1: this.value,
+            alias: aliname,
+        },
+        success: function(data) {
+            
+            data = $.parseJSON(data);
+            $('select[name="node2"]').empty();
+            $('select[name="node2"]').append( '<option value=""></option>' );
+            $.each(data, function(i) {
+                option = '<option value="'+data[i][0]+'">'+data[i][0]+' | '+data[i][1]+'</option>';
+                $('select[name="node2"]').append( option );
+            });
+            $('select[name="node2"]').prop('disabled', false);
+            $('select[name="node2"]').val('').trigger("chosen:updated");
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            $('select[name="node2"]').empty();
+            $('select[name="node2"]').prop('disabled', 'disabled');
+            alert("Please report this error: "+errorThrown+xhr.status+xhr.responseText);
+        }
+    });
+});
+
+</script>
+
+{% endblock %}
+

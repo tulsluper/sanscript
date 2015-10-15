@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row fullWidth">
+    <div class="columns">
+        {% csrf_token %}
+        {% if item_label %}
+            {% if item.enabled == False %}
+                <a id="run" href="" class="button secondary disabled small" style="{% if progress %}display:none;{% endif %}">run</a>
+            {% else %}
+                <a id="run" href="?start=true" class="button success small" style="{% if progress %}display:none;{% endif %}">run</a>
+            {% endif %}
+            <a id="in_progress" href="#" class="button disabled small" style="background:none; color:red; {% if not progress %}display:none{% endif %}" >in progress</a>
+            <div id="log" class="panel"></div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+
+  var position = 0;
+  var scroll_in_end = true;
+
+  $('#log').on('scroll', function(){
+      if (this.scrollHeight - this.scrollTop === this.clientHeight) {
+          scroll_in_end = true
+      }
+      else {
+          scroll_in_end = false
+      }
+  });
+
+  function checkData(data) {
+      data = $.parseJSON(data);
+      position += data.lines.length;
+
+      $.each(data.lines, function (i, line) {
+          
+          if (line.indexOf("ERROR") >= 0) {
+              message_class = "error"
+          }
+          else if (line.indexOf("WARNING") >= 0) {
+              message_class = "warning"
+          }
+          else {
+              message_class = "info"
+          };
+          $('#log').append('<p class="'+message_class+'">'+line+'</p>');
+      });
+
+      if (data.progress) {
+          $('#in_progress').show();
+          $('#run').hide();
+
+          if (scroll_in_end == true) {
+              $('#log').scrollTop($('#log').prop("scrollHeight"));
+          }
+
+          setTimeout(function(){ 
+              runAjax(checkData, position);
+          }, 1000);
+      }
+      else {
+          $('#in_progress').hide();
+          $('#run').show();
+          $('#log').scrollTop($('#log').prop("scrollHeight"));
+      }
+  };
+
+  function runAjax(callback, position) {
+      return $.ajax({
+          type: "POST",
+          url: ".",
+          data: {
+              csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+              position: position,
+          },
+          success: function(data) {
+              callback(data);
+          },
+          error: function(xhr, textStatus, errorThrown) {
+              alert(textStatus + errorThrown + xhr.status + xhr.responseText);
+          }
+      });
+  };
+
+
+  if (typeof document.getElementsByName('csrfmiddlewaretoken')[0] != 'undefined') {
+      runAjax(checkData, position);
+  };
+
+</script>
+
+
+{% endblock %}

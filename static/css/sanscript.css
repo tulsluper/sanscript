@@ -1,0 +1,169 @@
+html, body {
+    height: 100%;
+}
+#wrapper {
+    min-height: 100%;
+    height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+    height: 100%;
+    margin: 0 auto -30px; /* the bottom margin is the negative value of the footer's height */
+}
+#footer, #push {
+    height: 30px; /* .push must be the same height as .footer */
+}
+
+/* =========================================================================+ */
+
+.fullWidth {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: initial;
+}
+.noBottom {
+    margin-bottom: 0;
+}
+#header, #footer {
+    background: #333333;
+    color: #ffffff;
+}
+
+/* =========================================================================+ */
+/* log */
+
+#log {
+  height: 240px;
+  overflow: auto;
+  font-family: "Courier New", Courier, monospace;
+  color: #ffffff;
+  border: none;
+  background: #333333;
+}
+#log p {
+  margin: 0;
+  font-size: 13px;
+  color: #ffffff;
+}
+#log p.info     { color: green; }
+#log p.warning  { color: yellow;}
+#log p.error    { color: red;}
+
+/* =========================================================================+ */
+/* filter */
+
+.filter th {
+    padding: 1px;
+}
+.filter input[type="text"] {
+    margin-bottom: 0;
+}
+.filter_submit {
+    display: none;
+}
+
+/* =========================================================================+ */
+/* service */
+
+.service span {
+  float:left;
+  font-size:11px;
+  font-weight: normal;
+  border:1px solid #b0b0b0;
+  padding: 0 3px;
+  margin-right: 5px;
+}
+
+/* =========================================================================+ */
+/* bc_filter */
+
+.bc_filter {
+    float: left;
+    width:100%;
+}
+.bc_filter .button,
+.bc_filter input,
+.bc_filter select {
+    margin-bottom:0;
+}
+.bc_filter .button {
+  line-height: 1.5;
+  color: #ffffff;
+  padding:7px 1rem 6px 1rem;
+}
+.bc_filter select {
+    width:300px;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+.bc_filter select[multiple] {
+  vertical-align:top;
+  height:37px;
+}
+.bc_filter form > div {
+  float: left;
+  margin-right:10px;
+}
+
+#f_datestring   { width: 150px; z-index:2}
+#f_counter      { width: 180px;}
+#f_sort         { width: 150px;}
+#f_filter       { width: 150px;}
+#f_quantity     { width: 150px;}
+
+
+/* =========================================================================+ */
+/* chosen */
+
+.chosen-container ul {
+  font-size: 13px;
+}
+.chosen-container-single {
+  margin-top: 7px;
+}
+.chosen-container-multi .chosen-choices {
+  padding:4px 6px;
+}
+
+/* =========================================================================+ */
+/* bc_table */
+
+.outer {
+  position:relative;
+}
+.inner {
+  overflow-x:scroll;
+  overflow-y:visible;
+  margin-left:250px;
+}
+.inner table {
+  table-layout: fixed;
+  border: none;
+  margin: 0;
+  height: 1px;
+}
+.inner tr th {
+  position: absolute;
+  left:0;
+  width:250px;
+  font-weight:normal;
+}
+.inner tr td {
+  text-align:right;
+}
+.inner tr th span {
+  font-size:11px;
+  line-height: 1rem;
+}
+.inner tr td span {
+  color:#b0b0b0
+}
+.inner tr.even th,
+.inner tr.alt th,
+.inner tr:nth-of-type(even) th,
+.xtimes,
+.xtimes th {
+  background: #F9F9F9;
+}
+
+/* =========================================================================+ */
+/* bc_table */

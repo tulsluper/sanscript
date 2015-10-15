@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if objs %}
+    <div id="container" style="width:100%; height:{{ objs|length }}00px;"></div>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+<script>
+
+$(function () { 
+
+    $('#container').highcharts({
+        chart: {
+            type: 'bar',
+        },
+        title: {
+            text: '3PAR Capacity'
+        },
+        xAxis: {
+            categories: [{% for obj in objs %}'{{ obj.Storage }}', {% endfor %}]
+        },
+        yAxis: {
+            title: {
+                text: null,
+            },
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            reversed: true
+        },
+        tooltip: {
+            hideDelay: 100,
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y:.2f} TB</b> ({point.percentage:.0f}%)<br>',
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                grouping: false,
+                //shadow: false,
+                //borderWidth: 0,
+                dataLabels: {
+                    enabled: true, 
+                    style: {
+                        color: 'white',
+                        fontWeight: 'normal',
+                        textShadow: 'none',
+                    },
+                    formatter: function() {
+                        if (this.percentage >= this.series.name.length) return this.series.name;
+                    }
+                },
+            },
+
+        },
+        series: [{
+            name: 'copy',
+            color: '#2CA8C2',
+            stack: 'RESERVE+USED (detailed)',
+            data: [{% for obj in objs %}{% if obj.copy %}{{ obj.copy }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0.26,
+            pointPlacement: 0.14,
+            zIndex:1,
+        }, {
+            name: 'tpvv_free',
+            color: '#913CCD',
+            stack: 'RESERVE+USED (detailed)',
+            data: [{% for obj in objs %}{% if obj.tpvv_free %}{{ obj.tpvv_free }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0.26,
+            pointPlacement: 0.14,
+            zIndex:1,
+        }, {
+            name: 'tpvv_used',
+            color: '#F76D3C',
+            stack: 'RESERVE+USED (detailed)',
+            data: [{% for obj in objs %}{% if obj.tpvv_used %}{{ obj.tpvv_used }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0.26,
+            pointPlacement: 0.14,
+            zIndex:1,
+        }, {
+            name: 'cpvv',
+            color: '#F7D842',
+            stack: 'RESERVE+USED (detailed)',
+            data: [{% for obj in objs %}{% if obj.cpvv %}{{ obj.cpvv }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0.26,
+            pointPlacement: 0.14,
+            zIndex:1,
+        }, {
+            name: 'full',
+            color: '#CF3B5F',
+            stack: 'RESERVE+USED (detailed)',
+            data: [{% for obj in objs %}{% if obj.full %}{{ obj.full }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0.26,
+            pointPlacement: 0.14,
+            zIndex:1,
+        }, {
+            name: 'reserve_free',
+            color: '#cccccc',
+            stack: 'RESERVE+USED (detailed)',
+            data: [{% for obj in objs %}{% if obj.reserve_free %}{{ obj.reserve_free }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0.26,
+            pointPlacement: 0.14,
+            zIndex:1,
+        }, {
+            name: 'reserve_used',
+            color: '#666666',
+            stack: 'RESERVE+USED (detailed)',
+            data: [{% for obj in objs %}{% if obj.reserve_used %}{{ obj.reserve_used }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0.26,
+            pointPlacement: 0.14,
+            zIndex:1,
+        }, {
+            name: 'OVERPROVISIONED',
+            color: '#FF0000',
+            stack: 'TOTAL',
+            data: [{% for obj in objs %}{% if obj.OVERPROVISIONED %}{{ obj.OVERPROVISIONED }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0,
+            pointPlacement: 0,
+            dataLabels: {
+              y: 12,
+            }
+        }, {
+            name: 'FREE',
+            color: '#98CB4A',
+            stack: 'TOTAL',
+            data: [{% for obj in objs %}{% if obj.FREE %}{{ obj.FREE }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0,
+            pointPlacement: 0,
+        }, {
+            name: 'USED',
+            color: '#F15F74',
+            stack: 'TOTAL',
+            data: [{% for obj in objs %}{% if obj.USED %}{{ obj.USED }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0,
+            pointPlacement: 0,
+            dataLabels: {
+              y: 12,
+            }
+        }, {
+            name: 'RESERVE_OVERUSED',
+            color: '#444444',
+            stack: 'TOTAL',
+            data: [{% for obj in objs %}{% if obj.RESERVE_OVERUSED %}{{ obj.RESERVE_OVERUSED }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0,
+            pointPlacement: 0,
+            dataLabels: {
+              y: 12,
+            }
+        }, {
+            name: 'RESERVE',
+            color: '#999999',
+            stack: 'TOTAL',
+            data: [{% for obj in objs %}{% if obj.RESERVE %}{{ obj.RESERVE }}{% else %}null{% endif %}, {% endfor %}],
+            pointPadding: 0,
+            pointPlacement: 0,
+            dataLabels: {
+              y: 12,
+            }
+        }]
+    });
+});
+
+</script>
+{% endblock %}
+

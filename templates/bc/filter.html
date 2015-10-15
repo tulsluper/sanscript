@@ -1,0 +1,74 @@
+{% load static %}
+
+<div class="row fullWidth withBottom">
+  <div class="columns bc_filter">
+
+{% if ptype == 'port' %}
+<form action="." method="get">
+    <div>
+        <input type="date" name="date" id="f_datestring" value="{{ datestring }}">
+    </div>
+    <div>
+        <select name="counter" id="f_counter">
+            <option value="" disabled selected>select counter</option>
+        {% for c in counters %}
+            <option value="{{ c }}" {% if c == counter %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div>
+        <select name="sort" id="f_sort">
+          <option value="" disabled selected>sort by</option>
+          <option value="sum" {% if sort == 'sum' %}selected{% endif %}>sort by sum</option>
+          <option value="max" {% if sort == 'max' %}selected{% endif %}>sort by max</option>
+          <option value="median" {% if sort == 'median' %}selected{% endif %}>sort by median</option>
+        {% for x in xtimes %}
+          <option value="{{ x|join:'-'|slice:":5" }}" {% if x|join:'-' == sort %}selected{% endif %}>sort by {{ x|join:':'|slice:":5" }}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div>
+        <input type="text" name="filter" id="f_filter" value="{{ filter }}" placeholder="filter">
+    </div>
+    <div>
+        <select name="quantity" id="f_quantity">
+            <option value="" disabled selected>records</option>
+            <option value="10" {% if ports_quantity == 10 %}selected{% endif %}>top 10 records</option>
+            <option value="20" {% if ports_quantity == 20 %}selected{% endif %}>top 20 records</option>
+            <option value="50" {% if ports_quantity == 50 %}selected{% endif %}>top 50 records</option>
+            <option value="100" {% if ports_quantity == 100 %}selected{% endif %}>top 100 records</option>
+            <option value="all" {% if ports_quantity == 100 %}selected{% endif %}>all records</option>
+        </select>
+    </div>
+
+    <input type="submit" value="submit" class="button">
+</form>
+
+
+{% elif ptype == 'counter' %}
+<form action="." method="get">
+    <div>
+        <input type="date" name="date" id="f_datestring" value="{{ datestring }}">
+    </div>
+    <div>
+    <select name="port" id="f_port" class="chosen-select">
+      <option value="" {% if not port %}selected{% endif %}>all ports summary</option>
+    {% for p in ports %}
+      <option value="{{ p.0 }}" {% if p.0 == port %}selected{% endif %}>{{ p.0 }} | {{ p.1 }}</option>
+    {% endfor %}
+    </select>
+    </div>
+    <div>
+    <input type="submit" value="submit" class="button">
+    </div>
+</form>
+{% endif %}
+
+  {% csrf_token %}
+
+  </div>
+</div>
+
+
+
+

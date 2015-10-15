@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="row fullWidth withBottom"> 
+        <div class="panel bc_filter">
+
+        <form action="." method="get">
+            <div>
+                <input type="date" name="date" id="f_datestring" value="{{ datestring }}">
+            </div>
+            <div>
+                <select name="ports" class="chosen-select" data-placeholder="select ports" multiple>
+                {% for port in ports %}
+                    <option value="{{ port.0 }}" {% if port.0 in select_ports %}selected{% endif %}>{{ port.0 }} | {{ port.1 }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div>
+                <select name="counters" class="chosen-select" data-placeholder="select counters" multiple size='1'>
+                {% for counter in counters %}
+                    <option value="{{ counter }}" {% if counter in select_counters %}selected{% endif %}>{{ counter }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="submit" class="button">
+            </div>
+        </form>
+
+        </div>
+    </div>
+
+    {% for record in records %}
+    <div class="row fullWidth withBottom">
+        <div class="columns">
+            <div id="container{{ forloop.counter }}">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+{% block script_link %}
+    <script src="{% static "chosen/chosen.jquery.min.js" %}"></script>
+    <script src="{% static "foundation-datepicker-no-font-awesome/js/foundation-datepicker.js" %}"></script>
+    <script src="{% static "highcharts/js/highcharts.js" %}"></script>
+    <script src="{% static "highcharts/js/modules/exporting.js" %}"></script>
+{% endblock %}
+
+{% block script %}
+    <script>
+    $('.chosen-select').chosen({max_select_options: 5});
+//    $('#f_datestring').fdatepicker({
+//        format: 'yyyy-mm-dd',
+//        startDate: '2015-03-20',
+//        endDate: '+0d',
+//    });
+
+    $(function () {
+        {% for record in records %}
+        $('#container{{ forloop.counter }}').highcharts({
+            chart: {
+                type: 'spline',
+                zoomType: 'xy',
+            },
+            title: {
+                text: '{{ record.0 }}',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '',
+                x: -20
+            },
+            xAxis: {
+                startOnTick: true,
+                tickmarkPlacement: 'on',
+                categories: [{% for xtime in xtimes %}'{{ xtime|join:':'|slice:":5" }}', {% endfor %}],
+                tickInterval: {{ xtimes|length }}/12|0,
+            },
+            yAxis: {
+                title: {
+                    text: '{{ record.0 }}, {{ record.2 }}'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function (tooltip) {
+                    var items = this.points || splat(this),
+                        series = items[0].series,
+                        s;
+                    // sort the values
+                    items.sort(function(a, b){
+                        return ((a.y < b.y) ? -1 : ((a.y > b.y) ? 1 : 0));
+                    });
+                    items.reverse();
+                    return tooltip.defaultFormatter.call(this, tooltip);
+                },
+                valueSuffix: '',
+                shared: true,
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [
+            {% for values in record.1 %}
+            {
+                name: '{{ values.0.0 }} | {{ values.0.1 }}',
+                data: [{% for item in values.1 %}{{ item }}, {% endfor %}],
+                marker: {
+                    radius: 1
+                },
+            },
+            {% endfor %}
+            ]
+        });
+        {% endfor %}
+    })
+    </script>
+{% endblock %}
+

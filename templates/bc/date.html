@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row fullWidth">
+        <div class="panel">
+            {% include "bc/filter.html" %}
+        </div>
+    </div>
+    <div class="row fullWidth">
+        <div class="columns">
+            {% include "bc/table.html" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {% include "bc/filter_script.html" %}
+    {% include "bc/table_script.html" %}
+{% endblock %}
+
