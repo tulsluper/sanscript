@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 
-import os
 import importlib
 import logging
-from defs import run_with_locker
 
-basepath = os.path.realpath(__file__)[:-3]
-lockfile = basepath + '.lock'
-logfile = basepath + '.log'
 
 def set_logger(logfile):
     open(logfile, 'w').close()
@@ -25,9 +20,7 @@ def set_logger(logfile):
     return
 
 
-@run_with_locker(lockfile)
 def run(scripts):
-    set_logger(logfile)
     logging.info('# START')
     for script_name in scripts:
         logging.info('# START {}'.format(script_name))
