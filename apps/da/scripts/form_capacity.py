@@ -8,7 +8,7 @@ from defs import load_data, dump_data
 def sum_3par():
     capD = {}
     filepath = os.path.join(JSONDIR, '3par', 'sys')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     for record in data:
         xdict = {
             'RawTotal': record['TotalCap'],
@@ -27,7 +27,7 @@ def sum_3par():
 def sum_eva():
     capD = {}
     filepath = os.path.join(JSONDIR, 'eva', 'system')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     for record in data:
         xdict = {
             'RawTotal': record['totalstoragespace'],
@@ -46,9 +46,9 @@ def sum_eva():
 def sum_hds():
     capD = {}
     filepath = os.path.join(JSONDIR, 'hds', 'drive_status')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     filepath = os.path.join(JSONDIR, 'hds', 'drive_vendor')
-    data2 = load_data(filepath)
+    data2 = load_data(filepath, [])
     for record in data:
         for record2 in data2:
             if record['Storage'] == record2['Storage'] and record['HDU'] == record2['HDU']:
@@ -72,7 +72,7 @@ def sum_hds():
 
 def sum_form_cap():
     filepath = os.path.join(JSONDIR, 'volumes')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xdict = {}
     for record in data:
         storage = record['Storage']
@@ -99,7 +99,7 @@ def sum_form_cap():
 
 def sum_form_3par_avail():
     filepath = os.path.join(JSONDIR, 'capacity_3par')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xdict = {}
     for record in data:
         xdict[record['Storage']] = {
@@ -110,9 +110,9 @@ def sum_form_3par_avail():
 
 def sum_form_hds_cap():
     filepath = os.path.join(JSONDIR, 'hds/dppool')
-    data1 = load_data(filepath)
+    data1 = load_data(filepath, [])
     filepath = os.path.join(JSONDIR, 'hds/rgref')
-    data2 = load_data(filepath)
+    data2 = load_data(filepath, [])
     xdict = {}
     for record in data1:
         storage = record['Storage']
@@ -134,7 +134,7 @@ def sum_form_hds_cap():
 
 def main():
     filepath = os.path.join(JSONDIR, 'models')
-    models = load_data(filepath)
+    models = load_data(filepath, [])
 
     RawCapD = {}
     RawCapD.update(sum_3par())
