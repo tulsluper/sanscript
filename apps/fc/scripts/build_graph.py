@@ -48,9 +48,9 @@ def f_graph(links, ports):
 def main():
 
     filepath = os.path.join(JSONDIR, 'link')
-    links = load_data(filepath)
+    links = load_data(filepath, [])
     filepath = os.path.join(JSONDIR, 'port')
-    ports = load_data(filepath)
+    ports = load_data(filepath, [])
 
     data = f_graph(links, ports)
     filepath = os.path.join(JSONDIR, 'graph')
