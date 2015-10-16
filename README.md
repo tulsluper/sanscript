@@ -44,4 +44,4 @@ Restart uwsgi and nginx:
 service uwsgi restart
 service nginx restart
 ```
-Now application should be available in browser on http://<domain_name>/ or http://<ip_address>
+Now application should be available in browser on http://domain_name/ or http://ip_address/
