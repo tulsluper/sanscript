@@ -8,7 +8,7 @@ from defs import load_data, dump_data
 
 def tpar_form_hosts():
     filepath = os.path.join(JSONDIR, '3par/host')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xdict = {}
     for record in data:
         Storage_Host = '%s %s' %(record['Storage'], record['Name'])
@@ -30,7 +30,7 @@ def tpar_form_hosts():
 
 def hds_form_hosts():
     filepath = os.path.join(JSONDIR, 'hds/hgwwn')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xdict = {}
     for record in data:
         Storage_Host = '%s %s' %(record['Storage'], record['Host_Group'])
@@ -52,7 +52,7 @@ def hds_form_hosts():
 
 def eva_form_hosts():
     filepath = os.path.join(JSONDIR, 'eva/host')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xlist = []
     for record in data:
         wwns = []

@@ -8,7 +8,7 @@ from defs import load_data, dump_data
 
 def get_tpar_volume_hosts():
     filepath = os.path.join(JSONDIR, '3par/vlun')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xdict = {}
     for record in data:
         wwn = record['VV_WWN']
@@ -22,7 +22,7 @@ def get_tpar_volume_hosts():
 
 def tpar_form_volumes(volume_hosts):
     filepath = os.path.join(JSONDIR, '3par/vv')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xlist = []
     for record in data:
         volume = {
@@ -38,7 +38,7 @@ def tpar_form_volumes(volume_hosts):
 
 def get_hds_volume_hosts():
     filepath = os.path.join(JSONDIR, 'hds/hgmap')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xdict = {}
     for record in data:
         uid = '%s %s' %(record['Storage'], record['LUN'])
@@ -52,7 +52,7 @@ def get_hds_volume_hosts():
 
 def hds_form_volumes(volume_hosts):
     filepath = os.path.join(JSONDIR, 'hds/luref')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xlist = []
     for record in data:
         uid = '%s %s' %(record['Storage'], record['LU'])
@@ -69,7 +69,7 @@ def hds_form_volumes(volume_hosts):
 
 def get_eva_form_volumes():
     filepath = os.path.join(JSONDIR, 'eva/vdisk')
-    data = load_data(filepath)
+    data = load_data(filepath, [])
     xlist = []
     for record in data:
         if 'hosts' in record:
