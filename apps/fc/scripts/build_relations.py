@@ -75,13 +75,13 @@ def form_swport_rels(alirelations, alias_swport):
 def main():
 
     filepath = os.path.join(JSONDIR, 'zone')
-    zones = load_data(filepath)
+    zones = load_data(filepath, [])
     filepath = os.path.join(JSONDIR, 'alias')
-    aliases = load_data(filepath)
+    aliases = load_data(filepath, [])
     filepath = os.path.join(JSONDIR, 'port')
-    ports = load_data(filepath)
+    ports = load_data(filepath, [])
     filepath = os.path.join(JSONDIR, 'portshow')
-    portshow = load_data(filepath)
+    portshow = load_data(filepath, [])
 
     alirelations, swport_alias, alias_swport = form_rels(zones, aliases, ports, portshow)
     swportrelations = form_swport_rels(alirelations, alias_swport)
