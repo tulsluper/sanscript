@@ -104,7 +104,7 @@ def v_commands(request, item_label=None):
         if request.GET.get('start'):
             if not progress:
                 subprocess.Popen(
-                    [sys.executable, scriptfile],
+                    ['/usr/bin/env python3', scriptfile],
                     stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT,
                 )
