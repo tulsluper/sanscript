@@ -1,6 +1,5 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
-from pymongo import MongoClient
 from .models import CounterOid
 from apps.fc.models import Portshow
 from .models import XTimes, Integers, SDicts, CDicts, PDicts
