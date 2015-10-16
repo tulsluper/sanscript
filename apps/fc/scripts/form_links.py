@@ -17,69 +17,63 @@ CONNECTIONS = [[c[k] for k in fields] for c in connections]
 def get_domains():
     domains = {}
     filepath = os.path.join(JSONDIR, 'switch')
-    with open(filepath) as f:
-        records = json.load(f)
-        for record in records:
-            domain = record.get('switchDomain')
-            if domain:
-                domains[domain] = record['Switch']
+    records = load_data(filepath, [])
+    for record in records:
+        domain = record.get('switchDomain')
+        if domain:
+            domains[domain] = record['Switch']
     return domains
 
 
 def get_speeds():
     speeds = {}
     filepath = os.path.join(JSONDIR, 'port')
-    with open(filepath) as f:
-        records = json.load(f)
-        for record in records:
-            key = '%s.%s' %(record['Switch'], record['Index'])
-            value = record['Speed'].replace('G','').replace('N','')
-            speeds[key] = value
+    records = load_data(filepath, [])
+    for record in records:
+        key = '%s.%s' %(record['Switch'], record['Index'])
+        value = record['Speed'].replace('G','').replace('N','')
+        speeds[key] = value
     return speeds
 
 
 def get_addresses():
     addresses = {}
     filepath = os.path.join(JSONDIR, 'port')
-    with open(filepath) as f:
-        records = json.load(f)
-        for record in records:
-            key = '%s.%s' %(record['Switch'], record['Index'])
-            value = record['Address']
-            addresses[key] = value
+    records = load_data(filepath, [])
+    for record in records:
+        key = '%s.%s' %(record['Switch'], record['Index'])
+        value = record['Address']
+        addresses[key] = value
     return addresses
 
 
 def get_n_trunk_ports():
     n_trunk_ports = {}
     filepath = os.path.join(JSONDIR, 'port')
-    with open(filepath) as f:
-        records = json.load(f)
-        for record in records:
-            if record['Type'] == 'N-Port' and 'Trunk' in record['Comment']:
-                n_trunk_ports[record['Comment'][2:8]] = record
+    records = load_data(filepath, [])
+    for record in records:
+        if record['Type'] == 'N-Port' and 'Trunk' in record['Comment']:
+            n_trunk_ports[record['Comment'][2:8]] = record
     return n_trunk_ports
 
 
 def get_n_link_ports():
     n_link_ports_list = []
     filepath = os.path.join(JSONDIR, 'port')
-    with open(filepath) as f:
-        records = json.load(f)
-        for record in records:
-            if record['Type'] == 'N-Port' and not 'Trunk' in record['Comment']:
-                n_link_ports_list.append(record)
+    records = load_data(filepath, [])
+    for record in records:
+        if record['Type'] == 'N-Port' and not 'Trunk' in record['Comment']:
+            n_link_ports_list.append(record)
     return n_link_ports_list
 
 
 def get_f_link_ports():
     f_link_ports = {}
     filepath = os.path.join(JSONDIR, 'port')
-    with open(filepath) as f:
-        records = json.load(f)
-        for record in records:
-            if record['Type'] == 'F-Port':
-                f_link_ports[record['Address']] = record
+    records = load_data(filepath, [])
+    for record in records:
+        if record['Type'] == 'F-Port':
+            f_link_ports[record['Address']] = record
     return f_link_ports
 
 
