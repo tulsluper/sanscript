@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.apps import apps
 from django.db.models.signals import pre_save
 from django.forms.models import model_to_dict
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.admin.views.decorators import staff_member_required
 from .defs import prevent_password_save, create_formset
 from .defs import build_filters, model_to_table
@@ -21,6 +22,7 @@ def home(request):
 
 
 @staff_member_required
+@csrf_protect
 def v_configs(request, item_label=None):
     app_label = request.path.split('/')[1].split('-')[0]
     app = apps.get_app_config(app_label)
@@ -62,6 +64,7 @@ def v_configs(request, item_label=None):
 
 
 @staff_member_required
+@csrf_protect
 def v_commands(request, item_label=None):
 
     app_label = request.path.split('/')[1].split('-')[0]
@@ -124,6 +127,8 @@ def v_commands(request, item_label=None):
     return render(request, 'sa/command.html', data)
 
 
+@staff_member_required
+@csrf_protect
 def v_tables(request, item_label=None):
     app_label = request.path.split('/')[1].split('-')[0]
     app = apps.get_app_config(app_label)
