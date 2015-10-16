@@ -1,4 +1,4 @@
 # Install with: `pip3 install -r requirements.txt`
 
-django == 1.8.0
+django == 1.8
 jsonfield
