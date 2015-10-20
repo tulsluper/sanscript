@@ -4,3 +4,4 @@ django == 1.8
 jsonfield
 paramiko
 pysnmp
+ldap3
