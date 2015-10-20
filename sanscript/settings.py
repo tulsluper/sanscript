@@ -92,12 +92,12 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         # comment out lines below for postgresql
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'sanscriptdb',
-        # 'USER': 'sanscriptdbuser',
-        # 'PASSWORD': 'sanscriptdbpass',
-        # 'HOST':'',
-        # 'PORT':'',
+        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'sanscriptdb',
+        #'USER': 'sanscriptdbuser',
+        #'PASSWORD': 'sanscriptdbpass',
+        #'HOST':'localhost',
+        #'PORT':'',
     }
 }
 

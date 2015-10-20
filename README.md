@@ -16,6 +16,7 @@ cd /home/django/
 git clone https://github.com/tulsluper/sanscript.git
 cd sanscript
 pip3 install -r requirements.txt
+./manage.py migrate auth
 ./manage.py migrate
 ./manage.py createsuperuser
 chown -R www-data:www-data ../sanscript
