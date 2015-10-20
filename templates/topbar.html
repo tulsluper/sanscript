@@ -11,7 +11,21 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider"></li>
-      <li>{% if not user.is_authenticated %}<a href="/admin/login/?next=/sa/">login</a>{% else %}<a href="/admin/logout/?next=/sa/">logout</a>{% endif %}</li>
+      {% if user.is_staff %}
+      <li {% if sa %}class="active"{% endif %}>
+          <a href="/{{ app_label }}{% if not sa %}-sa{% endif %}/">
+              <i class="fi-widget" style="color:white;"></i>
+          </a>
+      </li>
+      {% endif %}
+      <li class="divider"></li>
+      {% if not user.is_authenticated %}
+        <li><a href="/accounts/login/?next=/sa/">login</a></li>
+      {% else %}
+        <li><a href=""><i class="fi-torso" style="color:white;"></i> {{ user }}</a></li>
+        <li class="divider"></li>
+        <li><a href="/accounts/logout/?next=/sa/">logout</a></li>
+      {% endif %}</li>
     </ul>
 
     <!-- Left Nav Section -->

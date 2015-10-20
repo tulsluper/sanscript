@@ -1,21 +1,18 @@
 <div class="row fullWidth">
-    <div class="panel clearfix">
-    {% for page in app_pages %}
+    {% if app_label != 'sa' %}
+    <div class="panel clearfix" {% if sa %}style="border:1px solid red;"{% endif %}>
+    {# <div style="display:inline-block;">{{ app.verbose_name }}:</div> #}
+      {% for page in app_pages %}
         {% if page.title %}
         <a href="/{{ app_label }}{% if sa %}-sa{% endif %}/{{ page.label }}/"
            class="button small {% if page.label == page_label %}info{% else %}secondary{% endif %} noBottom">
             {{ page.title }}
         </a>
         {% endif %}
-    {% endfor %}
-        {% if request.user.is_staff %}
-          <a href="/{{ app_label }}{% if not sa %}-sa{% endif %}/"
-             class="button small right {% if sa %}info{% else %}secondary{% endif %} noBottom">
-              <i class="fi-widget" style="color:white;"></i>
-          </a>
-        {% endif %}
+      {% endfor %}
         {% if last_update %}
           <a href="" class="button small right secondary">updated: {{ last_update }}</a>
         {% endif %}
     </div>
+    {% endif %}
 </div>

@@ -22,10 +22,19 @@ html, body {
 .noBottom {
     margin-bottom: 0;
 }
-#header, #footer {
+#header,
+#footer {
     background: #333333;
     color: #ffffff;
 }
+
+select {
+    width: 100px;
+}
+input[type="number"] {
+    width: 60px;
+}
+
 
 /* =========================================================================+ */
 /* log */
