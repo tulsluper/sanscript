@@ -12,7 +12,7 @@ def p_system(systemname, lines):
         record['Storage'] = systemname
         return [record]
     else:
-        return None
+        return []
 
 
 def p_host(systemname, lines):
