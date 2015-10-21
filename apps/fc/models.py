@@ -75,7 +75,7 @@ class SwitchCommon(models.Model):
 
 class Port(models.Model):
     Switch = models.CharField(max_length=30)
-    uPort = models.CharField(max_length=4)
+    uPort = models.CharField(max_length=5)
     Index = models.CharField(max_length=4)
     Slot = models.CharField(max_length=1)
     Port = models.CharField(max_length=2)
@@ -91,7 +91,7 @@ class Port(models.Model):
 
 class Portshow(models.Model):
     Switch = models.CharField(max_length=30)
-    uPort = models.CharField(max_length=4)
+    uPort = models.CharField(max_length=5)
     portIndex = models.CharField(max_length=4)
     portName = models.CharField(max_length=39)
     portHealth = models.CharField(max_length=23)
@@ -139,7 +139,7 @@ class PortCommon(models.Model):
 
 class Sfp(models.Model):
     Switch = models.CharField(max_length=30)
-    uPort = models.CharField(max_length=4)
+    uPort = models.CharField(max_length=5)
     Identifier = models.CharField(max_length=5)
     Connector = models.CharField(max_length=4)
     Transceiver = models.CharField(max_length=64)
