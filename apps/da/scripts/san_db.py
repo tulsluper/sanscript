@@ -22,11 +22,14 @@ def save(appname, relations):
         if debug_records_flag is False:
             model.objects.bulk_create([model(**record) for record in records])
         else:
-            print('== {} =='.format(modelname))
-            for record in records:
-                for key in record.items():
-                    print(key, record[key])
-                print('\n')
+            try:
+                model(**record).save()
+            except:
+                print('== {} =='.format(modelname))
+                for record in records:
+                    for key in record.items():
+                        print(key, record[key])
+                    print('\n')
         logging.info('--- file: %s -> model: %s | %s records' %(
             filename, modelname, len(records)))
     return
