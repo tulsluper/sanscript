@@ -144,7 +144,7 @@ class Sfp(models.Model):
     Connector = models.CharField(max_length=4)
     Transceiver = models.CharField(max_length=64)
     Encoding = models.CharField(max_length=7)
-    Baud_Rate = models.CharField(max_length=23)
+    Baud_Rate = models.CharField(max_length=24)
     Length_9u = models.CharField(max_length=20)
     Length_50u = models.CharField(max_length=20)
     Length_50u_OM2 = models.CharField(max_length=19)
