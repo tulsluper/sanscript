@@ -309,7 +309,7 @@ class HDSMap(models.Model):
 class Volume(models.Model):
     Storage = models.CharField(max_length=30)
     Uid = models.CharField(max_length=32)
-    Name = models.CharField(max_length=30)
+    Name = models.CharField(max_length=64)
     Size = models.DecimalField(max_digits=8, decimal_places=2)
     Hosts = JSONField()
 
