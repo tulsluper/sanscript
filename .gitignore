@@ -60,3 +60,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+#
+!apps/da/scripts/cli/SNM2/Linux_CLI/lib/
+!apps/da/scripts/cli/SNM2/Linux_CLI/lib/*.so
