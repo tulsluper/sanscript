@@ -1,14 +1,18 @@
 
 
 def p_system(systemname, lines):
-    record = {'Storage': systemname}
+    record = {}
     for line in lines:
         if ':' in line and line[0] == ' ' and line[2] != ' ':
             items = line.split()
             key = items[0]
             value = ' '.join(items[2:])
             record[key] = value
-    return [record]
+    if record:
+        record['Storage'] = systemname
+        return [record]
+    else:
+        return None
 
 
 def p_host(systemname, lines):
