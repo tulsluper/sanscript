@@ -127,7 +127,7 @@ class Portshow(models.Model):
 
 class PortCommon(models.Model):
     Switch = models.CharField(max_length=30)
-    uPort = models.CharField(max_length=4)
+    uPort = models.CharField(max_length=5)
     Index = models.CharField(max_length=4)
     Speed = models.CharField(max_length=3)
     State = models.CharField(max_length=9)
@@ -173,7 +173,7 @@ class Sfp(models.Model):
     RX_Power = models.CharField(max_length=17)
     TX_Power = models.CharField(max_length=17)
     State_transitions = models.CharField(max_length=3)
-    Last_poll_time = models.CharField(max_length=27)
+    Last_poll_time = models.CharField(max_length=28)
 
 
 class Name(models.Model):
