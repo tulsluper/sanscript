@@ -7,6 +7,8 @@ from settings import JSONDIR
 from defs import load_data
 from san_env import get_apps
 
+debug_records_flag = False
+
 
 def save(appname, relations):
     apps = get_apps()
@@ -17,7 +19,17 @@ def save(appname, relations):
             model.objects.all().delete()
         elif filters.get('before_delete'):
             model.objects.filter(**filters['before_delete']).delete()
-        model.objects.bulk_create([model(**record) for record in records])
+        if debug_records_flag is False:
+            model.objects.bulk_create([model(**record) for record in records])
+        else:
+            for record in records:
+                try:
+                    model(**record).save()
+                except:
+                    print('== {} =='.format(modelname))
+                    for key in sorted(record.keys()):
+                        print(key, record[key] if key in record else '')
+                    print('\n')
         logging.info('--- file: %s -> model: %s | %s records' %(
             filename, modelname, len(records)))
     return
