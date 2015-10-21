@@ -35,23 +35,37 @@ def dict_to_rows(xdict, integers={}):
 
 
 def port_view(request):
+
     datestring = request.GET.get('date')
     port = request.GET.get('port')
+
     if datestring is None:
         return redirect('%s?date=%s' %(request.path, datetime.now().strftime('%Y-%m-%d')))
-    xtimes = XTimes.objects.get(date=datestring).values
-    integers = Integers.objects.get(date=datestring).values
-    if port:
-        port = port.replace('_', ' ')
-        pdicts = PDicts.objects.get(date=datestring).values
-        pdicts = pdicts.get(port, {})
-        rows = dict_to_rows(pdicts, integers['p'])
-    else:
-        sdicts = SDicts.objects.get(date=datestring).values
-        rows = dict_to_rows(sdicts, integers['s'])
+
+    try:
+
+        xtimes = XTimes.objects.get(date=datestring).values
+        integers = Integers.objects.get(date=datestring).values
+    
+        if port:
+            port = port.replace('_', ' ')
+            pdicts = PDicts.objects.get(date=datestring).values
+            pdicts = pdicts.get(port, {})
+            rows = dict_to_rows(pdicts, integers['p'])
+        else:
+            sdicts = SDicts.objects.get(date=datestring).values
+            rows = dict_to_rows(sdicts, integers['s'])
+
+    except:
+   
+        xtimes = []
+        rows = []
+
+
     ports = []
     for p in Portshow.objects.all():
         ports.append(['%s %s' %(p.Switch, p.portIndex), p.portName])
+
     data = {
         'datestring': datestring,
         'xtimes': xtimes,
@@ -64,9 +78,12 @@ def port_view(request):
 
 
 def counter_view(request):
+
     datestring = request.GET.get('date')
+
     if datestring is None:
         return redirect('%s?date=%s' %(request.path, datetime.now().strftime('%Y-%m-%d')))
+
     xtimes = XTimes.objects.get(date=datestring).values
     integers = Integers.objects.get(date=datestring).values
 
