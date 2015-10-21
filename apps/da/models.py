@@ -115,7 +115,7 @@ class TPARVV(models.Model):
     BsId = models.CharField(max_length=8)
     Copied_MB = models.CharField(max_length=8)
     Copied_Perc = models.CharField(max_length=8)
-    CopyOf = models.CharField(max_length=8)
+    CopyOf = models.CharField(max_length=30)
     CreationTime = models.CharField(max_length=24)
     Detailed_State = models.CharField(max_length=8)
     Domain = models.CharField(max_length=8)
