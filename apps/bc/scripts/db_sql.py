@@ -4,9 +4,7 @@ import os
 import sys
 import json
 import logging
-from numpy import array, median
 from collections import defaultdict
-from pymongo import MongoClient
 from datetime import datetime
 from settings import SCALES, INTEGERS, APPNAME, DIFFSDIR
 from defs import load_data, dump_data

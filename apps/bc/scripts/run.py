@@ -16,7 +16,6 @@ connections = load_data(filepath, [])
 filepath = os.path.join(dirpath, 'CounterOid.json')
 counters = load_data(filepath, [])
 counters = {c["number"]: c["name"] for c in counters}
-print(connections, counters)
 
 if not os.path.exists(DIFFSDIR):
     os.makedirs(DIFFSDIR)
@@ -38,9 +37,8 @@ def snmpwalk(connection, counters=counters):
     if not errorIndication and not errorStatus:
         for varBindTableRow in varBindTable:
             for number, value in varBindTableRow:
-                number = number.prettyPrint()
-                numberitems = number.split('.')
-                number = '.'.join(numberitems[:10])
+                numberitems = number.asTuple()
+                number = '.'.join(map(str, numberitems[:10]))
                 port = numberitems[-1]
                 counter = counters[number]
                 value = value.prettyPrint()
