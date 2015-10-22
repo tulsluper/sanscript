@@ -1,4 +1,5 @@
 from django.apps import apps
+from apps.sa.models import AppDataLastUpdate
 
 
 def vars(request):
@@ -33,6 +34,11 @@ def vars(request):
         app = None
         app_pages = []
 
+    try:
+        last_update = AppDataLastUpdate.objects.get(appname=app_label).datetime
+    except:
+        last_update = None
+
     return {
         'sa': sa_flag,
         'app_label': app_label,
@@ -41,5 +47,6 @@ def vars(request):
         'appslist': appslist,
         'app': app,
         'app_pages': app_pages,
+        'last_update': last_update,
     }
 

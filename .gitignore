@@ -2,6 +2,7 @@
 db.sqlite3
 migrations
 apps/*/scripts/*Connection.json
+apps/da/scripts/cli/SNM2/Linux_CLI/log/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
