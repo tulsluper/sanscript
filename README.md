@@ -7,8 +7,15 @@ An application for SAN monitoring written in Python using Django, supports HP EV
 Install python3 and other packages
 ```bash
 apt-get install python3 python3-dev python3-pip
-apt-get install libldap2-dev libsasl2-dev libssl-dev
 apt-get install git
+
+# support LDAP
+apt-get install libldap2-dev libsasl2-dev libssl-dev
+
+# support 32-bit (for Hitachi SNM2 CLI)
+dpkg --add-architecture i386
+apt-get update
+apt-get install gcc-multilib
 ```
 Download application and install requirements
 ```bash
