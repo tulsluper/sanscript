@@ -1,0 +1,191 @@
+[
+{
+  "fields": {
+    "name": "Error",
+    "number": "1.3.6.1.3.94.4.5.1.3"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "TxObjects",
+    "number": "1.3.6.1.3.94.4.5.1.4"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "RxObjects",
+    "number": "1.3.6.1.3.94.4.5.1.5"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "TxElements",
+    "number": "1.3.6.1.3.94.4.5.1.6"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "RxElements",
+    "number": "1.3.6.1.3.94.4.5.1.7"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "BBCreditZero",
+    "number": "1.3.6.1.3.94.4.5.1.8"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "Class2RxFrames",
+    "number": "1.3.6.1.3.94.4.5.1.20"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "Class3RxFrames",
+    "number": "1.3.6.1.3.94.4.5.1.26"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "Class3Discards",
+    "number": "1.3.6.1.3.94.4.5.1.28"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "RxMulticastObjects",
+    "number": "1.3.6.1.3.94.4.5.1.29"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "TxMulticastObjects",
+    "number": "1.3.6.1.3.94.4.5.1.30"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "RxLinkResets",
+    "number": "1.3.6.1.3.94.4.5.1.33"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "TxLinkResets",
+    "number": "1.3.6.1.3.94.4.5.1.34"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "RxOfflineSequences",
+    "number": "1.3.6.1.3.94.4.5.1.36"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "TxOfflineSequences",
+    "number": "1.3.6.1.3.94.4.5.1.37"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "LinkFailures",
+    "number": "1.3.6.1.3.94.4.5.1.39"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "InvalidCRC",
+    "number": "1.3.6.1.3.94.4.5.1.40"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "InvalidTxWords",
+    "number": "1.3.6.1.3.94.4.5.1.41"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "PrimitiveSequenceProtocolErrors",
+    "number": "1.3.6.1.3.94.4.5.1.42"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "LossofSignal",
+    "number": "1.3.6.1.3.94.4.5.1.43"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "LossofSynchronization",
+    "number": "1.3.6.1.3.94.4.5.1.44"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "InvalidOrderedSets",
+    "number": "1.3.6.1.3.94.4.5.1.45"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "FramesTooLong",
+    "number": "1.3.6.1.3.94.4.5.1.46"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "FramesTruncated",
+    "number": "1.3.6.1.3.94.4.5.1.47"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "AddressErrors",
+    "number": "1.3.6.1.3.94.4.5.1.48"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "DelimiterErrors",
+    "number": "1.3.6.1.3.94.4.5.1.49"
+  },
+  "model": "bc.CounterOid"
+},
+{
+  "fields": {
+    "name": "EncodingDisparityErrors",
+    "number": "1.3.6.1.3.94.4.5.1.50"
+  },
+  "model": "bc.CounterOid"
+}
+]

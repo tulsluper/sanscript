@@ -58,6 +58,7 @@ Init application
 ./manage.py migrate auth
 ./manage.py migrate
 ./manage.py createsuperuser
+./manage.py loaddata fixtures/*
 chown -R www-data:www-data ../sanscript
 ```
 Install uwsgi and nginx
