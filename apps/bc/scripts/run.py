@@ -16,6 +16,7 @@ connections = load_data(filepath, [])
 filepath = os.path.join(dirpath, 'CounterOid.json')
 counters = load_data(filepath, [])
 counters = {c["number"]: c["name"] for c in counters}
+print(connections, counters)
 
 if not os.path.exists(DIFFSDIR):
     os.makedirs(DIFFSDIR)

@@ -17,7 +17,7 @@ def home(request):
 
 def sort_counters(counters, COUNTERS=COUNTERS):
     counters = list(counters)
-    counters.sort(key=lambda x: COUNTERS.index(x))
+    counters.sort(key=lambda x: COUNTERS.index(x) if x in COUNTERS else 0)
     return counters
 
 
@@ -84,27 +84,26 @@ def counter_view(request):
     if datestring is None:
         return redirect('%s?date=%s' %(request.path, datetime.now().strftime('%Y-%m-%d')))
 
-    xtimes = XTimes.objects.get(date=datestring).values
-    integers = Integers.objects.get(date=datestring).values
+    try:
+        xtimes = XTimes.objects.get(date=datestring).values
+        integers = Integers.objects.get(date=datestring).values
+        cdicts = CDicts.objects.get(date=datestring).values
+    except:
+        xtimes = []
+        cdicts = {}
+        integers = {}
 
     if request.is_ajax():
-        datestring = request.POST['datestring']
-        cdicts = CDicts.objects.get(date=datestring).values
         data = {
             'xtimes': xtimes,
             'counters': sort_counters(cdicts.keys()),
         }
         return HttpResponse(json.dumps(data))
 
-    cdicts = CDicts.objects.get(date=datestring).values
-
     counter = request.GET.get('counter', '')
     sort = request.GET.get('sort', 'sum')
     port = request.GET.get('filter', '')
     quantity = request.GET.get('quantity', 10)
-
-    if cdicts is None:
-        cdicts = {}
 
     records = []
     for key, values in cdicts.get(counter, {}).items():
@@ -122,7 +121,6 @@ def counter_view(request):
                 records.append([key, values, port_name])
         else:
             records.append([key, values, port_name])
-
 
     if '-' in sort:
         index = xtimes.index(sort.split('-'))

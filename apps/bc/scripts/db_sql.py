@@ -8,7 +8,7 @@ from numpy import array, median
 from collections import defaultdict
 from pymongo import MongoClient
 from datetime import datetime
-from settings import SCALES, INTEGERS, APPNAME
+from settings import SCALES, INTEGERS, APPNAME, DIFFSDIR
 from defs import load_data, dump_data
 from math import log10, floor
 from san_env import get_apps
@@ -87,7 +87,7 @@ def main():
     else:
         datestring = datetime.now().strftime('%Y-%m-%d')
 
-    dirpath = 'diffs/%s/' %datestring
+    dirpath = os.path.join(DIFFSDIR, datestring)
 
     udiffs, xtimes, deltas = sum_udiffs(dirpath)
     cdicts, pdicts, sdicts = calc_dicts(udiffs, deltas)

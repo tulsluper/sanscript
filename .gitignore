@@ -1,7 +1,7 @@
 # Django
 db.sqlite3
 migrations
-*/scripts/*Connection.json
+apps/*/scripts/*Connection.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
