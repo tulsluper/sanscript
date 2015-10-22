@@ -28,19 +28,15 @@ html, body {
     color: #ffffff;
 }
 
-ul,
-input,
-select {
+.aform ul,
+.aform input,
+.aform select {
     margin-bottom: 0;
 }
-
-
-/* =========================================================================+ */
-
-select {
+.aform select {
     width: 100px;
 }
-input[type="number"] {
+.aform input[type="number"] {
     width: 60px;
 }
 
