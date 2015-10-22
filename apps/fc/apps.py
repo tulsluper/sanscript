@@ -23,6 +23,7 @@ pages = [
 commands = [
     {'label': 'test_connections', 'view': 'command', 'title': 'Test connections'},
     {'label': 'collect_data', 'view': 'command', 'title': 'Collect data'},
+    {'label': 'collect_changes', 'view': 'command', 'title': 'Collect changes'},
 ]
 
 config_models = samevalues([
@@ -51,6 +52,7 @@ show_models = samevalues([
     'Path',
     'Portlog',
     'Fabriclog',
+    'Change',
 ])
 
 class appAppConfig(AppConfig):

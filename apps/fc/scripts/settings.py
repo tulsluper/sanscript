@@ -8,8 +8,9 @@ TEXTDIR = os.path.join(BASEDIR, 'data/{}/plain/'.format(APPNAME))
 JSONDIR = os.path.join(BASEDIR, 'data/{}/json/'.format(APPNAME))
 ARCHDIR = os.path.join(BASEDIR, 'data/{}/arch/'.format(APPNAME))
 
-oldconfigpath = os.path.join(BASEDIR, 'data/fc/configs/old.json')
-newconfigpath = os.path.join(BASEDIR, 'data/fc/configs/new.json')
+CONFIGSDIR = os.path.join(BASEDIR, 'data/{}/configs/'.format(APPNAME))
+oldconfigpath = os.path.join(CONFIGSDIR, 'old.json')
+newconfigpath = os.path.join(CONFIGSDIR, 'new.json')
 fabrics_connections_path = os.path.join(os.path.dirname(__file__), 'FabricConnection.json')
 switches_connections_path = os.path.join(os.path.dirname(__file__), 'SwitchConnection.json')
 
