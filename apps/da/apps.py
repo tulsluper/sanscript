@@ -32,7 +32,9 @@ config_models = samevalues([
 show_models = samevalues([
     'StorageConnection',
     'Capacity',
+    'CapacityHistory',
     'TPARCapacity',
+    'TPARCapacityHistory',
     'TPARHost',
     'TPARVV',
     'TPARVLUN',
