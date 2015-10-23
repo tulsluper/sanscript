@@ -17,6 +17,7 @@ pages = [
     {'label': 'zones', 'view': 'zones', 'title': 'Zones'},
     {'label': 'paths', 'view': 'paths', 'title': 'Paths'},
     {'label': 'changes', 'view': 'changes', 'title': 'Changes'},
+    {'label': 'change_acknowledge', 'view': 'change_acknowledge', 'title': ''},
     {'label': 'stat', 'view': 'stat', 'title': ''},
 ]
 

@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.admin.views.decorators import staff_member_required
 from .defs import prevent_password_save, create_formset
 from .defs import build_filters, model_to_table
+from django.views.decorators.csrf import csrf_protect
 
 
 def home(request):

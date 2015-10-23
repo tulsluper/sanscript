@@ -1,3 +1,5 @@
+from django.utils.safestring import mark_safe
+
 from django import template
 register = template.Library()
 
@@ -18,3 +20,8 @@ def upperbreak(word):
 @register.filter
 def is_list(value):
     return type(value) == list
+
+
+@register.filter
+def spacify(value):
+    return mark_safe(value.replace(' ', '&nbsp'))

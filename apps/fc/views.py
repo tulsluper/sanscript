@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 import json
 from .models import *
+from .forms import *
 from apps.sa.defs import build_filters, model_to_table
 
 
@@ -195,8 +196,43 @@ def changes(request):
         for index, cell in enumerate(row):
             if type(cell) == str and '\n' in cell:
                 row[index] = cell.replace(' ', '&nbsp;').replace('\n', '<br>')
+
+    objs = Change.objects.all()
+
     data = {
         'cols': cols,
         'rows': rows,
+        'objs': objs,
     }
-    return render(request, 'table.html', data)
+    return render(request, 'fc/changes.html', data)
+
+
+"""
+def change_acknowledge(request):
+    id = request.GET.get('id')
+    try:
+        obj = Change.objects.get(id=id)
+    except:
+        obj = None
+    data = {
+        'obj': obj,
+    }
+    return render(request, 'fc/change_acknowledge.html', data)
+"""
+
+
+@csrf_protect
+def change_acknowledge(request): 
+    id = request.GET.get('id')
+    instance = Change.objects.get(id=id)
+    form = ChangeForm(request.POST or None, instance=instance)
+    if form.is_valid():
+          instance = form.save(commit=False)
+          instance.Acknowledged = True
+          instance.save()
+          return redirect('/fc/changes/')
+    data = {
+        'instance': instance,
+        'form': form,
+    }
+    return render(request, 'fc/change_acknowledge.html', data)

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="item_name" style="display: none">{{ item_name }}</div>
+
+<div class="row fullWidth withTop">
+<div class="columns">
+
+    <form action=".?id={{ instance.id }}" method="POST">
+    {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="button small" value="acknowledge" >
+        <a href="/{{ app_label }}/changes/">
+            <input type="button" class="button small" value="cancel" >
+        </a>
+    </form>
+
+</div>
+</div>
+
+{% endblock %}

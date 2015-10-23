@@ -270,6 +270,9 @@ class Change(models.Model):
     Acknowledged = models.BooleanField(default=False)
     User = models.ForeignKey(User, blank=True, null=True)
 
+    class Meta:
+        ordering = ['-Till', 'Fabric',]
+
 
 class Portlog(models.Model):
     switch = models.CharField(max_length=30)
