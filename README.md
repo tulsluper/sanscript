@@ -16,6 +16,9 @@ apt-get install libldap2-dev libsasl2-dev libssl-dev
 dpkg --add-architecture i386
 apt-get update
 apt-get install gcc-multilib
+
+# (for EVA SSSU)
+apt-get install libstdc++5
 ```
 Download application and install requirements
 ```bash
