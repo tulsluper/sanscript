@@ -187,7 +187,17 @@ def zones(request):
     return render(request, 'table.html', data)
 
 
+@csrf_protect
 def changes(request):
+    field_latest = 'id'
+    if request.is_ajax():
+        data = {}
+        try:
+            if Change.objects.latest(field_latest).id != int(request.POST.get('last_obj_id')):
+                data = {'refresh': True}
+        except:
+            pass
+        return HttpResponse(json.dumps(data), content_type='application/json')
     filters = build_filters(request)
     cols, rows = model_to_table(Change, filters)
     cols = cols[:-1]
@@ -198,11 +208,13 @@ def changes(request):
                 row[index] = cell.replace(' ', '&nbsp;').replace('\n', '<br>')
 
     objs = Change.objects.all()
+    last_obj_id = objs.latest(field_latest).id if objs else None
 
     data = {
         'cols': cols,
         'rows': rows,
         'objs': objs,
+        'last_obj_id': last_obj_id,
     }
     return render(request, 'fc/changes.html', data)
 

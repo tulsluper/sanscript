@@ -6,6 +6,9 @@
 <div class="row fullWidth withTop">
 <div class="columns">
 
+<div id="last_obj_id" style="display:none">{{ last_obj_id }}</div>
+<div id="csrf_token" style="display:none">{{ csrf_token }}</div>
+
 {% if cols %}
 
   <div id="dvData">
@@ -52,6 +55,7 @@
 
     {% for obj in objs %}
       <tr style="background: {% if obj.Acknowledged %}#CCFFCC{% else %}#FFCCFF{% endif %}">
+          <td>{{ obj.id }} </td>
           <td>{{ obj.From }} </td>
           <td>{{ obj.Till }} </td>
           <td>{{ obj.Fabric }} </td>
@@ -94,6 +98,46 @@
     $(".export").on('click', function (event) {
       exportTableToCSV.apply(this, [$('#dvData>table'), $('#item_name').text()+'.csv']);
     });
+// check last record in db
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+            // Only send the token to relative URLs i.e. locally.
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+    }
+});
+
+setInterval(function() {
+    $.ajax({
+      url: '.', 
+      type: 'post',
+      data: {
+        'last_obj_id': $('#last_obj_id').text(),
+      },
+      success: function(data) {
+        if (data.refresh) {
+            window.location.href = '.';
+        }
+      },
+    });
+}, 5000);
 </script>
 {% endblock %}
 
