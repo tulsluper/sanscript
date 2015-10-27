@@ -24,4 +24,4 @@ def is_list(value):
 
 @register.filter
 def spacify(value):
-    return mark_safe(value.replace(' ', '&nbsp'))
+    return mark_safe(value.replace('  ', '&nbsp;&nbsp;'))
