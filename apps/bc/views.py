@@ -125,7 +125,8 @@ def counter_view(request):
             records.append([key, values, port_name])
 
     if '-' in sort:
-        index = xtimes.index(sort.split('-'))
+        index = ['-'.join(x)[:len(sort)] for x in xtimes].index(sort)
+        sort = '-'.join(xtimes[index])
         function = lambda items, index=index: items[index]
     elif sort == 'max':
         function = max

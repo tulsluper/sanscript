@@ -23,7 +23,7 @@
           <option value="max" {% if sort == 'max' %}selected{% endif %}>sort by max</option>
           <option value="median" {% if sort == 'median' %}selected{% endif %}>sort by median</option>
         {% for x in xtimes %}
-          <option value="{{ x|join:'-'|slice:":5" }}" {% if x|join:'-' == sort %}selected{% endif %}>sort by {{ x|join:':'|slice:":5" }}</option>
+          <option value="{{ x|join:'-' }}" {% if x|join:'-' == sort %}selected{% endif %}>sort by {{ x.0 }}:{{ x.1 }}</option>
         {% endfor %}
         </select>
     </div>
