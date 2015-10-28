@@ -182,4 +182,21 @@ html, body {
 }
 
 /* =========================================================================+ */
-/* bc_table */
+/* path_filter */
+
+.path_filter .button,
+.path_filter input,
+.path_filter select {
+    margin-bottom:0;
+}
+.path_filter select {
+    width:300px;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+}
+.path_filter form > div {
+  display:inline-block;
+  margin-right:10px;
+}
+
