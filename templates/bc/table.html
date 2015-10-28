@@ -16,7 +16,7 @@
               <span><a href="#" class="export">csv</a></span>
             </th>
           {% for xtime in xtimes %}
-            <td>{{ xtime|join:':' }}</td>
+            <td>{{ xtime.0 }}:{{ xtime.1 }}</td>
           {% endfor %}
         </tr>
       {% for row in rows %}
@@ -27,6 +27,9 @@
             {% else %}
                 <a href="/bc/port/?date={{ datestring }}&port={{ row.0.split|join:'_' }}">{{ row.0 }}</a>
             {% endif %}
+                {# for port(s) page: counter integer #}
+                {# for counter page: portname #}
+                {{ row.2|truncatechars:24 }}
             </th>
         {% for value in row.1 %}
             <td>
