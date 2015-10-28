@@ -1,7 +1,7 @@
 <script>
 $(function(){
 
-{% if ptype == 'port' %}
+{% if ptype == 'counter' %}
 
   function onDate(datestring, callback) {
       return $.ajax({
@@ -40,7 +40,7 @@ $(function(){
       $("#f_counter").html(options);
   };
 
-
+/*
   $('#f_datestring').fdatepicker({
       format: 'yyyy-mm-dd',
       startDate: '2015-03-20',
@@ -49,6 +49,7 @@ $(function(){
       datestring = ev.date.toJSON().substring(0,10);
       onDate(datestring, setfields);
   });
+*/
 
 
   $( ".bc_filter input[type=submit]" ).click(function() {
@@ -59,7 +60,7 @@ $(function(){
       return false;
   });
 
-{% elif ptype == 'counter' %}
+{% elif ptype == 'port' %}
 
 /*
   $('.chosen-select').chosen({max_select_options: 5});

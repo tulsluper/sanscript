@@ -3,7 +3,7 @@
 <div class="row fullWidth withBottom">
   <div class="columns bc_filter">
 
-{% if ptype == 'port' %}
+{% if ptype == 'counter' %}
 <form action="." method="get">
     <div>
         <input type="date" name="date" id="f_datestring" value="{{ datestring }}">
@@ -45,7 +45,7 @@
 </form>
 
 
-{% elif ptype == 'counter' %}
+{% elif ptype == 'port' %}
 <form action="." method="get">
     <div>
         <input type="date" name="date" id="f_datestring" value="{{ datestring }}">

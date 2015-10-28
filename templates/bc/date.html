@@ -6,9 +6,14 @@
             {% include "bc/filter.html" %}
         </div>
     </div>
-    <div class="row fullWidth">
+    <div class="row fullWidth" style="margin-bottom:2em;">
         <div class="columns">
             {% include "bc/table.html" %}
+        </div>
+    </div>
+    <div class="row fullWidth" style="margin-bottom:2em;">
+        <div class="columns">
+            {% include "bc/chart.html" %}
         </div>
     </div>
 {% endblock %}
@@ -16,5 +21,6 @@
 {% block script %}
     {% include "bc/filter_script.html" %}
     {% include "bc/table_script.html" %}
+    {% include "bc/chart_script.html" %}
 {% endblock %}
 

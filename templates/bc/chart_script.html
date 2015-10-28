@@ -1,0 +1,155 @@
+<script>
+{% if ptype == 'port' %}
+$(function(){
+    $('#container').highcharts({
+        chart: {
+            type: 'spline',
+            zoomType: 'xy',
+        },
+        title: {
+            text: '',
+        },
+        subtitle: {
+            text: '',
+        },
+        xAxis: {
+            startOnTick: true,
+            tickmarkPlacement: 'on',
+            categories: [{% for xtime in xtimes %}'{{ xtime|join:':'|slice:":5" }}', {% endfor %}],
+          {% if xtimes %}
+            tickInterval: {{ xtimes|length }}/12|0,
+          {% endif %}
+
+        },
+        yAxis: [
+        {% for row in rows %}
+          {
+            labels: {
+               style: {
+                   color: Highcharts.getOptions().colors[{{ forloop.counter0 }}]
+               }
+            },
+            title: {
+               text: {% if row.0 in visible_counters %}'{{ row.0 }} {{ row.2 }}'{% else %}null{% endif %},
+               style: {
+                   color: Highcharts.getOptions().colors[{{ forloop.counter0 }}]
+               }
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+          },
+        {% endfor %}
+        ],
+        
+        tooltip: {
+            valueSuffix: '',
+            shared: true,
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [
+        {% for row in rows %}
+          {
+            name: '{{ row.0 }} {{ row.2 }}',
+            type: 'spline',
+            yAxis: {{ forloop.counter0 }},
+            data: [{% for item in row.1 %}{{ item }}, {% endfor %}],
+            marker: {
+              radius: 1,
+            },
+            visible: {% if row.0 in visible_counters %}true{% else %}false{% endif %},
+            events: {
+              hide: function() {
+                this.yAxis.setTitle({text: null});
+              },
+              show: function() {
+                this.yAxis.update({
+                    title: {text: '{{ row.0 }}', style: {color: this.color}},
+                    labels: {style: {color: this.color}}
+                });
+              }
+            },
+          },
+        {% endfor %}
+        ]
+    });
+    $(window).trigger('resize');
+})
+
+{% elif ptype == 'counter' %}
+$(function(){
+    $('#container').highcharts({
+        chart: {
+            type: 'spline',
+            zoomType: 'xy',
+        },
+        title: {
+            text: '{{ counter }}',
+            x: -20
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            startOnTick: true,
+            tickmarkPlacement: 'on',
+            categories: [{% for xtime in xtimes %}'{{ xtime|join:':'|slice:":5" }}', {% endfor %}],
+            tickInterval: {{ xtimes|length }}/12|0,
+        },
+        yAxis: {
+            title: {
+               text: '{{ counter }}, {{ integer }}',
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            formatter: function (tooltip) {
+                var items = this.points || splat(this),
+                    series = items[0].series,
+                    s;
+                // sort the values
+                items.sort(function(a, b){
+                    return ((a.y < b.y) ? -1 : ((a.y > b.y) ? 1 : 0));
+                });
+                items.reverse();
+                return tooltip.defaultFormatter.call(this, tooltip);
+            },
+            valueSuffix: '',
+            shared: true,
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [
+        {% for row in rows %}
+          {
+            name: '{{ row.0 }} {{ row.2 }}',
+            type: 'spline',
+            data: [{% for item in row.1 %}{{ item }}, {% endfor %}],
+            marker: {
+              radius: 1,
+            },
+            visible: {% if forloop.first %}true{% else %}false{% endif %},
+          },
+        {% endfor %}
+        ]
+    });
+    $(window).trigger('resize');
+})
+{% endif %}
+</script>

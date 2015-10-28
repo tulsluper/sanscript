@@ -70,9 +70,11 @@ def port_view(request):
         'datestring': datestring,
         'xtimes': xtimes,
         'rows': rows,
-        'ptype': 'counter',
         'ports': ports,
         'port': port,
+
+        'ptype': 'port',
+        'visible_counters': ['Error', 'TxElements', 'BBCreditZero'],
     }
     return render(request, 'bc/date.html', data)
 
@@ -147,10 +149,10 @@ def counter_view(request):
         counter = []
 
     data = {
+        'ptype': 'counter',
         'datestring': datestring,
         'xtimes': xtimes,
         'rows': records,
-        'ptype': 'port',
         'counters': sort_counters(cdicts.keys()),
         'counter': counter,
         'integer': integer,
@@ -178,12 +180,17 @@ def select_view(request):
 
     if select_ports and select_counters:
 
-        xtimes = XTimes.objects.get(date=datestring).values
-        integers = Integers.objects.get(date=datestring).values
-        cdicts = CDicts.objects.get(date=datestring).values
+        try:
+            xtimes = XTimes.objects.get(date=datestring).values
+            integers = Integers.objects.get(date=datestring).values
+            integers = integers.get('p', {})
+            cdicts = CDicts.objects.get(date=datestring).values
+        except:
+            integers = {}
+            cdicts = {} 
 
         for counter in select_counters:
-            integer = integers['p'].get(counter, '')
+            integer = integers.get(counter, '')
             counter_ports = cdicts.get(counter, {})
             port_values = []
             for port in select_ports:
