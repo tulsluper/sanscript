@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 import json
+from datetime import datetime
 from .models import *
 from .forms import *
 from apps.sa.defs import build_filters, model_to_table
@@ -13,8 +14,26 @@ def home(request):
 
 
 def stat(request):
-    data = {}
-    return render(request, 'home.html', data)
+    node1 = request.GET.get('node1')
+    node2 = request.GET.get('node2')
+    if node1 and node2:
+        try:
+            treads = Path.objects.get(Node1=node1, Node2=node2).Treads
+        except:
+            treads = []
+        ports = set()
+        for tread in treads:
+            for node in tread:
+                if ' ' in node:
+                    ports.add(node)
+        
+        url = '/bc/select/?date={}'.format(str(datetime.now().date()))
+        for port in ports:
+            url += '&ports={}'.format(port.replace(' ', '+'))
+        for counter in ['Error', 'TxElements', 'RxElements','BBCreditZero']:
+            url += '&counters={}'.format(counter)
+        return redirect(url)
+    return redirect('/fc/paths/')
 
 
 @csrf_protect
@@ -116,7 +135,7 @@ def paths(request):
         'height': (maxports+1)*40+16,
         'internal': internal_links,
         'same_ports': same_ports,
-        'bcounters': False,
+        'bcounters': True,
     }
     return render(request, 'fc/path.html', data)
 
