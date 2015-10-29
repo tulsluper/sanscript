@@ -5,6 +5,14 @@ from settings import JSONDIR, logging
 from defs import load_data, dump_data
 
 
+def sort_storage_records(records, sorted_systems):
+    try:
+        records.sort(key=lambda x: sorted_systems.index(x['Storage']))
+    except:
+        pass
+    return records
+
+
 def main():
 
     records = []
@@ -78,6 +86,8 @@ def main():
 
         logging.info(storage)
 
+    sorted_systems = load_data(os.path.join(JSONDIR, 'sorted_systems'), [])
+    records = sort_storage_records(records, sorted_systems)
 
     filepath = os.path.join(JSONDIR, 'capacity_3par')
     dump_data(filepath, records)

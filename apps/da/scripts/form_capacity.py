@@ -5,6 +5,14 @@ from settings import JSONDIR, logging
 from defs import load_data, dump_data
 
 
+def sort_storage_records(records, sorted_systems):
+    try:
+        records.sort(key=lambda x: sorted_systems.index(x['Storage']))
+    except:
+        pass
+    return records
+
+
 def sum_3par():
     capD = {}
     filepath = os.path.join(JSONDIR, '3par', 'sys')
@@ -158,6 +166,10 @@ def main():
             record['RawFree'] = record['FormattedAvailable']*rate
         record['FormattedTotal'] = record['FormattedUsed'] + record['FormattedAvailable']
         records.append(record)
+
+    sorted_systems = load_data(os.path.join(JSONDIR, 'sorted_systems'), [])
+    records = sort_storage_records(records, sorted_systems)
+
     filepath = os.path.join(JSONDIR, 'capacity')
     dump_data(filepath, records)
     return
