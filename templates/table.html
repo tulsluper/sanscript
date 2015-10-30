@@ -88,7 +88,6 @@
       $(this).val(getUrlParameter(this.name));
     });
 // export table to csv
-    alert($('#page_label').text());
     $(".export").on('click', function (event) {
       exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'.csv']);
     });
