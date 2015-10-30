@@ -41,7 +41,8 @@ def snmpwalk(connection, counters=counters):
     cmdGen = cmdgen.CommandGenerator()
     errorIndication, errorStatus, errorIndex, varBindTable = cmdGen.nextCmd(
         cmdgen.CommunityData('public'),
-        cmdgen.UdpTransportTarget((address, 161), timeout=1.5, retries=2),
+        # default: UdpTransportTarget(transportAddr, timeout=1, retries=5, tagList=b'')
+        cmdgen.UdpTransportTarget((address, 161), timeout=5, retries=5),
         *list(counters.keys())
     )
     if errorIndication:
