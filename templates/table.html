@@ -4,6 +4,7 @@
 
 <div class="row fullWidth withTop">
 <div class="columns">
+  <div id="page_label" style="display:none">{{ page_label }}</div>
 
 {% if cols %}
 
@@ -87,8 +88,9 @@
       $(this).val(getUrlParameter(this.name));
     });
 // export table to csv
+    alert($('#page_label').text());
     $(".export").on('click', function (event) {
-      exportTableToCSV.apply(this, [$('#dvData>table'), $('#item_name').text()+'.csv']);
+      exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'.csv']);
     });
 </script>
 {% endblock %}
