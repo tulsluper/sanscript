@@ -31,19 +31,28 @@ def snmpwalk(connection, counters=counters):
     cmdGen = cmdgen.CommandGenerator()
     errorIndication, errorStatus, errorIndex, varBindTable = cmdGen.nextCmd(
         cmdgen.CommunityData('public'),
-        cmdgen.UdpTransportTarget((address, 161)),
+        cmdgen.UdpTransportTarget((address, 161), timeout=1.5, retries=2),
         *list(counters.keys())
     )
-    if not errorIndication and not errorStatus:
-        for varBindTableRow in varBindTable:
-            for number, value in varBindTableRow:
-                numberitems = number.asTuple()
-                number = '.'.join(map(str, numberitems[:10]))
-                port = numberitems[-1]
-                counter = counters[number]
-                value = value.prettyPrint()
-                value = int(value.replace(' ', ''), 16)
-                values['%s %s %s' %(name, port, counter)] = value
+    if errorIndication:
+        print(name, errorIndication)
+    else:
+        if errorStatus:
+            print('%s at %s' % (
+                errorStatus.prettyPrint(),
+                errorIndex and varBindTable[-1][int(errorIndex)-1] or '?'
+                )
+            )
+        else:
+            for varBindTableRow in varBindTable:
+                for number, value in varBindTableRow:
+                    numberitems = number.asTuple()
+                    number = '.'.join(map(str, numberitems[:10]))
+                    port = numberitems[-1]
+                    counter = counters[number]
+                    value = value.prettyPrint()
+                    value = int(value.replace(' ', ''), 16)
+                    values['%s %s %s' %(name, port, counter)] = value
     return values
 
 
