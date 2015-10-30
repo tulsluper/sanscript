@@ -10,6 +10,16 @@ from pysnmp.entity.rfc3413.oneliner import cmdgen
 from defs import load_data, dump_data
 from settings import PROCESSES, TEMPFILE, DIFFSDIR
 
+import logging
+logpath = os.path.join(os.path.dirname(__file__), 'run.log')
+logformat = '%(asctime)s %(levelname)s %(message)s'
+logging.basicConfig(
+    filename=logpath,
+    level=logging.INFO,
+    format=logformat
+)
+
+
 dirpath = os.path.dirname(os.path.realpath(__file__))
 filepath = os.path.join(dirpath, 'SwitchConnection.json')
 connections = load_data(filepath, [])
@@ -35,10 +45,12 @@ def snmpwalk(connection, counters=counters):
         *list(counters.keys())
     )
     if errorIndication:
-        print(name, errorIndication)
+        logging.warning(name)
+        logging.warning(errorIndication)
     else:
         if errorStatus:
-            print('%s at %s' % (
+            logging.warning(name)
+            logging.warning('%s at %s' % (
                 errorStatus.prettyPrint(),
                 errorIndex and varBindTable[-1][int(errorIndex)-1] or '?'
                 )
