@@ -99,14 +99,17 @@
 
 {% block script %}
 <script>
-// set filter values
+
+    // set filter values
     $( ".filter input" ).each(function( index ) {
       $(this).val(getUrlParameter(this.name));
     });
-// export table to csv
+
+    // export table to csv
     $(".export").on('click', function (event) {
       exportTableToCSV.apply(this, [$('#dvData>table'), $('#item_name').text()+'.csv']);
     });
+
 </script>
 {% endblock %}
 

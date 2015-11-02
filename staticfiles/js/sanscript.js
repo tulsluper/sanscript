@@ -35,9 +35,12 @@ function exportTableToCSV($table, filename) {
             var $row = $(row),
                 $cols = $row.find('th, td');
             return $cols.map(function (j, col) {
-                var $col = $(col),
-                    text = $col.text().trim();
-                return text.replace('"', '""'); // escape double quotes
+                var $col = $(col), text;
+                $col.find("br").replaceWith("<div>{{BR_MARKER}}</div>"); // <br> to line_break
+                text = $col.text().replace(/{{BR_MARKER}}/g, "\r\n"); // <br> to line_break
+                text = text.trim()
+                text = text.replace('"', '""'); // escape double quotes
+                return text
             }).get().join(tmpColDelim);
         }).get().join(tmpRowDelim)
             .split(tmpRowDelim).join(rowDelim)
