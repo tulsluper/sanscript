@@ -10,7 +10,9 @@ function getUrlParameter(sParam)
         var sParameterName = sURLVariables[i].split('=');
         if (sParameterName[0] == sParam)
         {
-            return decodeURIComponent(sParameterName[1]);
+            value = decodeURIComponent(sParameterName[1])
+            value = value.replace(/\+/g, ' ')
+            return value;
         }
     }
 }
