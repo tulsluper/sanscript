@@ -6,44 +6,42 @@
 <div class="columns">
 
   <style>
-    .fields1 td {text-align:center;}
     tbody tr td,
     .fields2 td {text-align:right;}
+    .sum_row th {text-align:right; border-top:1px solid #999;}
+    .delimiter {border-right:1px solid #999;}
+    .hlight {background: #A0D3E8}
   </style>
 
   <div id="dvData">
+
   <table>
     <thead>
         <tr class="service">
           <td colspan="11">
-              {% if datetime %}<span>{{ datetime }}</span>{% endif %}
-              <span>{{ rows|length }} records</span>
+              <span>{{ objs|length }} records</span>
               {% if integer %}<span>integer: {{ integer }}</span>{% endif %}
+              <span>R - Raw, F - Formatted</span>
               {% if request.GET|length %}<span><a href="{{ request.path }}" class="clear_filter">clear filter</a></span>{% endif %}
               <span><a href="#" class="export">export to csv</a></span>
               <span><a href="{{ request.build_absolute_uri }}">page link</a></span>
           </td>
         </tr>
-        <tr class="fields1">
-          <th>Storage</th>
-          <td colspan=5>Raw</td>
-          <td colspan=5>Formatted</td>
-        </tr>
         <tr class="fields2">
-          <th></th>
-          <td>Total</td>
-          <td>Data</td>
-          <td>Spare</td>
-          <td>Allocated</td>
-          <td>Free</td>
-          <td>Total</td>
-          <td>Used</td>
-          <td>Presented</td>
-          <td>NotPresented</td>
-          <td>Available</td>
+          <th class="delimiter">Storage</th>
+          <td>R&nbsp;Total</td>
+          <td>R&nbsp;Data</td>
+          <td>R&nbsp;Spare</td>
+          <td>R&nbsp;Allocated</td>
+          <td class="delimiter">R&nbsp;Free</td>
+          <td>F&nbsp;Total</td>
+          <td class="hlight">F&nbsp;Used</td>
+          <td>F&nbsp;Presented</td>
+          <td>F&nbsp;NotPresented</td>
+          <td class="hlight">F&nbsp;Available</td>
         </tr>
-      <form action="." method="get">
         <tr class="filter">
+      <form action="." method="get">
           <th><input type="text" id="Storage" name="Storage"></th>
           <th><input type="text" id="RawTotal" name="RawTotal"></th>
           <th><input type="text" id="RawData" name="RawData"></th>
@@ -55,28 +53,42 @@
           <th><input type="text" id="FormattedPresented" name="FormattedPresented"></th>
           <th><input type="text" id="FormattedNotPresented" name="FormattedNotPresented"></th>
           <th><input type="text" id="FormattedAvailable" name="FormattedAvailable"></th>
-        </tr>
         <input type="submit" value="OK" class="filter_submit">
       </form>
+        </tr>
     </thead>
     <tbody>
       {% for obj in objs %}
         <tr>
-          <th>{{ obj.Storage }}</th>
+          <th class="delimiter">{{ obj.Storage }}</th>
           <td>{{ obj.RawTotal }}</td>
           <td>{{ obj.RawData }}</td>
           <td>{{ obj.RawSpare }}</td>
           <td>{{ obj.RawAllocated }}</td>
-          <td>{{ obj.RawFree }}</td>
+          <td class="delimiter">{{ obj.RawFree }}</td>
           <td>{{ obj.FormattedTotal }}</td>
-          <td>{{ obj.FormattedUsed }}</td>
+          <td class="hlight">{{ obj.FormattedUsed }}</td>
           <td>{{ obj.FormattedPresented }}</td>
           <td>{{ obj.FormattedNotPresented }}</td>
-          <td>{{ obj.FormattedAvailable }}</td>
+          <td class="hlight">{{ obj.FormattedAvailable }}</td>
         </tr>
       {% endfor %}
+        <tr class="sum_row">
+          <th class="delimiter"></th>
+          <th>{{ sum_row.RawTotal }}</th>
+          <th>{{ sum_row.RawData }}</th>
+          <th>{{ sum_row.RawSpare }}</th>
+          <th>{{ sum_row.RawAllocated }}</th>
+          <th class="delimiter">{{ sum_row.RawFree }}</th>
+          <th>{{ sum_row.FormattedTotal }}</th>
+          <th class="hlight">{{ sum_row.FormattedUsed }}</th>
+          <th>{{ sum_row.FormattedPresented }}</th>
+          <th>{{ sum_row.FormattedNotPresented }}</th>
+          <th class="hlight">{{ sum_row.FormattedAvailable }}</th>
+        </tr>
     </tbody>
   </table>
+
   </div>
 
 </div>

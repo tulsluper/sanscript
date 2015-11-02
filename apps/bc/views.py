@@ -209,6 +209,11 @@ def select_view(request):
             if sum([sum(x[1]) for x in port_values]):
                 records.append([counter, port_values, integer])
 
+    if records == [] and (select_ports or select_counters):
+        message = {'severity': 'info', 'text': 'No data for this select'}
+    else:
+        message = None
+
     data = {
         'datestring': datestring,
         'ports': ports,
@@ -217,5 +222,6 @@ def select_view(request):
         'select_ports': select_ports,
         'select_counters': select_counters,
         'records': records,
+        'message': message
     }
     return render(request, 'bc/select.html', data)

@@ -31,6 +31,7 @@
         </div>
     </div>
 
+
     {% for record in records %}
     <div class="row fullWidth withBottom">
         <div class="columns">
@@ -39,6 +40,14 @@
         </div>
     </div>
     {% endfor %}
+
+    {% if message %}
+        <div data-alert class="alert-box {{ message.severity }}">
+            {{ message.text|safe }}
+            <a href="#" class="close">&times;</a>
+        </div>
+    {% endif %}
+
 
 {% endblock %}
 

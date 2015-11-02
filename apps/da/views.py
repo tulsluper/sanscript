@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from apps.sa.defs import sfilter, stable
+from apps.sa.defs import sfilter, stable, sum_by_field
 from django.db.models import Sum
 from .models import *
 from datetime import datetime, timedelta
@@ -12,8 +12,11 @@ def home(request):
 
 def capacity(request):
     objs = sfilter(Capacity, request)
+    sum_row = sum_by_field(Capacity, objs)
     data = {
-        'objs': objs
+        'objs': objs,
+        'sum_row': sum_row,
+        'integer': 'TB',
     }
     return render(request, 'da/capacity.html', data)
 

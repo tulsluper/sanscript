@@ -2,6 +2,7 @@ from django.forms.models import modelformset_factory
 from django.forms import PasswordInput
 from operator import or_, and_
 from django.db.models import Q
+from django.db.models import Sum
 
 
 def prevent_password_save(sender, instance, **kwargs):
@@ -95,8 +96,10 @@ def model_to_table(model, filters):
         rows.append(row)
     return fields, rows
 
-def stable(model, objects):
-    fields = [f.name for f in model._meta.fields][1:]
+
+def stable(model, objects, fields=None):
+    if fields is None:
+        fields = [f.name for f in model._meta.fields][1:]
     rows = []
     for record in objects:
         row = []
@@ -109,5 +112,16 @@ def stable(model, objects):
             row.append(value)
         rows.append(row)
     return fields, rows
+
+
+def sum_by_field(model, objects, fields=None):
+    if fields is None:
+        fields = [f.name for f in model._meta.fields][1:]
+    row = {}
+    for field in fields:
+        value = list(objects.aggregate(Sum(field)).values())[0]
+        row[field] = value
+    return row
+
 
 
