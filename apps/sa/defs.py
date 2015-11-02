@@ -119,7 +119,10 @@ def sum_by_field(model, objects, fields=None):
         fields = [f.name for f in model._meta.fields][1:]
     row = {}
     for field in fields:
-        value = list(objects.aggregate(Sum(field)).values())[0]
+        try:
+            value = list(objects.aggregate(Sum(field)).values())[0]
+        except:
+            value = None
         row[field] = value
     return row
 
