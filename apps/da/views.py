@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from apps.sa.defs import build_filters, model_to_table
+from apps.sa.defs import sfilter, stable
 from django.db.models import Sum
 from .models import *
 from datetime import datetime, timedelta
@@ -9,9 +9,9 @@ def home(request):
     data = {}
     return render(request, 'home.html', data)
 
+
 def capacity(request):
-    filters = build_filters(request)
-    objs = Capacity.objects.filter(**filters)
+    objs = sfilter(Capacity, request)
     data = {
         'objs': objs
     }
@@ -19,8 +19,7 @@ def capacity(request):
 
 
 def capacity_history(request):
-    filters = build_filters(request)
-    objs = CapacityHistory.objects.filter(**filters)
+    objs = sfilter(CapacityHistory, request)
     fields = CapacityHistory._meta.get_all_field_names()
     fields.remove('id')
     fields.remove('Storage')
@@ -42,8 +41,7 @@ def capacity_history(request):
 
 
 def capacity_3par_history(request):
-    filters = build_filters(request)
-    objs = TPARCapacityHistory.objects.filter(**filters)
+    objs = sfilter(TPARCapacityHistory, request)
     fields = TPARCapacityHistory._meta.get_all_field_names()
     fields.remove('id')
     fields.remove('Storage')
@@ -66,16 +64,16 @@ def capacity_3par_history(request):
 
 
 def capacity_3par(request):
-    TPARCapacity.objects.all()
+    objs = sfilter(TPARCapacity, request)
     data = {
-        'objs': TPARCapacity.objects.all()
+        'objs': objs
     }
     return render(request, 'da/capacity_3par.html', data)
 
 
 def volumes(request):
-    filters = build_filters(request)
-    cols, rows = model_to_table(Volume, filters)
+    objects = sfilter(Volume, request)
+    cols, rows = stable(Volume, objects)
     data = {
         'cols': cols,
         'rows': rows,
@@ -84,8 +82,8 @@ def volumes(request):
 
 
 def hosts(request):
-    filters = build_filters(request)
-    cols, rows = model_to_table(Host, filters)
+    objects = sfilter(Host, request)
+    cols, rows = stable(Host, objects)
     data = {
         'cols': cols,
         'rows': rows,

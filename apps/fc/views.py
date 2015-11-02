@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 from .models import *
 from .forms import *
-from apps.sa.defs import build_filters, model_to_table
+from apps.sa.defs import sfilter, stable
 
 
 def home(request):
@@ -141,8 +141,8 @@ def paths(request):
 
 
 def switches(request):
-    filters = build_filters(request)
-    cols, rows = model_to_table(SwitchCommon, filters)
+    objs = sfilter(SwitchCommon, request)
+    cols, rows = stable(SwitchCommon, objs)
     data = {
         'cols': cols,
         'rows': rows,
@@ -151,8 +151,8 @@ def switches(request):
 
 
 def ports(request):
-    filters = build_filters(request)
-    cols, rows = model_to_table(PortCommon, filters)
+    objs = sfilter(PortCommon, request)
+    cols, rows = stable(PortCommon, objs)
     for row in rows:
         for index, cell in enumerate(row):
             if type(cell) == list:
@@ -179,8 +179,8 @@ def fix_cell(cell):
 
 
 def aliases(request):
-    filters = build_filters(request)
-    cols, rows = model_to_table(AliasStatus, filters)
+    objs = sfilter(AliasStatus, request)
+    cols, rows = stable(AliasStatus, objs)
     for row in rows:
         for index, cell in enumerate(row):
             if type(cell) == dict:
@@ -193,8 +193,8 @@ def aliases(request):
 
 
 def zones(request):
-    filters = build_filters(request)
-    cols, rows = model_to_table(ZoneStatus, filters)
+    objs = sfilter(ZoneStatus, request)
+    cols, rows = stable(ZoneStatus, objs)
     for row in rows:
         for index, cell in enumerate(row):
             if type(cell) == dict:
@@ -217,21 +217,11 @@ def changes(request):
         except:
             pass
         return HttpResponse(json.dumps(data), content_type='application/json')
-    filters = build_filters(request)
-    cols, rows = model_to_table(Change, filters)
-    cols = cols[:-1]
-    rows = [row[:-1] for row in rows]
-    for row in rows:
-        for index, cell in enumerate(row):
-            if type(cell) == str and '\n' in cell:
-                row[index] = cell.replace(' ', '&nbsp;').replace('\n', '<br>')
 
-    objs = Change.objects.all()
+    objs = sfilter(Change, request)
     last_obj_id = objs.latest(field_latest).id if objs else None
 
     data = {
-        'cols': cols,
-        'rows': rows,
         'objs': objs,
         'last_obj_id': last_obj_id,
     }

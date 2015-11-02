@@ -1,5 +1,7 @@
 from django.forms.models import modelformset_factory
 from django.forms import PasswordInput
+from operator import or_, and_
+from django.db.models import Q
 
 
 def prevent_password_save(sender, instance, **kwargs):
@@ -41,11 +43,62 @@ def build_filters(request):
     return filters
 
 
+def sfilter(model, request):
+    
+    objects = []
+
+    def set_op(op, key, xs):
+        if len(xs) == 1:
+            return xs[0]
+        elif len(xs) == 2:
+            elm0 = xs[0] if type(xs[0]) == Q else Q((key, xs[0]))
+            elm1 = xs[1] if type(xs[1]) == Q else Q((key, xs[1]))
+            return op(elm0, elm1)
+        else:
+            elm0 = xs[0] if type(xs[0]) == Q else Q((key, xs[0]))
+            return op(elm0, set_op(op, key, xs[1:]))
+
+    if ''.join(list(request.GET.values())) != '':
+        query = Q()
+        for key, value in request.GET.items():
+            if value:
+                key = '{}__contains'.format(key)
+                value = value.replace(' ', '').replace('+', '')
+                if '&&' in value or '||' in value:
+                    query.add(
+                        set_op(or_, key, [set_op(and_, key, z) for z in [x.split('&&') for x in value.split('||')]]),
+                        Q.AND)
+                else:
+                    query.add(Q((key, value)), Q.AND)
+
+        print(query)
+        objects = model.objects.filter(query)
+                    
+    else:
+        objects = model.objects.all()
+    return objects
+
+
 def model_to_table(model, filters):
     fields = [f.name for f in model._meta.fields][1:]
     rows = []
     objs = model.objects.filter(**filters)[:5000]
     for record in objs:
+        row = []
+        for field in fields:
+            value = getattr(record, field)
+            if value is None:
+                value = ''
+            if field == 'password':
+                value = ''
+            row.append(value)
+        rows.append(row)
+    return fields, rows
+
+def stable(model, objects):
+    fields = [f.name for f in model._meta.fields][1:]
+    rows = []
+    for record in objects:
         row = []
         for field in fields:
             value = getattr(record, field)
