@@ -9,8 +9,7 @@ from apps.sa.defs import sfilter, stable
 
 
 def home(request):
-    data = {}
-    return render(request, 'home.html', data)
+    return redirect('/fc/switches/')
 
 
 def stat(request):

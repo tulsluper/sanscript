@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from apps.sa.defs import sfilter, stable, sum_by_field
 from django.db.models import Sum
 from .models import *
@@ -6,8 +6,7 @@ from datetime import datetime, timedelta
 
 
 def home(request):
-    data = {}
-    return render(request, 'home.html', data)
+    return redirect('/da/capacity/')
 
 
 def capacity(request):

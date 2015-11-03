@@ -6,8 +6,9 @@ from .models import XTimes, Integers, SDicts, CDicts, PDicts
 
 COUNTERS = [obj.name for obj in CounterOid.objects.all() if obj.enabled]
 
-DBHOST = 'localhost'
-DBNAME = 'bcounters'
+
+def home(request):
+    return redirect('/bc/port/')
 
 
 def home(request):
