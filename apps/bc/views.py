@@ -11,11 +11,6 @@ def home(request):
     return redirect('/bc/port/')
 
 
-def home(request):
-    data = {}
-    return render(request, 'home.html', data)
-
-
 def sort_counters(counters, COUNTERS=COUNTERS):
     counters = list(counters)
     counters.sort(key=lambda x: COUNTERS.index(x) if x in COUNTERS else 0)
