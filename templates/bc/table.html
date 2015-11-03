@@ -19,6 +19,7 @@
             <td>{{ xtime.0 }}:{{ xtime.1 }}</td>
           {% endfor %}
         </tr>
+      {% spaceless %}
       {% for row in rows %}
         <tr>
             <th>
@@ -32,15 +33,11 @@
                 {{ row.2|truncatechars:24 }}
             </th>
         {% for value in row.1 %}
-            <td>
-                {% if value == 0 %}&nbsp;
-                {% elif value < 1 %}<span>{{ value }}</span>
-                {% else %}{{ value }}
-                {% endif %}
-            </td>
+            <td>{% if value == 0 %}<!--empty-->{% elif value < 1 %}<span>{{ value }}</span>{% else %}{{ value }}{% endif %}</td>
         {% endfor %}
         </tr>
       {% endfor %}
+      {% endspaceless %}
     </table>
   </div>
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static "foundation-5.5.2/css/foundation.css" %}" />
     <link rel="stylesheet" href="{% static "foundation-icons/foundation-icons.css" %}" />
     <link rel="stylesheet" href="{% static "chosen/chosen.min.css" %}" />
-    <link rel="stylesheet" href="{% static "jsPlumb/jsPlumb.css" %}" />
+    {% if js_jsPlumb %}<link rel="stylesheet" href="{% static "jsPlumb/jsPlumb.css" %}" />{% endif %}
     <link rel="stylesheet" href="{% static "css/sanscript.css" %}" />
     <script src="{% static "foundation-5.5.2/js/vendor/modernizr.js" %}"></script>
     {% block style %}
@@ -30,7 +30,7 @@
     <script src="{% static "Highcharts-4.1.8/js/highcharts.js" %}"></script>
     <script src="{% static "Highcharts-4.1.8/js/modules/exporting.js" %}"></script>
     <script src="{% static "chosen/chosen.jquery.min.js" %}"></script>
-    <script src="{% static "jsPlumb/jsPlumb-1.7.10-min.js" %}"></script>
+    {% if js_jsPlumb %}<script src="{% static "jsPlumb/jsPlumb-1.7.10-min.js" %}"></script>{% endif %}
     <script src="{% static "js/sanscript.js" %}"></script>
     <script>
       $(document).foundation();

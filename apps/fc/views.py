@@ -135,6 +135,7 @@ def paths(request):
         'internal': internal_links,
         'same_ports': same_ports,
         'bcounters': True,
+        'js_jsPlumb': True,
     }
     return render(request, 'fc/path.html', data)
 
