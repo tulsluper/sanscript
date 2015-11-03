@@ -110,7 +110,7 @@ def changes(request):
                 if obj.Name != new_obj.Name:
                     obj.Name = ch_format(obj.Name, new_obj.Name)
                 if obj.Size != new_obj.Size:
-                    obj.Size = ch_format(obj.Size,new_obj.Size)
+                    obj.Size = ch_format(obj.Size, new_obj.Size)
                 if obj.Hosts != new_obj.Hosts:
                     obj.Hosts = ch_format(obj.Hosts, new_obj.Hosts)
             except:

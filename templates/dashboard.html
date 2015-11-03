@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.dashboard i {
+  color:white;
+  font-size:64px;
+}
+.dashboard h3 span {
+  font-size:0.6em;
+}
+</style>
+
+<div class="row fullWidth dashboard" style="margin-top:2em;">
+<div style="margin:0 1em;">
+
+  <div class="columns large-12">
+    <div class="panel text-center" style="background:none; border:none; opacity: 0.8;">
+        <h1>SANscript</h1>
+    </div>
+  </div>
+
+  <div class="columns large-4 medium-4 left">
+    <div class="panel" style="background:#FF5454">
+    <div class="row">
+       <div class="columns large-6" style="border-right:2px solid white; opacity: 0.6;">
+         <div class="icon text-center">
+           <h3>Storages</h3>
+           <i class="fi-cloud"></i>
+         </div>
+       </div>
+       <div class="columns large-6" style="opacity: 0.8; font-weight: bold">
+         <div class="text text-right">
+           <h3><span>f. used</span> {{ FormattedUsed }}<span> TB</span></h3>
+           <h3><span>f. free</span> {{ FormattedAvailable }}<span> TB</span></h3>
+         </div>
+       </div>
+    </div>
+    </div>
+  </div>
+  <div class="columns large-4 medium-4 left">
+    <div class="panel" style="background:#67C2EF">
+    <div class="row">
+       <div class="columns large-6" style="border-right:2px solid white; opacity: 0.6;">
+         <div class="icon text-center">
+           <h3>Switches</h3>
+           <i class="fi-cloud"></i>
+         </div>
+       </div>
+       <div class="columns large-6" style="opacity: 0.8; font-weight: bold">
+         <div class="text text-right">
+           <h3><span>switches</span> {{ SwitchesCount }}</h3>
+           <h3><span>online ports</span> {{ OnlinePortsCount }}</h3>
+         </div>
+       </div>
+    </div>
+
+
+    </div>
+  </div>
+<!--
+  <div class="columns large-4 medium-4">
+    <div class="panel" style="background:#FABB3D">
+       <i class="fi-cloud"></i>
+    </div>
+  </div>
+  <div class="columns large-4 medium-4">
+    <div class="panel" style="background:#79C447">
+       <i class="fi-cloud"></i>
+    </div>
+  </div>
+-->
+</div>
+</div>
+
+{% endblock %}

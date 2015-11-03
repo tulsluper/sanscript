@@ -16,10 +16,24 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .defs import prevent_password_save, create_formset
 from .defs import build_filters, model_to_table
 from django.views.decorators.csrf import csrf_protect
+from apps.da.models import Capacity
+from apps.fc.models import SwitchCommon, PortCommon
+from django.db.models import Sum
 
 
 def home(request):
-    return render(request, 'home.html')
+    objs = Capacity.objects.all()
+    FormattedUsed = int(list(objs.aggregate(Sum('FormattedUsed')).values())[0])
+    FormattedAvailable = int(list(objs.aggregate(Sum('FormattedAvailable')).values())[0])
+    SwitchesCount = SwitchCommon.objects.count()
+    OnlinePortsCount = PortCommon.objects.filter(State='Online').count()
+    data = {
+        'FormattedUsed': FormattedUsed,
+        'FormattedAvailable': FormattedAvailable,
+        'SwitchesCount': SwitchesCount,
+        'OnlinePortsCount': OnlinePortsCount,
+    }
+    return render(request, 'dashboard.html', data)
 
 
 @staff_member_required
