@@ -5,6 +5,7 @@
 <div class="row fullWidth withTop">
 <div class="columns">
   <div id="page_label" style="display:none">{{ page_label }}</div>
+  <div id="last_update" style="display:none">{{ last_update|date:"Y-m-d-H:i"}}</div>
 
 {% if cols %}
 
@@ -88,7 +89,7 @@
     });
 // export table to csv
     $(".export").on('click', function (event) {
-      exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'.csv']);
+      exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'_'+$('#last_update').text()+'.csv']);
     });
 </script>
 {% endblock %}
