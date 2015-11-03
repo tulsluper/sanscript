@@ -26,6 +26,10 @@ scripts = [
 
     'save_into_db',
     'save_app_info',
+
+    'configs_collect', 
+    'configs_compare',
+    'configs_changes_save',
 ]
 
 

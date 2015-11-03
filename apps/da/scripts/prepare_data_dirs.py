@@ -6,7 +6,7 @@ import settings
 
 
 def main():
-    for name in ['TEXTDIR', 'JSONDIR']:
+    for name in ['TEXTDIR', 'JSONDIR', 'CONFIGSDIR']:
         directory = getattr(settings, name)
         if not os.path.exists(directory):
             os.makedirs(directory)

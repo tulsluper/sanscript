@@ -18,6 +18,8 @@ pages = [
     {'label': 'capacity_3par_history', 'view': 'capacity_3par_history', 'title': '3PAR Capacity History'},
     {'label': 'volumes', 'view': 'volumes', 'title': 'Volumes'},
     {'label': 'hosts', 'view': 'hosts', 'title': 'Hosts'},
+    {'label': 'changes', 'view': 'changes', 'title': 'Changes'},
+    {'label': 'change_acknowledge', 'view': 'change_acknowledge', 'title': ''},
 ]
 
 commands = [
@@ -45,6 +47,7 @@ show_models = samevalues([
     'HDSMap',
     'Volume',
     'Host',
+    'VolumeChange',
 ])
 
 

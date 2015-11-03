@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load extras %}
+{% block content %}
+<div id="item_name" style="display: none">{{ item_name }}</div>
+
+<div class="row fullWidth withTop">
+<div class="columns">
+
+<div id="last_obj_id" style="display:none">{{ last_obj_id }}</div>
+<div id="csrf_token" style="display:none">{{ csrf_token }}</div>
+
+  <div id="dvData">
+
+  <table class="aform">
+    <thead>
+    <tr class="service">
+        <td colspan="11">
+              {% if datetime %}<span>{{ datetime }}</span>{% endif %}
+              <span>{{ objs|length }} records</span>
+              {% if integer %}<span>integer: {{ integer }}</span>{% endif %}
+              {% if request.GET|length %}<span><a href="{{ request.path }}" class="clear_filter">clear filter</a></span>{% endif %}
+              <span><a href="#" class="export">export to csv</a></span>
+              <span><a href="{{ request.build_absolute_uri }}">page link</a></span>
+        </td>
+    </tr>
+
+    <tr>
+          <th>From</th>
+          <th>Till</th>
+          <th>Storage</th>
+          <th>Uid</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Hosts</th>
+          <th>Action</th>
+          <th>Note</th>
+          <th>Acknowledged</th>
+          <th></th>
+    </tr>
+
+    <form action="." method="get">
+      <tr class="filter">
+        <th><input type="text" id="From" name="From"></th>
+        <th><input type="text" id="Till" name="Till"></th>
+        <th><input type="text" id="Storage" name="Storage"></th>
+        <th><input type="text" id="Uid" name="Uid"></th>
+        <th><input type="text" id="Name" name="Name"></th>
+        <th><input type="text" id="Size" name="Size"></th>
+        <th><input type="text" id="Hosts" name="Hosts"></th>
+        <th><input type="text" id="Action" name="Action"></th>
+        <th><input type="text" id="Note" name="Note"></th>
+        <th><input type="text" id="Acknowledged" name="Acknowledged"></th>
+        <th></th>
+      </tr>
+      <input type="submit" value="OK" class="filter_submit">
+    </form>
+
+
+    </thead>
+    <tbody>
+
+    {% for obj in objs %}
+      <tr style="background: {% if obj.Acknowledged %}#CCFFCC{% else %}#FFCCFF{% endif %}">
+          <td>{{ obj.From }} </td>
+          <td>{{ obj.Till }} </td>
+          <td>{{ obj.Storage }} </td>
+          <td>{{ obj.Uid }} </td>
+          <td>{{ obj.Name|safe }} </td>
+          <td>{{ obj.Size|safe }} </td>
+          <td>{{ obj.Hosts|safe }} </td>
+          <td class="t_{{ obj.Action }}">{{ obj.Action }}</td>
+          <td>{{ obj.Note }} </td>
+          <td>{{ obj.Acknowledged }} </td>
+          <td>
+          {% if user.is_staff %}
+              <a href="/{{app_label}}/change_acknowledge/?id={{obj.id}}" class="button small">
+              {% if obj.Acknowledged %}
+                  edit note
+              {% else %}
+                  acknowledge
+              {% endif %}
+              </a>
+          {% endif %}
+          </td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+// set filter values
+    $( ".filter input" ).each(function( index ) {
+      $(this).val(getUrlParameter(this.name));
+    });
+// export table to csv
+    $(".export").on('click', function (event) {
+      exportTableToCSV.apply(this, [$('#dvData>table'), $('#item_name').text()+'.csv']);
+    });
+
+</script>
+{% endblock %}
+
+

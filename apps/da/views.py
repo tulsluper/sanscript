@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
 from apps.sa.defs import sfilter, stable, sum_by_field
 from django.db.models import Sum
 from .models import *
+from .forms import *
 from datetime import datetime, timedelta
 
 
@@ -91,4 +94,47 @@ def hosts(request):
         'rows': rows,
     }
     return render(request, 'table.html', data)
+
+
+def changes(request):
+    def ch_format(old, new):
+        return '<del>{}</del> <span style class="t_red">>></span> <strong>{}</strong>'.format(old, new)
+
+    objs = sfilter(VolumeChange, request)
+
+    objs_x = objs.exclude(Action_Flag='new')
+    for obj in objs_x:
+        if obj.Action_Flag == 'old':
+            try:
+                new_obj = objs.get(Till=obj.Till, Storage=obj.Storage, Uid=obj.Uid, Action_Flag='new')
+                if obj.Name != new_obj.Name:
+                    obj.Name = ch_format(obj.Name, new_obj.Name)
+                if obj.Size != new_obj.Size:
+                    obj.Size = ch_format(obj.Size,new_obj.Size)
+                if obj.Hosts != new_obj.Hosts:
+                    obj.Hosts = ch_format(obj.Hosts, new_obj.Hosts)
+            except:
+                pass
+
+    data = {
+        'objs': objs_x,
+    }
+    return render(request, 'da/changes.html', data)
+
+
+@csrf_protect
+def change_acknowledge(request):
+    id = request.GET.get('id')
+    instance = VolumeChange.objects.get(id=id)
+    form = VolumeChangeForm(request.POST or None, instance=instance)
+    if form.is_valid():
+          instance = form.save(commit=False)
+          instance.Acknowledged = True
+          instance.save()
+          return redirect('/da/changes/')
+    data = {
+        'instance': instance,
+        'form': form,
+    }
+    return render(request, 'da/change_acknowledge.html', data)
 

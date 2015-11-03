@@ -1,5 +1,6 @@
 from django.db import models
 from jsonfield import JSONField
+from django.contrib.auth.models import User
 
 
 # ==============================================================================
@@ -312,6 +313,21 @@ class Volume(models.Model):
     Name = models.CharField(max_length=64)
     Size = models.DecimalField(max_digits=8, decimal_places=2)
     Hosts = JSONField()
+
+
+class VolumeChange(models.Model):
+    From = models.DateTimeField()
+    Till = models.DateTimeField()
+    Storage = models.CharField(max_length=30)
+    Uid = models.CharField(max_length=39)
+    Name = models.CharField(max_length=64)
+    Size = models.DecimalField(max_digits=8, decimal_places=2)
+    Hosts = JSONField()
+    Action = models.CharField(max_length=16)
+    Action_Flag = models.CharField(max_length=16)
+    Note = models.CharField(max_length=64)
+    Acknowledged = models.BooleanField(default=False)
+    User = models.ForeignKey(User, blank=True, null=True)
 
 
 class Host(models.Model):

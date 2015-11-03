@@ -200,3 +200,14 @@ html, body {
   margin-right:10px;
 }
 
+/* =========================================================================+ */
+/* colors */
+
+.t_red {color: #D01217 }
+.t_blue {color: #0192DD }
+.t_green {color: #699C40 }
+.t_orange {color: orange }
+
+.t_added {color: #699C40}
+.t_removed {color: #D01217}
+.t_changed {color: orange}
