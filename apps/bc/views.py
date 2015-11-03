@@ -57,7 +57,6 @@ def port_view(request):
         xtimes = []
         rows = []
 
-
     ports = []
     for p in Portshow.objects.all():
         ports.append(['%s %s' %(p.Switch, p.portIndex), p.portName])
