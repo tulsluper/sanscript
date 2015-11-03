@@ -54,10 +54,10 @@ def main():
     config2 = load_data(os.path.join(CONFIGSDIR, 'volumes_new'), {})
     dts = load_data(os.path.join(JSONDIR, 'volumes_changes_dts'), {})
     if not config1:
-        logging.warning('no config in %s' %oldconfigpath)
+        logging.warning('no config in %s' %oldpath)
         logging.info('run collect_configs script again')
     if not config2:
-        logging.warning('no config in %s' %newconfigpath)
+        logging.warning('no config in %s' %newpath)
     if config1 and config2:
         records = compare_configs(config1, config2)
         for record in records:
