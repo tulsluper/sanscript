@@ -50,8 +50,8 @@ def compare_configs(config1, config2):
 
 
 def main():
-    oldpath(os.path.join(CONFIGSDIR, 'volumes_old'))
-    newpath(os.path.join(CONFIGSDIR, 'volumes_new'))
+    oldpath = os.path.join(CONFIGSDIR, 'volumes_old')
+    newpath = os.path.join(CONFIGSDIR, 'volumes_new')
     config1 = load_data(os.path.join(CONFIGSDIR, 'volumes_old'), {})
     config2 = load_data(os.path.join(CONFIGSDIR, 'volumes_new'), {})
     dts = load_data(os.path.join(JSONDIR, 'volumes_changes_dts'), {})
