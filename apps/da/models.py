@@ -329,6 +329,9 @@ class VolumeChange(models.Model):
     Acknowledged = models.BooleanField(default=False)
     User = models.ForeignKey(User, blank=True, null=True)
 
+    class Meta:
+        ordering = ['-Till', 'Action',]
+
 
 class Host(models.Model):
     Storage = models.CharField(max_length=30)
