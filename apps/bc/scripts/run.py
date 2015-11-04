@@ -132,7 +132,7 @@ def main():
     """
     main function
     """
-    snmp_dt, snmp_values = multisnmpwalk(counters, connections[:4], PROCESSES)
+    snmp_dt, snmp_values = multisnmpwalk(counters, connections, PROCESSES)
     temp_dt, temp_values = do_temp(snmp_values)
     if temp_dt:
         udiffs = diffcalc(snmp_values, temp_values)
