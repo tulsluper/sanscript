@@ -26,12 +26,12 @@ def home(request):
     FormattedUsed = int(list(objs.aggregate(Sum('FormattedUsed')).values())[0])
     FormattedAvailable = int(list(objs.aggregate(Sum('FormattedAvailable')).values())[0])
     SwitchesCount = SwitchCommon.objects.count()
-    OnlinePortsCount = PortCommon.objects.filter(State='Online').count()
+    PortsCount = PortCommon.objects.filter(State='Online').count()
     data = {
         'FormattedUsed': FormattedUsed,
         'FormattedAvailable': FormattedAvailable,
         'SwitchesCount': SwitchesCount,
-        'OnlinePortsCount': OnlinePortsCount,
+        'PortsCount': PortsCount,
     }
     return render(request, 'dashboard.html', data)
 
