@@ -335,3 +335,9 @@ class Host(models.Model):
     Host = models.CharField(max_length=30)
     OS = models.CharField(max_length=30)
     WWNs = JSONField()
+
+
+class HostCapacity(models.Model):
+    Storage = models.CharField(max_length=30)
+    Hosts = JSONField()
+    Size = models.DecimalField(max_digits=8, decimal_places=2)

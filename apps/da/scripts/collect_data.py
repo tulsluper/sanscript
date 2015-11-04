@@ -21,6 +21,7 @@ scripts = [
     'parse_hds',
     'form_volumes',
     'form_hosts',
+    'form_hosts_capacity',
     'form_capacity_3par',
     'form_capacity',
 

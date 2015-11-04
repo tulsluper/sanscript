@@ -95,6 +95,15 @@ def hosts(request):
     }
     return render(request, 'table.html', data)
 
+def hosts_capacity(request):
+    objects = sfilter(HostCapacity, request)
+    cols, rows = stable(HostCapacity, objects)
+    data = {
+        'cols': cols,
+        'rows': rows,
+    }
+    return render(request, 'table.html', data)
+
 
 def changes(request):
     def ch_format(old, new):

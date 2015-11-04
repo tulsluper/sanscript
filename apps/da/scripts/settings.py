@@ -70,5 +70,6 @@ MODELS = [
     ['hds/hgmap', 'HDSMap', {'before_delete_all': True}],
     ['volumes', 'Volume', {'before_delete_all': True}],
     ['hosts', 'Host', {'before_delete_all': True}],
+    ['hosts_capacity', 'HostCapacity', {'before_delete_all': True}],
 ]
 
