@@ -61,7 +61,7 @@ def snmpwalk(connection, counters=counters):
                 for number, value in varBindTableRow:
                     numberitems = number.asTuple()
                     number = '.'.join(map(str, numberitems[:10]))
-                    port = numberitems[-1]
+                    port = int(numberitems[-1])-1
                     counter = counters[number]
                     value = value.prettyPrint()
                     value = int(value.replace(' ', ''), 16)
