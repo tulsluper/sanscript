@@ -31,7 +31,7 @@ def form_rels(zones, aliases, ports, portshow):
     for r in portshow:
         for wwn in r['portWwn_of_devices_connected']:
             if not wwn in portsD:
-                portsD[wwn] = '%s %s' %(r['Switch'], r['portIndex'])
+                portsD[wwn] = '%s %s' %(r['Switch'], r.get('portIndex') or r.get('uPort'))
     #portsD.update({r['portWwn_of_devices_connected']: '%s %s' %(r['Switch'], r['portIndex']) for r in portshow})
 
     for zone in zones:
