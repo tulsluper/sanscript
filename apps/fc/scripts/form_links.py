@@ -178,6 +178,8 @@ def f_ftrunk():
                             port2record = n_trunk_ports.get(Address, {})
                             sw2 = port2record.get('Switch', '')
                             speed = port2record.get('Speed', '').replace('G','').replace('N','').replace('A','')
+                            speed = int(speed) if speed else None
+                            print(speed)
                             record_direct = {
                                 'Switch1': sw1,
                                 'Port1': int(port1),
