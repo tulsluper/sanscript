@@ -197,7 +197,7 @@ def f_ftrunk():
                                 'Switch2': sw1,
                                 'Port2': int(port1),
                                 'Speed': speed,
-                                'TrunkId': int(port2record.get('Port')),
+                                'TrunkId': int(port2record.get('Port')) if port2record.get('Port') else None,
                                 'Master': Master,
                                 'E_Trunk': None,
                                 'F_Trunk': True,
