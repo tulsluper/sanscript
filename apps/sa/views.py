@@ -23,8 +23,11 @@ from django.db.models import Sum
 
 def home(request):
     objs = Capacity.objects.all()
-    FormattedUsed = int(list(objs.aggregate(Sum('FormattedUsed')).values())[0])
-    FormattedAvailable = int(list(objs.aggregate(Sum('FormattedAvailable')).values())[0])
+    if objs:
+        FormattedUsed = int(list(objs.aggregate(Sum('FormattedUsed')).values())[0])
+        FormattedAvailable = int(list(objs.aggregate(Sum('FormattedAvailable')).values())[0])
+    else:
+        FormattedUsed, FormattedAvailable = 0, 0
     SwitchesCount = SwitchCommon.objects.count()
     PortsCount = PortCommon.objects.count()
     data = {
