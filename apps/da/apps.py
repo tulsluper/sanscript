@@ -49,6 +49,7 @@ show_models = samevalues([
     'Volume',
     'Host',
     'HostCapacity',
+    'HostCapacityHistory',
     'VolumeChange',
 ])
 

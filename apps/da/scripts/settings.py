@@ -71,5 +71,6 @@ MODELS = [
     ['volumes', 'Volume', {'before_delete_all': True}],
     ['hosts', 'Host', {'before_delete_all': True}],
     ['hosts_capacity', 'HostCapacity', {'before_delete_all': True}],
+    ['hosts_capacity', 'HostCapacityHistory', {'before_delete': {'Date__contains': datetime.now().date()}}],
 ]
 
