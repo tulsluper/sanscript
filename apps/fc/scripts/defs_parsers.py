@@ -208,12 +208,15 @@ def p_portshow(switch, lines):
                 if key == 'Interrupts':
                     parseflag = False
                 else:
-                    if 'connected' in key:
-                        value = []
-                    if 'portScn' in value:
-                        value, value2 = value.split('portScn:')
-                        record['portScn'] = value2
-                    record[key] = value
+                    if key == 'Peer_beacon':
+                        pass
+                    else:
+                        if 'connected' in key:
+                            value = []
+                        if 'portScn' in value:
+                            value, value2 = value.split('portScn:')
+                            record['portScn'] = value2
+                        record[key] = value
             else:
                 value = line.strip()
                 if 'connected' in key and value == 'None':
