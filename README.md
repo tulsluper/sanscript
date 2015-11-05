@@ -69,6 +69,7 @@ Init application
 ./manage.py migrate
 ./manage.py createsuperuser
 ./manage.py loaddata fixtures/*
+./manage.py collectstatic
 chown -R www-data:www-data ../sanscript
 ```
 Install uwsgi and nginx
