@@ -13,44 +13,46 @@ import collections
 
 def form_nodes(treads):
     nodes = collections.OrderedDict()
-    for tread in sorted(treads):
-        arrow = 'left'
-        for node in tread:
-            if ' ' in node:
-                switch, port = node.split()
-                if not switch in nodes:
-                    nodes[switch] = {'left':[], 'right':[]}
-                if not port in nodes[switch][arrow]:
-                    nodes[switch][arrow].append(port)
-                arrow = 'right' if arrow == 'left' else 'left'
+    if treads:
+        for tread in sorted(treads):
+            arrow = 'left'
+            for node in tread:
+                if ' ' in node:
+                    switch, port = node.split()
+                    if not switch in nodes:
+                        nodes[switch] = {'left':[], 'right':[]}
+                    if not port in nodes[switch][arrow]:
+                        nodes[switch][arrow].append(port)
+                    arrow = 'right' if arrow == 'left' else 'left'
     return nodes
 
 
 def form_links(treads, linksD):
     unics = []
     links = []
-    for tread in treads:
-        for n in range(len(tread)-1):
-            node1 = tread[n]
-            node2 = tread[n+1]
-            if ' ' in node1 and ' ' in node2:
-                link = [node1, node2]
-                if not link in unics:
-                    s1,p1 = node1.split()
-                    s2,p2 = node2.split()
-                    link = linksD.get('%s %s %s %s' %(s1, p1, s2, p2))
-                    record = {
-                        'node1': node1.replace(' ', '_'),
-                        'node2': node2.replace(' ', '_'),
-                        'Speed': link['Speed'],
-                        'TrunkId': link['TrunkId'],
-                        'Master': link['Master'],
-                        'E_Trunk': link['E_Trunk'],
-                        'F_Trunk': link['F_Trunk'],
-                        'F_Link': link['F_Link'],
-                    }
-                    unics.append(link)
-                    links.append(record)
+    if treads:
+        for tread in treads:
+            for n in range(len(tread)-1):
+                node1 = tread[n]
+                node2 = tread[n+1]
+                if ' ' in node1 and ' ' in node2:
+                    link = [node1, node2]
+                    if not link in unics:
+                        s1,p1 = node1.split()
+                        s2,p2 = node2.split()
+                        link = linksD.get('%s %s %s %s' %(s1, p1, s2, p2))
+                        record = {
+                            'node1': node1.replace(' ', '_'),
+                            'node2': node2.replace(' ', '_'),
+                            'Speed': link['Speed'],
+                            'TrunkId': link['TrunkId'],
+                            'Master': link['Master'],
+                            'E_Trunk': link['E_Trunk'],
+                            'F_Trunk': link['F_Trunk'],
+                            'F_Link': link['F_Link'],
+                        }
+                        unics.append(link)
+                        links.append(record)
     return links
 
 
