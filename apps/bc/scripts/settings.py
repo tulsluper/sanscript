@@ -9,6 +9,15 @@ JSONDIR = os.path.join(BASEDIR, 'data/{}/json/'.format(APPNAME))
 TEMPFILE = os.path.join(JSONDIR, 'temp')
 DIFFSDIR = os.path.join(JSONDIR, 'diffs')
 
+import logging
+logpath = os.path.join(os.path.dirname(__file__), 'run.log')
+logformat = '%(asctime)s %(levelname)s %(message)s'
+logging.basicConfig(
+    filename=logpath,
+    level=logging.INFO,
+    format=logformat
+)
+
 
 # processes for multiprocessing
 PROCESSES = 4
