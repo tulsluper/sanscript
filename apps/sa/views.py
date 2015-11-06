@@ -21,7 +21,7 @@ from apps.fc.models import SwitchCommon, PortCommon
 from django.db.models import Sum
 
 
-def home(request):
+def dashboard(request):
     objs = Capacity.objects.all()
     if objs:
         FormattedUsed = int(list(objs.aggregate(Sum('FormattedUsed')).values())[0])
@@ -37,6 +37,14 @@ def home(request):
         'PortsCount': PortsCount,
     }
     return render(request, 'dashboard.html', data)
+
+
+def home(request):
+#    app_label = request.path.split('/')[1].split('-')[0]
+    if request.path.split('/')[1] == 'sa':
+        return dashboard(request)
+    else:
+        return render(request, 'home.html', {})
 
 
 @staff_member_required
