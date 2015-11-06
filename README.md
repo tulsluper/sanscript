@@ -97,3 +97,12 @@ service uwsgi restart
 service nginx restart
 ```
 Now application should be available in browser on http://domain_name/ or http://ip_address/
+
+Add systems to application and collect data.
+
+For schedule data collection add records to crontab:
+```bash
+0 * * * * /home/django/sanscript/apps/da/scripts/collect_data.py
+0 * * * * /home/django/sanscript/apps/fc/scripts/collect_data.py
+*/5 * * * * /home/django/sanscript/apps/bc/scripts/collect_data.py
+```
