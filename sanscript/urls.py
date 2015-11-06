@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', login, {'template_name': 'login.html'}),
     url(r'^accounts/logout/$', logout, {'next_page': '/'}),
+    url(r'^docs/$', 'sanscript.views.home'),
     url(r'^$', 'sanscript.views.home'),
 ]
 
