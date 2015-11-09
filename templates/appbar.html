@@ -1,7 +1,7 @@
 <div class="row fullWidth">
     {% if app_label != 'sa' %}
     <div class="panel clearfix" {% if sa %}style="border:1px solid red;"{% endif %}>
-    {# <div style="display:inline-block;">{{ app.verbose_name }}:</div> #}
+      {# <div style="display:inline-block;">{{ app.verbose_name }}:</div> #}
       {% for page in app_pages %}
         {% if page.title %}
         <a href="/{{ app_label }}{% if sa %}-sa{% endif %}/{{ page.label }}/"
@@ -11,7 +11,7 @@
         {% endif %}
       {% endfor %}
         {% if last_update %}
-          <div class="button small right disabled secondary"><span>updated: {{ last_update }}</span></div>
+          <span class="label secondary">updated: {{ last_update }}</span>
         {% endif %}
     </div>
     {% endif %}
