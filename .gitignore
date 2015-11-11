@@ -1,11 +1,16 @@
 # Django
 db.sqlite3
 migrations
+
+# SANscript
 apps/*/scripts/*Connection.json
 apps/da/scripts/cli/SNM2/Linux_CLI/log/
 
 apps/fc/scripts/configs_get_rfc.py
 apps/fc/scripts/configs_update_note.py
+
+!apps/da/scripts/cli/SNM2/Linux_CLI/lib/
+!apps/da/scripts/cli/SNM2/Linux_CLI/lib/*.so
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -60,11 +65,8 @@ coverage.xml
 *.log
 
 # Sphinx documentation
-docs/_build/
+# docs/_build/
 
 # PyBuilder
 target/
 
-#
-!apps/da/scripts/cli/SNM2/Linux_CLI/lib/
-!apps/da/scripts/cli/SNM2/Linux_CLI/lib/*.so
