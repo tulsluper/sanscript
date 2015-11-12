@@ -22,6 +22,9 @@ snmpEngine = engine.SnmpEngine()
 # Transport setup
 
 # UDP over IPv4
+config.addV3User(
+    snmpEngine, 'snmpuser1'
+)
 config.addSocketTransport(
     snmpEngine,
     udp.domainName,

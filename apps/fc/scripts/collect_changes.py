@@ -12,6 +12,8 @@ logfile = basepath + '.log'
 scripts = [
     'configs_collect',
     'configs_compare',
+    'configs_get_rfc',
+    'configs_update_note',
     'configs_changes_save',
 ]
 
