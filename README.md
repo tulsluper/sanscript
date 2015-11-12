@@ -110,8 +110,8 @@ For schedule data collection add records to crontab:
 For enable SANscript services:
 ```bash
 cp /home/django/sanscript/configs/systemd/* /etc/systemd/system/
-systemctl enable san_trap_server.service 
-systemctl enable san_event_server.service 
+systemctl enable san_trap_server 
+systemctl enable san_event_server 
 systemctl start san_trap_server
 systemctl start san_event_server
 
