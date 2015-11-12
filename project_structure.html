@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Project Structure &mdash; SANscript 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SANscript 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to SANscript’s documentation!" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to SANscript’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="project-structure">
+<h1>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h1>
+<p>This is a simple example</p>
+<div class="highlight-python"><div class="highlight"><pre>├── apps                    # project-specific applications
+├── configs                 # configs for deployment
+├── data                    # collected and parsed data
+├── docs                    # documentation
+├── fixtures                # initial data for models
+├── LICENSE                 # license text
+├── manage.py               # utility for administrative tasks
+├── README.md
+├── requirements.txt        # list of required packages
+├── sanscript               # actual Python package for project
+├── services
+├── staticfiles             # static files
+└── templates               # html templates
+</pre></div>
+</div>
+<div class="section" id="apps">
+<h2>apps/<a class="headerlink" href="#apps" title="Permalink to this headline">¶</a></h2>
+<p>Project-specific applications:</p>
+<div class="highlight-python"><div class="highlight"><pre>apps/
+├── bc                      # BCounters
+├── da                      # Disk Array (Storages)
+├── fc                      # Fibre Channel (Switches)
+└── sa                      # admin module for apps
+</pre></div>
+</div>
+</div>
+<div class="section" id="configs">
+<h2>configs/<a class="headerlink" href="#configs" title="Permalink to this headline">¶</a></h2>
+<p>configs for deployment:</p>
+<div class="highlight-python"><div class="highlight"><pre>configs/
+├── db_init_postgres.sql
+├── nginx
+│   └── sanscript.conf
+└── uwsgi
+    └── sanscript.ini
+</pre></div>
+</div>
+</div>
+<div class="section" id="apps-app-label">
+<h2>apps/&lt;app_label&gt;/<a class="headerlink" href="#apps-app-label" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre>apps/&lt;app_label&gt;/
+├── admin.py
+├── apps.py
+├── forms.py
+├── __init__.py
+├── models.py
+├── scripts/
+├── tests.py
+├── urls.py
+└── views.py
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Project Structure</a><ul>
+<li><a class="reference internal" href="#apps">apps/</a></li>
+<li><a class="reference internal" href="#configs">configs/</a></li>
+<li><a class="reference internal" href="#apps-app-label">apps/&lt;app_label&gt;/</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to SANscript&#8217;s documentation!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/project_structure.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Andriy Kovalchuk.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
+      
+      |
+      <a href="_sources/project_structure.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

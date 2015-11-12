@@ -1,0 +1,15 @@
+Project architecture
+****
+
+.. currentmodule:: apsw
+
+These tips are based on mailing list postings.  You are recommended to
+read all the documentation as well.
+
+SQLite is different
+===================
+
+While SQLite provides a SQL database like many others out there, it is
+also unique in many ways.  Read about the unique features at the
+`SQLite website <https://sqlite.org/different.html>`__.
+
