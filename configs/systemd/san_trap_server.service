@@ -1,0 +1,11 @@
+[Unit]
+Description=SANscript SNMP Trap Receiver
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/django/sanscript/services/san_trap_server.py
+PIDFile=/var/run/san_trap_server.pid
+
+[Install]
+WantedBy=default.target

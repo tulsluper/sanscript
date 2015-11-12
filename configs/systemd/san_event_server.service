@@ -1,0 +1,11 @@
+[Unit]
+Description=SANscript Event Server
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/django/sanscript/services/san_event_server.py
+PIDFile=/var/run/san_event_server.pid
+
+[Install]
+WantedBy=default.target
