@@ -39,10 +39,17 @@ def dashboard(request):
     return render(request, 'dashboard.html', data)
 
 
+def sa_admin(request):
+    data = {}
+    return render(request, 'home.html', data)
+
+
 def home(request):
 #    app_label = request.path.split('/')[1].split('-')[0]
     if request.path.split('/')[1] == 'sa':
         return dashboard(request)
+    elif request.path.split('/')[1] == 'sa-sa':
+        return sa_admin(request)
     else:
         return render(request, 'home.html', {})
 
