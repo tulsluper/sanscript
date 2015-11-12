@@ -39,6 +39,8 @@ def check_cfgenable(varBinds):
                 data['message'] = val[2:-1]
         if name == '1.3.6.1.6.3.18.1.3.0':
             data['sender'] = val
+        if name == '1.3.6.1.4.1.1588.2.1.1.1.1.10.0':
+            data['serial'] = val[2:-1]
     return hit, data
 
 
