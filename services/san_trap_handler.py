@@ -21,7 +21,8 @@ def check_cfgenable(varBinds):
         name, val = name.prettyPrint(), val.prettyPrint()
         if brocade is False:
             if name == '1.3.6.1.6.3.1.1.4.1.0'\
-            and val == '1.3.6.1.4.1.1588.2.1.1.1.0.4':
+            and val == '1.3.6.1.3.94.0.4':
+            #and val == '1.3.6.1.4.1.1588.2.1.1.1.0.4':
                 brocade = True
         if brocade is True\
         and hit is False:
