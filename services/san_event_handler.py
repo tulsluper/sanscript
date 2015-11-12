@@ -12,7 +12,7 @@ def handle(message):
     if event == 'test':
         print('Test signal received: {}'.format(message))
     elif event == 'cfgenable':
-        sender = data.get('sender')
+        sender = data.get('sender') or data.get('serial')
         if type(SENDERS) == list and sender in SENDERS:
             subprocess.Popen(
                 ['/usr/bin/python3', COLLECT_CHANGES_SCRIPT],
