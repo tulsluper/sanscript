@@ -14,11 +14,8 @@ Contents:
    :maxdepth: 2
 
    project_structure
+   apps.sa
    services
-
-.. automodule:: wsgi
-   :members:
-
 
 
 Indices and tables

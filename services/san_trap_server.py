@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+SNMP trap receiver server for SANscript
+
+Script is based on this example:
+http://pysnmp.sourceforge.net/examples/current/v3arch/manager/ntfrcv/v3-multiple-users.html
+"""
+
 
 from pysnmp.entity import engine, config
 from pysnmp.carrier.asynsock.dgram import udp
