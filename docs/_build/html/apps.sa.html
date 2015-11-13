@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Services &mdash; SANscript 0.1 documentation</title>
+    <title>sa application &mdash; SANscript 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,6 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="SANscript 0.1 documentation" href="index.html" />
+    <link rel="next" title="Services" href="services.html" />
     <link rel="prev" title="Project Structure" href="project_structure.html" />
    
   
@@ -41,6 +42,9 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="services.html" title="Services"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="project_structure.html" title="Project Structure"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li> 
@@ -52,50 +56,23 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="services">
-<h1>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h1>
-<p>There are several additional services that can be run with SANscript</p>
-<div class="section" id="trap-receiver">
-<h2>Trap Receiver<a class="headerlink" href="#trap-receiver" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="sa-application">
+<h1>sa application<a class="headerlink" href="#sa-application" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal"><span class="pre">sa</span></code></p>
+<div class="section" id="module-apps.sa.defs">
+<span id="common-functions"></span><h2>common functions<a class="headerlink" href="#module-apps.sa.defs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="apps.sa.defs.stable">
+<code class="descclassname">apps.sa.defs.</code><code class="descname">stable</code><span class="sig-paren">(</span><em>model</em>, <em>objects</em>, <em>fields=None</em><span class="sig-paren">)</span><a class="headerlink" href="#apps.sa.defs.stable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rxxxxxxx</p>
+</dd></dl>
+
 <div class="line-block">
 <div class="line">Receives SNMP traps from switches;</div>
 <div class="line">sends events to Event Server.</div>
 </div>
 <div class="line-block">
 <div class="line">Default socket - 0.0.0.0:162</div>
-</div>
-<span class="target" id="module-services.san_trap_handler"></span><dl class="function">
-<dt id="services.san_trap_handler.check_cfgenable">
-<code class="descclassname">services.san_trap_handler.</code><code class="descname">check_cfgenable</code><span class="sig-paren">(</span><em>varBinds</em><span class="sig-paren">)</span><a class="headerlink" href="#services.san_trap_handler.check_cfgenable" title="Permalink to this definition">¶</a></dt>
-<dd><p>1.3.6.1.2.1.1.3.0 = 694895304
-1.3.6.1.6.3.1.1.4.1.0 = 1.3.6.1.4.1.1588.2.1.1.1.0.4
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.1.2989 = 2989
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.2.2989 = b&#8216;2015/10/23-15:22:46&#8217;
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.3.2989 = 4
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.4.2989 = 1
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.5.2989 = b&#8217;ZONE-1022 The effective configuration has changed to CONFIG1. . &#8216;
-1.3.6.1.4.1.1588.2.1.1.1.1.10.0 = b&#8217;CZC333ADUK&#8217;
-1.3.6.1.6.3.18.1.3.0 = 10.1.57.111
-1.3.6.1.4.1.11.2.17.2.2.0 = b&#8216;10.1.57.111&#8217;</p>
-<p>1.3.6.1.2.1.1.3.0 = 662660321
-1.3.6.1.6.3.1.1.4.1.0 = 1.3.6.1.4.1.1588.2.1.1.42.0.4
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.1.7927 = 7927
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.2.7927 = b&#8216;2015/11/12-16:59:11&#8217;
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.3.7927 = 4
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.4.7927 = 1
-1.3.6.1.4.1.1588.2.1.1.1.8.5.1.5.7927 = b&#8217;ZONE-1022 The effective configuration has changed to DNCONFIG1.  &#8216;
-1.3.6.1.4.1.1588.2.1.1.1.1.10.0 = b&#8217;USB84140BA&#8217;</p>
-</dd></dl>
-
-</div>
-<div class="section" id="event-server">
-<h2>Event Server<a class="headerlink" href="#event-server" title="Permalink to this headline">¶</a></h2>
-<div class="line-block">
-<div class="line">Receives events from Trap Receiver;</div>
-<div class="line">Runs comands or perform other actions.</div>
-</div>
-<div class="line-block">
-<div class="line">Default socket - 0.0.0.0:50501</div>
 </div>
 </div>
 </div>
@@ -108,9 +85,8 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Services</a><ul>
-<li><a class="reference internal" href="#trap-receiver">Trap Receiver</a></li>
-<li><a class="reference internal" href="#event-server">Event Server</a></li>
+<li><a class="reference internal" href="#">sa application</a><ul>
+<li><a class="reference internal" href="#module-apps.sa.defs">common functions</a></li>
 </ul>
 </li>
 </ul>
@@ -118,10 +94,13 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="project_structure.html"
                         title="previous chapter">Project Structure</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="services.html"
+                        title="next chapter">Services</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/services.txt"
+      <li><a href="_sources/apps.sa.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -150,7 +129,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
       
       |
-      <a href="_sources/services.txt"
+      <a href="_sources/apps.sa.txt"
           rel="nofollow">Page source</a></li>
     </div>
 
