@@ -19,11 +19,9 @@ This is a simple example
     ├── staticfiles		# static files
     └── templates		# html templates
 
-
-apps/
-===============
-
-Project-specific applications::
+SANscript applications
+=============================
+::
 
     apps/
     ├── bc			# BCounters
@@ -31,9 +29,9 @@ Project-specific applications::
     ├── fc			# Fibre Channel (Switches)
     └── sa			# admin module for apps
 
-configs/
-==================
-configs for deployment::
+Configs for deployment
+======================
+::
 
     configs/
     ├── db_init_postgres.sql
@@ -41,19 +39,3 @@ configs for deployment::
     │   └── sanscript.conf
     └── uwsgi
         └── sanscript.ini
-
-apps/<app_label>/
-==================
-::
-
-    apps/<app_label>/
-    ├── admin.py
-    ├── apps.py
-    ├── forms.py
-    ├── __init__.py
-    ├── models.py
-    ├── scripts/
-    ├── tests.py
-    ├── urls.py
-    └── views.py
-
