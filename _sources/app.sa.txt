@@ -1,5 +1,5 @@
 ****************************
-  Services 
+  sa application
 ****************************
 
 There are several additional services that can be run with SANscript 
@@ -11,18 +11,3 @@ Trap Receiver
 | sends events to Event Server.
 
 | Default socket - 0.0.0.0:162
-
-
-.. automodule:: services.san_trap_handler
-    :members:
-
-
-
-Event Server
-============
-| Receives events from Trap Receiver;
-| Runs comands or perform other actions.
-
-| Default socket - 0.0.0.0:50501
-
-
