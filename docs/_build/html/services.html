@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Project Structure &mdash; SANscript 0.1 documentation</title>
+    <title>Services &mdash; SANscript 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,8 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="SANscript 0.1 documentation" href="index.html" />
-    <link rel="next" title="Services" href="services.html" />
-    <link rel="prev" title="Welcome to SANscript" href="index.html" />
+    <link rel="prev" title="Project Structure" href="project_structure.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -39,10 +38,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="services.html" title="Services"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to SANscript"
+          <a href="project_structure.html" title="Project Structure"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -53,43 +49,27 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="project-structure">
-<h1>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h1>
-<p>This is a simple example</p>
-<div class="highlight-python"><div class="highlight"><pre>├── apps                    # project-specific applications
-├── configs                 # configs for deployment
-├── data                    # collected and parsed data
-├── docs                    # documentation
-├── fixtures                # initial data for models
-├── LICENSE                 # license text
-├── manage.py               # utility for administrative tasks
-├── README.md
-├── requirements.txt        # list of required packages
-├── sanscript               # actual Python package for project
-├── services
-├── staticfiles             # static files
-└── templates               # html templates
-</pre></div>
+  <div class="section" id="services">
+<h1>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h1>
+<p>There are several additional services that can be run with SANscript</p>
+<div class="section" id="trap-receiver">
+<h2>Trap Receiver<a class="headerlink" href="#trap-receiver" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">Receives SNMP traps from switches;</div>
+<div class="line">sends events to Event Server.</div>
 </div>
-<div class="section" id="sanscript-applications">
-<h2>SANscript applications<a class="headerlink" href="#sanscript-applications" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>apps/
-├── bc                      # BCounters
-├── da                      # Disk Array (Storages)
-├── fc                      # Fibre Channel (Switches)
-└── sa                      # admin module for apps
-</pre></div>
+<div class="line-block">
+<div class="line">Default socket - 0.0.0.0:162</div>
 </div>
 </div>
-<div class="section" id="configs-for-deployment">
-<h2>Configs for deployment<a class="headerlink" href="#configs-for-deployment" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><div class="highlight"><pre>configs/
-├── db_init_postgres.sql
-├── nginx
-│   └── sanscript.conf
-└── uwsgi
-    └── sanscript.ini
-</pre></div>
+<div class="section" id="event-server">
+<h2>Event Server<a class="headerlink" href="#event-server" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">Receives events from Trap Receiver;</div>
+<div class="line">Runs comands or perform other actions.</div>
+</div>
+<div class="line-block">
+<div class="line">Default socket - 0.0.0.0:50501</div>
 </div>
 </div>
 </div>
@@ -102,23 +82,20 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Project Structure</a><ul>
-<li><a class="reference internal" href="#sanscript-applications">SANscript applications</a></li>
-<li><a class="reference internal" href="#configs-for-deployment">Configs for deployment</a></li>
+<li><a class="reference internal" href="#">Services</a><ul>
+<li><a class="reference internal" href="#trap-receiver">Trap Receiver</a></li>
+<li><a class="reference internal" href="#event-server">Event Server</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to SANscript</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="services.html"
-                        title="next chapter">Services</a></p>
+  <p class="topless"><a href="project_structure.html"
+                        title="previous chapter">Project Structure</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/project_structure.txt"
+      <li><a href="_sources/services.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -147,7 +124,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
       
       |
-      <a href="_sources/project_structure.txt"
+      <a href="_sources/services.txt"
           rel="nofollow">Page source</a></li>
     </div>
 
