@@ -14,6 +14,10 @@ Contents:
    :maxdepth: 2
 
    project_structure
+   services
+
+.. automodule:: wsgi
+   :members:
 
 
 
