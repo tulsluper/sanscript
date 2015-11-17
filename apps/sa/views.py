@@ -13,12 +13,25 @@ from django.db.models.signals import pre_save
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.admin.views.decorators import staff_member_required
-from .defs import prevent_password_save, create_formset
-from .defs import build_filters, model_to_table
+from .defs import create_formset, sfilter, stable
 from django.views.decorators.csrf import csrf_protect
 from apps.da.models import Capacity
 from apps.fc.models import SwitchCommon, PortCommon
 from django.db.models import Sum
+
+
+def prevent_password_save(sender, instance, **kwargs):
+    try:
+        obj = sender.objects.get(pk=instance.pk)
+    except sender.DoesNotExist:
+        pass # object is new
+    else:
+        if not instance.password:
+            instance.password = obj.password # do not change password
+        elif instance.password.strip() == '':
+            instance.password = None # set password to empty
+    return
+
 
 
 def dashboard(request):
@@ -174,8 +187,9 @@ def v_tables(request, item_label=None):
     }
     if item_label:
         Model = app.get_model(item_label)
-        filters = build_filters(request)
-        cols, rows = model_to_table(Model, filters)
+        objects = sfilter(Model, request)
+        cols, rows = stable(Model, objects)
+
         data.update({
             'cols': cols,
             'rows': rows,

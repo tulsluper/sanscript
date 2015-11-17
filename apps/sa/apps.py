@@ -10,6 +10,12 @@ admin_pages = [
 ]        
 
 class appAppConfig(AppConfig):
+    """
+    | AppConfig for current application.
+    | For more information see
+    | https://docs.djangoproject.com/en/1.8/ref/applications/#application-configuration
+    """
+
     label = os.path.basename(os.path.dirname(os.path.realpath(__file__)))
     name = 'apps.{}'.format(label)
     verbose_name = ''

@@ -14,8 +14,8 @@ Contents:
    :maxdepth: 2
 
    project_structure
-   apps.sa
    services
+   modules
 
 
 Indices and tables
