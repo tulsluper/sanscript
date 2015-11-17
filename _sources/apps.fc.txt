@@ -1,68 +1,61 @@
-apps.sa package
+apps.fc package
 ===============
-
-Subpackages
------------
-
-.. toctree::
-
-    apps.sa.templatetags
 
 Submodules
 ----------
 
-apps.sa.admin module
+apps.fc.admin module
 --------------------
 
-.. automodule:: apps.sa.admin
+.. automodule:: apps.fc.admin
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.apps module
+apps.fc.apps module
 -------------------
 
-.. automodule:: apps.sa.apps
+.. automodule:: apps.fc.apps
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.defs module
--------------------
+apps.fc.forms module
+--------------------
 
-.. automodule:: apps.sa.defs
+.. automodule:: apps.fc.forms
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.models module
+apps.fc.models module
 ---------------------
 
-.. automodule:: apps.sa.models
+.. automodule:: apps.fc.models
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.tests module
+apps.fc.tests module
 --------------------
 
-.. automodule:: apps.sa.tests
+.. automodule:: apps.fc.tests
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.urls module
+apps.fc.urls module
 -------------------
 
-.. automodule:: apps.sa.urls
+.. automodule:: apps.fc.urls
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.views module
+apps.fc.views module
 --------------------
 
-.. automodule:: apps.sa.views
+.. automodule:: apps.fc.views
     :members:
     :undoc-members:
     :show-inheritance:
@@ -71,7 +64,7 @@ apps.sa.views module
 Module contents
 ---------------
 
-.. automodule:: apps.sa
+.. automodule:: apps.fc
     :members:
     :undoc-members:
     :show-inheritance:

@@ -1,68 +1,53 @@
-apps.sa package
+apps.bc package
 ===============
-
-Subpackages
------------
-
-.. toctree::
-
-    apps.sa.templatetags
 
 Submodules
 ----------
 
-apps.sa.admin module
+apps.bc.admin module
 --------------------
 
-.. automodule:: apps.sa.admin
+.. automodule:: apps.bc.admin
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.apps module
+apps.bc.apps module
 -------------------
 
-.. automodule:: apps.sa.apps
+.. automodule:: apps.bc.apps
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.defs module
--------------------
-
-.. automodule:: apps.sa.defs
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-apps.sa.models module
+apps.bc.models module
 ---------------------
 
-.. automodule:: apps.sa.models
+.. automodule:: apps.bc.models
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.tests module
+apps.bc.tests module
 --------------------
 
-.. automodule:: apps.sa.tests
+.. automodule:: apps.bc.tests
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.urls module
+apps.bc.urls module
 -------------------
 
-.. automodule:: apps.sa.urls
+.. automodule:: apps.bc.urls
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.views module
+apps.bc.views module
 --------------------
 
-.. automodule:: apps.sa.views
+.. automodule:: apps.bc.views
     :members:
     :undoc-members:
     :show-inheritance:
@@ -71,7 +56,7 @@ apps.sa.views module
 Module contents
 ---------------
 
-.. automodule:: apps.sa
+.. automodule:: apps.bc
     :members:
     :undoc-members:
     :show-inheritance:

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>apps.da package &mdash; SANscript 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SANscript 0.1 documentation" href="index.html" />
+    <link rel="up" title="apps package" href="apps.html" />
+    <link rel="next" title="apps.fc package" href="apps.fc.html" />
+    <link rel="prev" title="apps.bc package" href="apps.bc.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="apps.fc.html" title="apps.fc package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="apps.bc.html" title="apps.bc package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >sanscript</a> &raquo;</li>
+          <li><a href="apps.html" accesskey="U">apps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="apps-da-package">
+<h1>apps.da package<a class="headerlink" href="#apps-da-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-da-admin-module">
+<h2>apps.da.admin module<a class="headerlink" href="#apps-da-admin-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.da.apps">
+<span id="apps-da-apps-module"></span><h2>apps.da.apps module<a class="headerlink" href="#module-apps.da.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apps.da.apps.appAppConfig">
+<em class="property">class </em><tt class="descclassname">apps.da.apps.</tt><tt class="descname">appAppConfig</tt><big>(</big><em>app_name</em>, <em>app_module</em><big>)</big><a class="headerlink" href="#apps.da.apps.appAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.apps.config.AppConfig</span></tt></p>
+<dl class="attribute">
+<dt id="apps.da.apps.appAppConfig.commands">
+<tt class="descname">commands</tt><em class="property"> = [{'label': 'test_connections', 'title': 'Test connections'}, {'label': 'collect_data', 'title': 'Collect data'}]</em><a class="headerlink" href="#apps.da.apps.appAppConfig.commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.da.apps.appAppConfig.config_models">
+<tt class="descname">config_models</tt><em class="property"> = [{'label': 'StorageConnection', 'model': 'StorageConnection', 'title': 'StorageConnection'}]</em><a class="headerlink" href="#apps.da.apps.appAppConfig.config_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.da.apps.appAppConfig.label">
+<tt class="descname">label</tt><em class="property"> = 'da'</em><a class="headerlink" href="#apps.da.apps.appAppConfig.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.da.apps.appAppConfig.name">
+<tt class="descname">name</tt><em class="property"> = 'apps.da'</em><a class="headerlink" href="#apps.da.apps.appAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.da.apps.appAppConfig.pages">
+<tt class="descname">pages</tt><em class="property"> = [{'label': 'capacity', 'title': 'Capacity', 'view': 'capacity'}, {'label': 'capacity_history', 'title': 'Capacity History', 'view': 'capacity_history'}, {'label': 'capacity_3par', 'title': '3PAR Capacity', 'view': 'capacity_3par'}, {'label': 'capacity_3par_history', 'title': '3PAR Capacity History', 'view': 'capacity_3par_history'}, {'label': 'volumes', 'title': 'Volumes', 'view': 'volumes'}, {'label': 'hosts', 'title': 'Hosts', 'view': 'hosts'}, {'label': 'hosts_capacity', 'title': 'HostsCapacity', 'view': 'hosts_capacity'}, {'label': 'changes', 'title': 'Changes', 'view': 'changes'}, {'label': 'change_acknowledge', 'title': '', 'view': 'change_acknowledge'}]</em><a class="headerlink" href="#apps.da.apps.appAppConfig.pages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.da.apps.appAppConfig.show_models">
+<tt class="descname">show_models</tt><em class="property"> = [{'label': 'StorageConnection', 'model': 'StorageConnection', 'title': 'StorageConnection'}, {'label': 'Capacity', 'model': 'Capacity', 'title': 'Capacity'}, {'label': 'CapacityHistory', 'model': 'CapacityHistory', 'title': 'CapacityHistory'}, {'label': 'TPARCapacity', 'model': 'TPARCapacity', 'title': 'TPARCapacity'}, {'label': 'TPARCapacityHistory', 'model': 'TPARCapacityHistory', 'title': 'TPARCapacityHistory'}, {'label': 'TPARHost', 'model': 'TPARHost', 'title': 'TPARHost'}, {'label': 'TPARVV', 'model': 'TPARVV', 'title': 'TPARVV'}, {'label': 'TPARVLUN', 'model': 'TPARVLUN', 'title': 'TPARVLUN'}, {'label': 'EVAVdisk', 'model': 'EVAVdisk', 'title': 'EVAVdisk'}, {'label': 'EVAHost', 'model': 'EVAHost', 'title': 'EVAHost'}, {'label': 'HDSHost', 'model': 'HDSHost', 'title': 'HDSHost'}, {'label': 'HDSLU', 'model': 'HDSLU', 'title': 'HDSLU'}, {'label': 'HDSMap', 'model': 'HDSMap', 'title': 'HDSMap'}, {'label': 'Volume', 'model': 'Volume', 'title': 'Volume'}, {'label': 'Host', 'model': 'Host', 'title': 'Host'}, {'label': 'HostCapacity', 'model': 'HostCapacity', 'title': 'HostCapacity'}, {'label': 'HostCapacityHistory', 'model': 'HostCapacityHistory', 'title': 'HostCapacityHistory'}, {'label': 'VolumeChange', 'model': 'VolumeChange', 'title': 'VolumeChange'}]</em><a class="headerlink" href="#apps.da.apps.appAppConfig.show_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.da.apps.appAppConfig.verbose_name">
+<tt class="descname">verbose_name</tt><em class="property"> = 'Storages'</em><a class="headerlink" href="#apps.da.apps.appAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="apps.da.apps.samevalues">
+<tt class="descclassname">apps.da.apps.</tt><tt class="descname">samevalues</tt><big>(</big><em>names</em><big>)</big><a class="headerlink" href="#apps.da.apps.samevalues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="apps-da-forms-module">
+<h2>apps.da.forms module<a class="headerlink" href="#apps-da-forms-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-da-models-module">
+<h2>apps.da.models module<a class="headerlink" href="#apps-da-models-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.da.tests">
+<span id="apps-da-tests-module"></span><h2>apps.da.tests module<a class="headerlink" href="#module-apps.da.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-da-urls-module">
+<h2>apps.da.urls module<a class="headerlink" href="#apps-da-urls-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-da-views-module">
+<h2>apps.da.views module<a class="headerlink" href="#apps-da-views-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.da">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.da" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">apps.da package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#apps-da-admin-module">apps.da.admin module</a></li>
+<li><a class="reference internal" href="#module-apps.da.apps">apps.da.apps module</a></li>
+<li><a class="reference internal" href="#apps-da-forms-module">apps.da.forms module</a></li>
+<li><a class="reference internal" href="#apps-da-models-module">apps.da.models module</a></li>
+<li><a class="reference internal" href="#module-apps.da.tests">apps.da.tests module</a></li>
+<li><a class="reference internal" href="#apps-da-urls-module">apps.da.urls module</a></li>
+<li><a class="reference internal" href="#apps-da-views-module">apps.da.views module</a></li>
+<li><a class="reference internal" href="#module-apps.da">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="apps.bc.html"
+                        title="previous chapter">apps.bc package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apps.fc.html"
+                        title="next chapter">apps.fc package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/apps.da.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Andriy Kovalchuk.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster </a>
+      
+      |
+      <a href="_sources/apps.da.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

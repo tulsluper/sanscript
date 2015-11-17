@@ -1,68 +1,61 @@
-apps.sa package
+apps.da package
 ===============
-
-Subpackages
------------
-
-.. toctree::
-
-    apps.sa.templatetags
 
 Submodules
 ----------
 
-apps.sa.admin module
+apps.da.admin module
 --------------------
 
-.. automodule:: apps.sa.admin
+.. automodule:: apps.da.admin
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.apps module
+apps.da.apps module
 -------------------
 
-.. automodule:: apps.sa.apps
+.. automodule:: apps.da.apps
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.defs module
--------------------
+apps.da.forms module
+--------------------
 
-.. automodule:: apps.sa.defs
+.. automodule:: apps.da.forms
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.models module
+apps.da.models module
 ---------------------
 
-.. automodule:: apps.sa.models
+.. automodule:: apps.da.models
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.tests module
+apps.da.tests module
 --------------------
 
-.. automodule:: apps.sa.tests
+.. automodule:: apps.da.tests
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.urls module
+apps.da.urls module
 -------------------
 
-.. automodule:: apps.sa.urls
+.. automodule:: apps.da.urls
     :members:
     :undoc-members:
     :show-inheritance:
 
-apps.sa.views module
+apps.da.views module
 --------------------
 
-.. automodule:: apps.sa.views
+.. automodule:: apps.da.views
     :members:
     :undoc-members:
     :show-inheritance:
@@ -71,7 +64,7 @@ apps.sa.views module
 Module contents
 ---------------
 
-.. automodule:: apps.sa
+.. automodule:: apps.da
     :members:
     :undoc-members:
     :show-inheritance:
