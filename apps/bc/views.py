@@ -1,7 +1,6 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from .models import CounterOid, PortConfig
-from apps.fc.models import Portshow
 from .models import XTimes, Integers, SDicts, CDicts, PDicts
 
 COUNTERS = [obj.name for obj in CounterOid.objects.all() if obj.enabled]
@@ -58,15 +57,8 @@ def port_view(request):
         rows = []
 
     ports = []
-#    for p in Portshow.objects.all():
-#        ports.append(['%s %s' %(p.Switch, p.portIndex), p.portName])
-
-    try:
-        pndict = PortConfig.objects.get(counter='connUnitPortName').values
-        for uport, name in pndict.items():
-            ports.append([uport, name])
-    except:
-        pass
+    for p in PortConfig.objects.all():
+        ports.append(['%s %s' %(p.switchname, p.portindex), p.portname])
 
     data = {
         'datestring': datestring,
@@ -113,9 +105,9 @@ def counter_view(request):
     for key, values in cdicts.get(counter, {}).items():
         sw, po = key.split()
         try:
-            ports_objs = Portshow.objects.filter(Switch=sw, portIndex=po)
+            ports_objs = PortConfig.objects.filter(switchname=sw, portindex=po)
             if ports_objs:
-                port_name = ports_objs[0].portName
+                port_name = ports_objs[0].portname
             else:
                 port_name = '?'
         except:
@@ -176,10 +168,10 @@ def select_view(request):
 
     xtimes = []
     records = []
-    ports = []
 
-    for obj in Portshow.objects.all():
-        ports.append(['%s %s' %(obj.Switch, obj.portIndex), obj.portName])
+    ports = []
+    for p in PortConfig.objects.all():
+        ports.append(['%s %s' %(p.switchname, p.portindex), p.portname])
 
     if select_ports and select_counters:
 
@@ -199,9 +191,9 @@ def select_view(request):
             for port in select_ports:
 
                 sw, po = port.split()
-                ports_objs = Portshow.objects.filter(Switch=sw, portIndex=po)
+                ports_objs = PortConfig.objects.filter(switchname=sw, portindex=po)
                 if ports_objs:
-                    port_name = ports_objs[0].portName
+                    port_name = ports_objs[0].portname
                 else:
                     port_name = '?'
 
