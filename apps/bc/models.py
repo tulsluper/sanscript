@@ -49,3 +49,8 @@ class SDicts(models.Model):
 class Integers(models.Model):
     date = models.DateField()
     values = JSONField()
+
+class PortConfig(models.Model):
+    counter = models.CharField(max_length=64)
+    values = JSONField()
+    datetime = models.DateTimeField(auto_now_add=True)

@@ -31,6 +31,7 @@ show_models = samevalues([
     'PDicts',
     'SDicts',
     'Integers',
+    'PortConfig',
 ])
 
 

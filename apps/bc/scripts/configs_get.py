@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+from datetime import datetime
 from itertools import chain
 from multiprocessing import Pool
 from pysnmp.entity.rfc3413.oneliner import cmdgen
@@ -16,6 +17,9 @@ counters = {
     '1.3.6.1.3.94.1.10.1.3': 'connUnitPortType',
     '1.3.6.1.3.94.1.10.1.17': 'connUnitPortName'
 }
+
+if not os.path.exists(JSONDIR):
+    os.makedirs(JSONDIR)
 
 
 def counter_from_number(number, counters=counters):
@@ -55,9 +59,8 @@ def snmpwalk(connection, counters=counters):
                 for number, value in varBindTableRow:
                     counter = counter_from_number(number)
                     port = int(number.asTuple()[-1]) -1
-                    print(dir(value))
                     value = str(value)
-                    values['%s %s %s' %(name, port, counter)] = value
+                    values['%s_%s %s' %(name, port, counter)] = value
     return values
 
 
@@ -75,8 +78,21 @@ def main():
     """
     main function
     """
-    data = multisnmpwalk(counters, connections, PROCESSES)
-    dump_data(os.path.join(JSONDIR, 'configs'), data)
+    dt = datetime.now()
+    cdata = {}
+    records = []
+    udata = multisnmpwalk(counters, connections, PROCESSES)
+    for uid, value in udata.items():
+        uport, counter = uid.split()
+        if not counter in cdata:
+            cdata[counter] = {}
+        cdata[counter][uport] = value
+
+    for counter, xdict in cdata.items():
+        dump_data(os.path.join(JSONDIR, counter), xdict)
+        records.append({'counter': counter, 'values': xdict, 'datetime': str(dt)})
+    dump_data(os.path.join(JSONDIR, 'configs'), records)
+
     return
 
 
