@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 try:
-    from db_settings import DATABASES
+    from .db_settings import DATABASES
 except:
     DATABASES = None
 
@@ -121,3 +121,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "staticfiles"),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+try:
+    from .custom_settings import *
+except:
+    pass
