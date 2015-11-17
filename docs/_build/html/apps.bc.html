@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>apps.bc package &mdash; SANscript 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SANscript 0.1 documentation" href="index.html" />
+    <link rel="up" title="apps package" href="apps.html" />
+    <link rel="next" title="apps.da package" href="apps.da.html" />
+    <link rel="prev" title="apps package" href="apps.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="apps.da.html" title="apps.da package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="apps.html" title="apps package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >sanscript</a> &raquo;</li>
+          <li><a href="apps.html" accesskey="U">apps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="apps-bc-package">
+<h1>apps.bc package<a class="headerlink" href="#apps-bc-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-bc-admin-module">
+<h2>apps.bc.admin module<a class="headerlink" href="#apps-bc-admin-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.bc.apps">
+<span id="apps-bc-apps-module"></span><h2>apps.bc.apps module<a class="headerlink" href="#module-apps.bc.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apps.bc.apps.appAppConfig">
+<em class="property">class </em><tt class="descclassname">apps.bc.apps.</tt><tt class="descname">appAppConfig</tt><big>(</big><em>app_name</em>, <em>app_module</em><big>)</big><a class="headerlink" href="#apps.bc.apps.appAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.apps.config.AppConfig</span></tt></p>
+<dl class="attribute">
+<dt id="apps.bc.apps.appAppConfig.commands">
+<tt class="descname">commands</tt><em class="property"> = [{'label': 'test_connections', 'title': 'Test connections', 'view': 'command'}, {'enabled': False, 'label': 'collect_data', 'title': 'Collect data', 'view': 'command'}]</em><a class="headerlink" href="#apps.bc.apps.appAppConfig.commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.bc.apps.appAppConfig.config_models">
+<tt class="descname">config_models</tt><em class="property"> = [{'label': 'SwitchConnection', 'model': 'SwitchConnection', 'title': 'SwitchConnection'}, {'label': 'CounterOid', 'model': 'CounterOid', 'title': 'CounterOid'}]</em><a class="headerlink" href="#apps.bc.apps.appAppConfig.config_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.bc.apps.appAppConfig.label">
+<tt class="descname">label</tt><em class="property"> = 'bc'</em><a class="headerlink" href="#apps.bc.apps.appAppConfig.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.bc.apps.appAppConfig.name">
+<tt class="descname">name</tt><em class="property"> = 'apps.bc'</em><a class="headerlink" href="#apps.bc.apps.appAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.bc.apps.appAppConfig.pages">
+<tt class="descname">pages</tt><em class="property"> = [{'label': 'port', 'title': 'Port', 'view': 'port_view'}, {'label': 'counter', 'title': 'Counter', 'view': 'counter_view'}, {'label': 'select', 'title': 'Select', 'view': 'select_view'}]</em><a class="headerlink" href="#apps.bc.apps.appAppConfig.pages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.bc.apps.appAppConfig.show_models">
+<tt class="descname">show_models</tt><em class="property"> = [{'label': 'SwitchConnection', 'model': 'SwitchConnection', 'title': 'SwitchConnection'}, {'label': 'XTimes', 'model': 'XTimes', 'title': 'XTimes'}, {'label': 'Deltas', 'model': 'Deltas', 'title': 'Deltas'}, {'label': 'CDicts', 'model': 'CDicts', 'title': 'CDicts'}, {'label': 'PDicts', 'model': 'PDicts', 'title': 'PDicts'}, {'label': 'SDicts', 'model': 'SDicts', 'title': 'SDicts'}, {'label': 'Integers', 'model': 'Integers', 'title': 'Integers'}]</em><a class="headerlink" href="#apps.bc.apps.appAppConfig.show_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.bc.apps.appAppConfig.verbose_name">
+<tt class="descname">verbose_name</tt><em class="property"> = 'BCounters'</em><a class="headerlink" href="#apps.bc.apps.appAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="apps.bc.apps.samevalues">
+<tt class="descclassname">apps.bc.apps.</tt><tt class="descname">samevalues</tt><big>(</big><em>names</em><big>)</big><a class="headerlink" href="#apps.bc.apps.samevalues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="apps-bc-models-module">
+<h2>apps.bc.models module<a class="headerlink" href="#apps-bc-models-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.bc.tests">
+<span id="apps-bc-tests-module"></span><h2>apps.bc.tests module<a class="headerlink" href="#module-apps.bc.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-bc-urls-module">
+<h2>apps.bc.urls module<a class="headerlink" href="#apps-bc-urls-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-bc-views-module">
+<h2>apps.bc.views module<a class="headerlink" href="#apps-bc-views-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.bc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.bc" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">apps.bc package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#apps-bc-admin-module">apps.bc.admin module</a></li>
+<li><a class="reference internal" href="#module-apps.bc.apps">apps.bc.apps module</a></li>
+<li><a class="reference internal" href="#apps-bc-models-module">apps.bc.models module</a></li>
+<li><a class="reference internal" href="#module-apps.bc.tests">apps.bc.tests module</a></li>
+<li><a class="reference internal" href="#apps-bc-urls-module">apps.bc.urls module</a></li>
+<li><a class="reference internal" href="#apps-bc-views-module">apps.bc.views module</a></li>
+<li><a class="reference internal" href="#module-apps.bc">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="apps.html"
+                        title="previous chapter">apps package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apps.da.html"
+                        title="next chapter">apps.da package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/apps.bc.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Andriy Kovalchuk.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster </a>
+      
+      |
+      <a href="_sources/apps.bc.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>apps.fc package &mdash; SANscript 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SANscript 0.1 documentation" href="index.html" />
+    <link rel="up" title="apps package" href="apps.html" />
+    <link rel="next" title="apps.sa package" href="apps.sa.html" />
+    <link rel="prev" title="apps.da package" href="apps.da.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="apps.sa.html" title="apps.sa package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="apps.da.html" title="apps.da package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >sanscript</a> &raquo;</li>
+          <li><a href="apps.html" accesskey="U">apps package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="apps-fc-package">
+<h1>apps.fc package<a class="headerlink" href="#apps-fc-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-fc-admin-module">
+<h2>apps.fc.admin module<a class="headerlink" href="#apps-fc-admin-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.fc.apps">
+<span id="apps-fc-apps-module"></span><h2>apps.fc.apps module<a class="headerlink" href="#module-apps.fc.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apps.fc.apps.appAppConfig">
+<em class="property">class </em><tt class="descclassname">apps.fc.apps.</tt><tt class="descname">appAppConfig</tt><big>(</big><em>app_name</em>, <em>app_module</em><big>)</big><a class="headerlink" href="#apps.fc.apps.appAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.apps.config.AppConfig</span></tt></p>
+<dl class="attribute">
+<dt id="apps.fc.apps.appAppConfig.commands">
+<tt class="descname">commands</tt><em class="property"> = [{'label': 'test_connections', 'title': 'Test connections', 'view': 'command'}, {'label': 'collect_data', 'title': 'Collect data', 'view': 'command'}, {'label': 'collect_changes', 'title': 'Collect changes', 'view': 'command'}]</em><a class="headerlink" href="#apps.fc.apps.appAppConfig.commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.fc.apps.appAppConfig.config_models">
+<tt class="descname">config_models</tt><em class="property"> = [{'label': 'FabricConnection', 'model': 'FabricConnection', 'title': 'FabricConnection'}, {'label': 'SwitchConnection', 'model': 'SwitchConnection', 'title': 'SwitchConnection'}]</em><a class="headerlink" href="#apps.fc.apps.appAppConfig.config_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.fc.apps.appAppConfig.label">
+<tt class="descname">label</tt><em class="property"> = 'fc'</em><a class="headerlink" href="#apps.fc.apps.appAppConfig.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.fc.apps.appAppConfig.name">
+<tt class="descname">name</tt><em class="property"> = 'apps.fc'</em><a class="headerlink" href="#apps.fc.apps.appAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.fc.apps.appAppConfig.pages">
+<tt class="descname">pages</tt><em class="property"> = [{'label': 'switches', 'title': 'Switches', 'view': 'switches'}, {'label': 'ports', 'title': 'Ports', 'view': 'ports'}, {'label': 'aliases', 'title': 'Aliases', 'view': 'aliases'}, {'label': 'zones', 'title': 'Zones', 'view': 'zones'}, {'label': 'paths', 'title': 'Paths', 'view': 'paths'}, {'label': 'changes', 'title': 'Changes', 'view': 'changes'}, {'label': 'change_acknowledge', 'title': '', 'view': 'change_acknowledge'}, {'label': 'stat', 'title': '', 'view': 'stat'}]</em><a class="headerlink" href="#apps.fc.apps.appAppConfig.pages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.fc.apps.appAppConfig.show_models">
+<tt class="descname">show_models</tt><em class="property"> = [{'label': 'FabricConnection', 'model': 'FabricConnection', 'title': 'FabricConnection'}, {'label': 'SwitchConnection', 'model': 'SwitchConnection', 'title': 'SwitchConnection'}, {'label': 'Serial', 'model': 'Serial', 'title': 'Serial'}, {'label': 'Version', 'model': 'Version', 'title': 'Version'}, {'label': 'Switch', 'model': 'Switch', 'title': 'Switch'}, {'label': 'Port', 'model': 'Port', 'title': 'Port'}, {'label': 'Portshow', 'model': 'Portshow', 'title': 'Portshow'}, {'label': 'Name', 'model': 'Name', 'title': 'Name'}, {'label': 'Sfp', 'model': 'Sfp', 'title': 'Sfp'}, {'label': 'Zone', 'model': 'Zone', 'title': 'Zone'}, {'label': 'Alias', 'model': 'Alias', 'title': 'Alias'}, {'label': 'AliasStatus', 'model': 'AliasStatus', 'title': 'AliasStatus'}, {'label': 'ZoneStatus', 'model': 'ZoneStatus', 'title': 'ZoneStatus'}, {'label': 'Link', 'model': 'Link', 'title': 'Link'}, {'label': 'SwportAlias', 'model': 'SwportAlias', 'title': 'SwportAlias'}, {'label': 'AliasSwport', 'model': 'AliasSwport', 'title': 'AliasSwport'}, {'label': 'PortRelation', 'model': 'PortRelation', 'title': 'PortRelation'}, {'label': 'Path', 'model': 'Path', 'title': 'Path'}, {'label': 'Portlog', 'model': 'Portlog', 'title': 'Portlog'}, {'label': 'Fabriclog', 'model': 'Fabriclog', 'title': 'Fabriclog'}, {'label': 'Change', 'model': 'Change', 'title': 'Change'}]</em><a class="headerlink" href="#apps.fc.apps.appAppConfig.show_models" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.fc.apps.appAppConfig.verbose_name">
+<tt class="descname">verbose_name</tt><em class="property"> = 'Switches'</em><a class="headerlink" href="#apps.fc.apps.appAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="apps.fc.apps.samevalues">
+<tt class="descclassname">apps.fc.apps.</tt><tt class="descname">samevalues</tt><big>(</big><em>names</em><big>)</big><a class="headerlink" href="#apps.fc.apps.samevalues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="apps-fc-forms-module">
+<h2>apps.fc.forms module<a class="headerlink" href="#apps-fc-forms-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-fc-models-module">
+<h2>apps.fc.models module<a class="headerlink" href="#apps-fc-models-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.fc.tests">
+<span id="apps-fc-tests-module"></span><h2>apps.fc.tests module<a class="headerlink" href="#module-apps.fc.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-fc-urls-module">
+<h2>apps.fc.urls module<a class="headerlink" href="#apps-fc-urls-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-fc-views-module">
+<h2>apps.fc.views module<a class="headerlink" href="#apps-fc-views-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.fc">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.fc" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">apps.fc package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#apps-fc-admin-module">apps.fc.admin module</a></li>
+<li><a class="reference internal" href="#module-apps.fc.apps">apps.fc.apps module</a></li>
+<li><a class="reference internal" href="#apps-fc-forms-module">apps.fc.forms module</a></li>
+<li><a class="reference internal" href="#apps-fc-models-module">apps.fc.models module</a></li>
+<li><a class="reference internal" href="#module-apps.fc.tests">apps.fc.tests module</a></li>
+<li><a class="reference internal" href="#apps-fc-urls-module">apps.fc.urls module</a></li>
+<li><a class="reference internal" href="#apps-fc-views-module">apps.fc.views module</a></li>
+<li><a class="reference internal" href="#module-apps.fc">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="apps.da.html"
+                        title="previous chapter">apps.da package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apps.sa.html"
+                        title="next chapter">apps.sa package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/apps.fc.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Andriy Kovalchuk.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster </a>
+      
+      |
+      <a href="_sources/apps.fc.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

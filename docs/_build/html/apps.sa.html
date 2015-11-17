@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>sa application &mdash; SANscript 0.1 documentation</title>
+    <title>apps.sa package &mdash; SANscript 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,15 +24,16 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="SANscript 0.1 documentation" href="index.html" />
-    <link rel="next" title="Services" href="services.html" />
-    <link rel="prev" title="Project Structure" href="project_structure.html" />
+    <link rel="up" title="apps package" href="apps.html" />
+    <link rel="next" title="apps.sa.templatetags package" href="apps.sa.templatetags.html" />
+    <link rel="prev" title="apps.fc package" href="apps.fc.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
 
   </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
+  <body>
+    <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -42,38 +43,204 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="services.html" title="Services"
+          <a href="apps.sa.templatetags.html" title="apps.sa.templatetags package"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="project_structure.html" title="Project Structure"
+          <a href="apps.fc.html" title="apps.fc package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">SANscript 0.1 documentation</a> &raquo;</li>
+          <li><a href="modules.html" >sanscript</a> &raquo;</li>
+          <li><a href="apps.html" accesskey="U">apps package</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body" role="main">
+          <div class="body">
             
-  <div class="section" id="sa-application">
-<h1>sa application<a class="headerlink" href="#sa-application" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal"><span class="pre">sa</span></code></p>
-<div class="section" id="module-apps.sa.defs">
-<span id="common-functions"></span><h2>common functions<a class="headerlink" href="#module-apps.sa.defs" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="apps.sa.defs.stable">
-<code class="descclassname">apps.sa.defs.</code><code class="descname">stable</code><span class="sig-paren">(</span><em>model</em>, <em>objects</em>, <em>fields=None</em><span class="sig-paren">)</span><a class="headerlink" href="#apps.sa.defs.stable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rxxxxxxx</p>
+  <div class="section" id="apps-sa-package">
+<h1>apps.sa package<a class="headerlink" href="#apps-sa-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apps.sa.templatetags.html">apps.sa.templatetags package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="apps.sa.templatetags.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.sa.templatetags.html#module-apps.sa.templatetags.extras">apps.sa.templatetags.extras module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apps.sa.templatetags.html#module-apps.sa.templatetags">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-sa-admin-module">
+<h2>apps.sa.admin module<a class="headerlink" href="#apps-sa-admin-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.sa.apps">
+<span id="apps-sa-apps-module"></span><h2>apps.sa.apps module<a class="headerlink" href="#module-apps.sa.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="apps.sa.apps.appAppConfig">
+<em class="property">class </em><tt class="descclassname">apps.sa.apps.</tt><tt class="descname">appAppConfig</tt><big>(</big><em>app_name</em>, <em>app_module</em><big>)</big><a class="headerlink" href="#apps.sa.apps.appAppConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.apps.config.AppConfig</span></tt></p>
+<div class="line-block">
+<div class="line">AppConfig for current application.</div>
+<div class="line">For more information see</div>
+<div class="line"><a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/applications/#application-configuration">https://docs.djangoproject.com/en/1.8/ref/applications/#application-configuration</a></div>
+</div>
+<dl class="attribute">
+<dt id="apps.sa.apps.appAppConfig.admin_pages">
+<tt class="descname">admin_pages</tt><em class="property"> = [{'label': 'configs', 'title': 'configs', 'view': 'v_configs'}, {'label': 'commands', 'title': 'commands', 'view': 'v_commands'}, {'label': 'tables', 'title': 'tables', 'view': 'v_tables'}]</em><a class="headerlink" href="#apps.sa.apps.appAppConfig.admin_pages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.sa.apps.appAppConfig.label">
+<tt class="descname">label</tt><em class="property"> = 'sa'</em><a class="headerlink" href="#apps.sa.apps.appAppConfig.label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.sa.apps.appAppConfig.name">
+<tt class="descname">name</tt><em class="property"> = 'apps.sa'</em><a class="headerlink" href="#apps.sa.apps.appAppConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.sa.apps.appAppConfig.pages">
+<tt class="descname">pages</tt><em class="property"> = []</em><a class="headerlink" href="#apps.sa.apps.appAppConfig.pages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="apps.sa.apps.appAppConfig.verbose_name">
+<tt class="descname">verbose_name</tt><em class="property"> = ''</em><a class="headerlink" href="#apps.sa.apps.appAppConfig.verbose_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
-<div class="line-block">
-<div class="line">Receives SNMP traps from switches;</div>
-<div class="line">sends events to Event Server.</div>
 </div>
-<div class="line-block">
-<div class="line">Default socket - 0.0.0.0:162</div>
+<div class="section" id="module-apps.sa.defs">
+<span id="apps-sa-defs-module"></span><h2>apps.sa.defs module<a class="headerlink" href="#module-apps.sa.defs" title="Permalink to this headline">¶</a></h2>
+<p>Functions for sa and other project applications.</p>
+<dl class="function">
+<dt id="apps.sa.defs.create_formset">
+<tt class="descclassname">apps.sa.defs.</tt><tt class="descname">create_formset</tt><big>(</big><em>Model</em><big>)</big><a class="headerlink" href="#apps.sa.defs.create_formset" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Creates formset for model.</div>
 </div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model</strong> (<em>django.db.models.base.ModelBase</em>) &#8211; Model instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Formset for model.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">django.forms.formsets.BaseFormSet</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="apps.sa.defs.sfilter">
+<tt class="descclassname">apps.sa.defs.</tt><tt class="descname">sfilter</tt><big>(</big><em>model</em>, <em>request</em><big>)</big><a class="headerlink" href="#apps.sa.defs.sfilter" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Filters all model objects by fields values in request.GET.</div>
+<div class="line">Allows using &#8216;&amp;&amp;&#8217; and &#8216;||&#8217; in filter.</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>django.db.models.base.ModelBase</em>) &#8211; Model instance.</li>
+<li><strong>request</strong> (<em>django.core.handlers.wsgi.WSGIRequest</em>) &#8211; Http request.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Set of model objects.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">django.db.models.query.QuerySet</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="apps.sa.defs.stable">
+<tt class="descclassname">apps.sa.defs.</tt><tt class="descname">stable</tt><big>(</big><em>model</em>, <em>objects</em>, <em>fields=None</em><big>)</big><a class="headerlink" href="#apps.sa.defs.stable" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Converts model objects to list of lists of fields values.</div>
+<div class="line">If fields are not specified gets all fields except &#8216;Id&#8217;.</div>
+<div class="line">If value is <tt class="docutils literal"><span class="pre">None</span></tt> or field is &#8216;password&#8217; replaces value to <tt class="docutils literal"><span class="pre">''</span></tt>.</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>django.db.models.base.ModelBase</em>) &#8211; Model instance.</li>
+<li><strong>objects</strong> (<em>django.db.models.query.QuerySet</em>) &#8211; Set of model objects.</li>
+<li><strong>fields</strong> (<em>list</em>) &#8211; Fields names. Defaults to None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Fields names, fields values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list, list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="apps.sa.defs.sum_by_field">
+<tt class="descclassname">apps.sa.defs.</tt><tt class="descname">sum_by_field</tt><big>(</big><em>model</em>, <em>objects</em>, <em>fields=None</em><big>)</big><a class="headerlink" href="#apps.sa.defs.sum_by_field" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Calculates sums of fields values of objects by each field.</div>
+<div class="line">If fields are not specified gets all fields except &#8216;Id&#8217;.</div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> (<em>django.db.models.base.ModelBase</em>) &#8211; Model instance.</li>
+<li><strong>objects</strong> (<em>django.db.models.query.QuerySet</em>) &#8211; Set of model objects.</li>
+<li><strong>fields</strong> (<em>list</em>) &#8211; Fields names. Defaults to None.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Sums of fields values.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="apps-sa-models-module">
+<h2>apps.sa.models module<a class="headerlink" href="#apps-sa-models-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.sa.tests">
+<span id="apps-sa-tests-module"></span><h2>apps.sa.tests module<a class="headerlink" href="#module-apps.sa.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-sa-urls-module">
+<h2>apps.sa.urls module<a class="headerlink" href="#apps-sa-urls-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="apps-sa-views-module">
+<h2>apps.sa.views module<a class="headerlink" href="#apps-sa-views-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-apps.sa">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-apps.sa" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -81,30 +248,37 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">sa application</a><ul>
-<li><a class="reference internal" href="#module-apps.sa.defs">common functions</a></li>
+<li><a class="reference internal" href="#">apps.sa package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#apps-sa-admin-module">apps.sa.admin module</a></li>
+<li><a class="reference internal" href="#module-apps.sa.apps">apps.sa.apps module</a></li>
+<li><a class="reference internal" href="#module-apps.sa.defs">apps.sa.defs module</a></li>
+<li><a class="reference internal" href="#apps-sa-models-module">apps.sa.models module</a></li>
+<li><a class="reference internal" href="#module-apps.sa.tests">apps.sa.tests module</a></li>
+<li><a class="reference internal" href="#apps-sa-urls-module">apps.sa.urls module</a></li>
+<li><a class="reference internal" href="#apps-sa-views-module">apps.sa.views module</a></li>
+<li><a class="reference internal" href="#module-apps.sa">Module contents</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="project_structure.html"
-                        title="previous chapter">Project Structure</a></p>
+  <p class="topless"><a href="apps.fc.html"
+                        title="previous chapter">apps.fc package</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="services.html"
-                        title="next chapter">Services</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/apps.sa.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
+  <p class="topless"><a href="apps.sa.templatetags.html"
+                        title="next chapter">apps.sa.templatetags package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/apps.sa.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -125,8 +299,8 @@
       &copy;2015, Andriy Kovalchuk.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster </a>
       
       |
       <a href="_sources/apps.sa.txt"

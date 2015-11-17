@@ -1,3 +1,8 @@
+"""
+Functions for sa and other project applications.
+"""
+
+
 from django.forms.models import modelformset_factory
 from django.forms import PasswordInput
 from operator import or_, and_
@@ -5,20 +10,16 @@ from django.db.models import Q
 from django.db.models import Sum
 
 
-def prevent_password_save(sender, instance, **kwargs):
-    try:
-        obj = sender.objects.get(pk=instance.pk)
-    except sender.DoesNotExist:
-        pass # object is new
-    else:
-        if not instance.password:
-            instance.password = obj.password # do not change password
-        elif instance.password.strip() == '':
-            instance.password = None # set password to empty
-    return
-
-
 def create_formset(Model):
+    """
+    | Creates formset for model.
+
+    Args:
+        model (django.db.models.base.ModelBase): Model instance.
+
+    Returns:
+        django.forms.formsets.BaseFormSet: Formset for model.
+    """
     FormSet = modelformset_factory(
         Model,
         exclude=(),
@@ -27,26 +28,21 @@ def create_formset(Model):
             'password': PasswordInput(),
         }
     )
+    print(modelformset_factory.__class__, type(FormSet), FormSet)
     return FormSet
 
 
-def build_filters(request):
-    filters = {}
-    for key, value in request.GET.items():
-        if value:
-            if value[0] == '[' and value[-1] == ']':
-                qtype = 'in'
-                value = value[1:-1].split(',')
-                value = [x.strip() for x in value]
-            else:
-                qtype = 'contains'
-            filters['%s__%s' %(key, qtype)] = value
-    return filters
-
-
 def sfilter(model, request):
-    
-    objects = []
+    """
+    | Filters all model objects by fields values in request.GET.
+    | Allows using '&&' and '||' in filter.
+    Args:
+        model (django.db.models.base.ModelBase): Model instance.
+        request (django.core.handlers.wsgi.WSGIRequest): Http request.
+
+    Returns:
+        django.db.models.query.QuerySet: Set of model objects.
+    """
 
     def set_op(op, key, xs):
         if len(xs) == 1:
@@ -59,6 +55,7 @@ def sfilter(model, request):
             elm0 = xs[0] if type(xs[0]) == Q else Q((key, xs[0]))
             return op(elm0, set_op(op, key, xs[1:]))
 
+    objects = []
     if ''.join(list(request.GET.values())) != '':
         query = Q()
         for key, value in request.GET.items():
@@ -80,24 +77,21 @@ def sfilter(model, request):
     return objects
 
 
-def model_to_table(model, filters):
-    fields = [f.name for f in model._meta.fields][1:]
-    rows = []
-    objs = model.objects.filter(**filters)[:5000]
-    for record in objs:
-        row = []
-        for field in fields:
-            value = getattr(record, field)
-            if value is None:
-                value = ''
-            if field == 'password':
-                value = ''
-            row.append(value)
-        rows.append(row)
-    return fields, rows
-
-
 def stable(model, objects, fields=None):
+    """
+    | Converts model objects to list of lists of fields values.
+    | If fields are not specified gets all fields except 'Id'.
+    | If value is ``None`` or field is 'password' replaces value to ``''``.
+
+    Args:
+        model (django.db.models.base.ModelBase): Model instance.
+        objects (django.db.models.query.QuerySet): Set of model objects.
+        fields (list): Fields names. Defaults to None.
+
+    Returns:
+        list, list: Fields names, fields values.
+    """
+
     if fields is None:
         fields = [f.name for f in model._meta.fields][1:]
     rows = []
@@ -115,6 +109,19 @@ def stable(model, objects, fields=None):
 
 
 def sum_by_field(model, objects, fields=None):
+    """
+    | Calculates sums of fields values of objects by each field.
+    | If fields are not specified gets all fields except 'Id'.
+
+    Args:
+        model (django.db.models.base.ModelBase): Model instance.
+        objects (django.db.models.query.QuerySet): Set of model objects.
+        fields (list): Fields names. Defaults to None.
+
+    Returns:
+        dict: Sums of fields values.
+    """
+
     if fields is None:
         fields = [f.name for f in model._meta.fields][1:]
     row = {}
@@ -125,6 +132,5 @@ def sum_by_field(model, objects, fields=None):
             value = None
         row[field] = value
     return row
-
 
 
