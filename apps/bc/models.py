@@ -51,6 +51,8 @@ class Integers(models.Model):
     values = JSONField()
 
 class PortConfig(models.Model):
-    counter = models.CharField(max_length=64)
-    values = JSONField()
-    datetime = models.DateTimeField(auto_now_add=True)
+    switchname = models.CharField(max_length=30)
+    portindex = models.IntegerField()
+    portname = models.CharField(max_length=60)
+    porttype = models.IntegerField()
+

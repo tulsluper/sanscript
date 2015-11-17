@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
-from .models import CounterOid
+from .models import CounterOid, PortConfig
 from apps.fc.models import Portshow
 from .models import XTimes, Integers, SDicts, CDicts, PDicts
 
@@ -58,8 +58,15 @@ def port_view(request):
         rows = []
 
     ports = []
-    for p in Portshow.objects.all():
-        ports.append(['%s %s' %(p.Switch, p.portIndex), p.portName])
+#    for p in Portshow.objects.all():
+#        ports.append(['%s %s' %(p.Switch, p.portIndex), p.portName])
+
+    try:
+        pndict = PortConfig.objects.get(counter='connUnitPortName').values
+        for uport, name in pndict.items():
+            ports.append([uport, name])
+    except:
+        pass
 
     data = {
         'datestring': datestring,
