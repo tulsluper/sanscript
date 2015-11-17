@@ -4,8 +4,8 @@ import os
 
 APPNAME = 'bc'
 BASEDIR = os.path.join(os.path.dirname(__file__), '../../../')
-JSONDIR = os.path.join(BASEDIR, 'data/{}/json/'.format(APPNAME))
-
+DATADIR = os.path.join(BASEDIR, 'data/{}'.format(APPNAME))
+JSONDIR = os.path.join(DATADIR, 'json')
 TEMPFILE = os.path.join(JSONDIR, 'temp')
 DIFFSDIR = os.path.join(JSONDIR, 'diffs')
 
