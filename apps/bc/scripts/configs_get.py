@@ -18,6 +18,14 @@ counters = {
     '1.3.6.1.3.94.1.10.1.17': 'connUnitPortName'
 }
 
+names =  [x['name'] for x in connections]
+
+
+def sort_uports(xlist):
+    xlist.sort(key=lambda x: (names.index(x[0].split()[0]), int(x[0].split()[1])))
+    return xlist
+
+
 if not os.path.exists(JSONDIR):
     os.makedirs(JSONDIR)
 
@@ -60,7 +68,7 @@ def snmpwalk(connection, counters=counters):
                     counter = counter_from_number(number)
                     port = int(number.asTuple()[-1]) -1
                     value = str(value)
-                    values['%s_%s %s' %(name, port, counter)] = value
+                    values['{} {} {}'.format(name, port, counter)] = value
     return values
 
 
@@ -78,20 +86,38 @@ def main():
     """
     main function
     """
-    dt = datetime.now()
-    cdata = {}
-    records = []
+    pdata = {}
     udata = multisnmpwalk(counters, connections, PROCESSES)
     for uid, value in udata.items():
-        uport, counter = uid.split()
-        if not counter in cdata:
-            cdata[counter] = {}
-        cdata[counter][uport] = value
+        switch, port, counter = uid.split()
+        uport = '{} {}'.format(switch, port)
+        if not uport in pdata:
+            pdata[uport] = {}
+        if counter == 'connUnitPortType':
+            pdata[uport]['porttype'] = value
+        elif counter == 'connUnitPortName':
+            pdata[uport]['portname'] = value
 
+    records = []
+    for uport, record in pdata.items():
+        switch, port = uport.split()
+        record['switchname'] = switch
+        record['portindex'] = port
+        records.append(record)
+
+    names =  [x['name'] for x in connections]
+    records.sort(key=lambda x: (names.index(x['switchname']), int(x['portindex'])))
+
+    print(records)
+
+    dump_data(os.path.join(JSONDIR, 'configs'), records)
+
+    """
     for counter, xdict in cdata.items():
+        xdict = sort_uports(xdict)
         dump_data(os.path.join(JSONDIR, counter), xdict)
         records.append({'counter': counter, 'values': xdict, 'datetime': str(dt)})
-    dump_data(os.path.join(JSONDIR, 'configs'), records)
+    """
 
     return
 
