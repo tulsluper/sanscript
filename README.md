@@ -40,28 +40,10 @@ apt-get install postgresql
 apt-get install python3-psycopg2
 ```
 ```
+cp /home/django/sanscript/configs/postgres/db_settings.py /home/django/sanscript/sanscript/
 su - postgres
-psql -f /home/django/sanscript/configs/db_init_postgres.sql
+psql -f /home/django/sanscript/configs/postgres/db_init.sql
 exit
-```
-Change database config in /home/django/sanscript/sanscript/settings.py
-```
-DATABASES = {
-    'default': {
-
-        # comment out lines below for sqlite3
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
-        # comment out lines below for postgresql
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sanscriptdb',
-        'USER': 'sanscriptdbuser',
-        'PASSWORD': 'sanscriptdbpass',
-        'HOST':'localhost',
-        'PORT':'',
-    }
-}
 ```
 Init application
 ```bash
