@@ -48,6 +48,7 @@ def to_items(switch, lines, last_dt):
                     items = line.strip().split()
                     items = fix_items(items, line)
                     xtime, task, event, port, cmd, args = items
+                    dt = datetime.strptime(xdate+xtime, '%b %d %Y%H:%M:%S.%f')
                     records.append({'dt': str(dt), 'switch': switch, 'port': port, 'task': task, 'event': event, 'cmd': cmd, 'args': args})
     return records, dt or last_dt
 
