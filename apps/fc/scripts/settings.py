@@ -6,6 +6,7 @@ APPNAME = 'fc'
 BASEDIR = os.path.join(os.path.dirname(__file__), '../../../')
 TEXTDIR = os.path.join(BASEDIR, 'data/{}/plain/'.format(APPNAME))
 JSONDIR = os.path.join(BASEDIR, 'data/{}/json/'.format(APPNAME))
+TEMPDIR = os.path.join(BASEDIR, 'data/{}/temp/'.format(APPNAME))
 ARCHDIR = os.path.join(BASEDIR, 'data/{}/arch/'.format(APPNAME))
 
 CONFIGSDIR = os.path.join(BASEDIR, 'data/{}/configs/'.format(APPNAME))

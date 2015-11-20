@@ -54,6 +54,8 @@ show_models = samevalues([
     'Portlog',
     'Fabriclog',
     'Change',
+    'Portlog',
+    'Fabriclog',
 ])
 
 class appAppConfig(AppConfig):

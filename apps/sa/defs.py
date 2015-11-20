@@ -55,6 +55,7 @@ def sfilter(model, request):
             elm0 = xs[0] if type(xs[0]) == Q else Q((key, xs[0]))
             return op(elm0, set_op(op, key, xs[1:]))
 
+    limit = 3000
     objects = []
     if ''.join(list(request.GET.values())) != '':
         query = Q()
@@ -70,10 +71,10 @@ def sfilter(model, request):
                     query.add(Q((key, value)), Q.AND)
 
         print(query)
-        objects = model.objects.filter(query)
+        objects = model.objects.filter(query)[:limit]
                     
     else:
-        objects = model.objects.all()
+        objects = model.objects.all()[:limit]
     return objects
 
 
