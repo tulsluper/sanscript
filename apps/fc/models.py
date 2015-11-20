@@ -282,6 +282,8 @@ class Portlog(models.Model):
     port = models.CharField(max_length=8)
     cmd = models.CharField(max_length=8)
     args = models.CharField(max_length=64)
+    class Meta:
+        ordering = ['-dt',]
 
 
 class Fabriclog(models.Model):
@@ -292,3 +294,5 @@ class Fabriclog(models.Model):
     Sn_Pn = models.CharField(max_length=8)
     Port = models.CharField(max_length=8)
     Xid = models.CharField(max_length=8)
+    class Meta:
+        ordering = ['-dt',]
