@@ -32,24 +32,22 @@ def fix_items(items, line):
 
 
 def to_items(switch, lines, last_dt):
-    actual = True if last_dt is None else False
     records = []
+    actual = False
     dt = None
     for line in lines:
         if line[3] == ' ':
             items = line.strip().split()
             xdate = ' '.join([items[x] for x in [1, 2, 4]])
-            if last_dt:
-                if datetime.strptime(xdate, '%b %d %Y').date() == last_dt.date():
-                    actual = True
+            if datetime.strptime(xdate, '%b %d %Y').date() >= last_dt.date():
+                actual = True
         else:
-            if actual:
-                if last_dt is None or line[:12] >= str(last_dt.time())[:12]:
-                    items = line.strip().split()
-                    items = fix_items(items, line)
-                    xtime, task, event, port, cmd, args = items
-                    dt = datetime.strptime(xdate+xtime, '%b %d %Y%H:%M:%S.%f')
-                    records.append({'dt': str(dt), 'switch': switch, 'port': port, 'task': task, 'event': event, 'cmd': cmd, 'args': args})
+            if actual and line[:12] >= str(last_dt.time())[:12]:
+                items = line.strip().split()
+                items = fix_items(items, line)
+                xtime, task, event, port, cmd, args = items
+                dt = datetime.strptime(xdate+xtime, '%b %d %Y%H:%M:%S.%f')
+                records.append({'dt': str(dt), 'switch': switch, 'port': port, 'task': task, 'event': event, 'cmd': cmd, 'args': args})
     return records, dt or last_dt
 
 
@@ -74,7 +72,7 @@ def to_items_fab(switch, lines, last_dt):
 
 def main():
 
-    null_dt = datetime.now()-timedelta(days=1)
+    null_dt = datetime.now()-timedelta(hours=1)
     last_dates = load_data(os.path.join(TEMPDIR, 'last_dates'), {})
     portlog = []
     fabriclog = []
@@ -90,7 +88,7 @@ def main():
                 if last_dt_str is None:
                     last_dt = null_dt
                 else:
-                    last_dt = datetime.strptime(last_dt_str, "%Y-%m-%d %H:%M:%S.%f")
+                    last_dt = datetime.strptime(last_dt_str, "%Y-%m-%d %H:%M:%S")
 
                 xdate = None
                 if command == 'portlogdump':
@@ -99,9 +97,9 @@ def main():
                 elif command == 'fabriclog':
                     records, xdate = to_items_fab(system, lines[2:-2], last_dt)
                     fabriclog += records
-                dt_str = None if xdate is None else str(xdate)
+                dt_str = None if xdate is None else xdate.strftime("%Y-%m-%d %H:%M:%S")
                 last_dates['{}.{}'.format(system, command)] = dt_str
-
+    print(len(portlog))
     dump_data(os.path.join(TEMPDIR, 'last_dates'), last_dates)
     dump_data(os.path.join(JSONDIR, 'portlog'), portlog)
     dump_data(os.path.join(JSONDIR, 'fabriclog'), fabriclog)
