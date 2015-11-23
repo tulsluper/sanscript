@@ -2,7 +2,7 @@
 
 import os
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from settings import TEMPDIR, TEXTDIR, JSONDIR
 from settings import logging
 from defs import dump_data, load_data
@@ -74,6 +74,7 @@ def to_items_fab(switch, lines, last_dt):
 
 def main():
 
+    null_dt = datetime.now()-timedelta(days=1)
     last_dates = load_data(os.path.join(TEMPDIR, 'last_dates'), {})
     portlog = []
     fabriclog = []
@@ -86,10 +87,10 @@ def main():
                 lines = f.readlines()
 
                 last_dt_str = last_dates.get(filename)
-                if last_dt_str is not None:
-                    last_dt = datetime.strptime(last_dt_str, "%Y-%m-%d %H:%M:%S.%f")
+                if last_dt_str is None:
+                    last_dt = null_dt
                 else:
-                    last_dt = None
+                    last_dt = datetime.strptime(last_dt_str, "%Y-%m-%d %H:%M:%S.%f")
 
                 xdate = None
                 if command == 'portlogdump':
