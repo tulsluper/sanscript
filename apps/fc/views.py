@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from .models import *
 from .forms import *
 from apps.sa.defs import sfilter, stable
@@ -228,20 +228,6 @@ def changes(request):
     return render(request, 'fc/changes.html', data)
 
 
-"""
-def change_acknowledge(request):
-    id = request.GET.get('id')
-    try:
-        obj = Change.objects.get(id=id)
-    except:
-        obj = None
-    data = {
-        'obj': obj,
-    }
-    return render(request, 'fc/change_acknowledge.html', data)
-"""
-
-
 @csrf_protect
 def change_acknowledge(request): 
     id = request.GET.get('id')
@@ -257,3 +243,39 @@ def change_acknowledge(request):
         'form': form,
     }
     return render(request, 'fc/change_acknowledge.html', data)
+
+
+def portlog(request):
+
+    if request.GET.get('dt') is None:
+        dt10 = str(datetime.now()-timedelta(minutes=10))[:18]
+        return redirect('/fc/portlog/?dt={}'.format(dt10))
+
+    objs = sfilter(Portlog, request)
+    cols, rows = stable(Portlog, objs)
+
+    xdict = {}
+    sp_dict = {}
+    dt_list = set()
+    for obj in objs:
+        swport = '{} {}'.format(obj.switch, obj.port)
+        dt = obj.dt.replace(second=0, microsecond=0)
+        dt_list.add(dt)
+        if not swport in sp_dict:
+            sp_dict[swport] = set()
+        sp_dict[swport].add(dt)
+
+    minutes = sorted(dt_list)
+    xlist = []
+    for swport, dts in sp_dict.items():
+        xlist.append([swport, ['x' if dt in dts else '' for dt in minutes]])
+
+    data = {
+        'cols': cols,
+        'rows': rows,
+        'xlist': xlist,
+        'minutes': minutes,
+        'warning': 'no data for this select',
+    }
+    
+    return render(request, 'fc/portlog.html', data)

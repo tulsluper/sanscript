@@ -19,6 +19,7 @@ pages = [
     {'label': 'changes', 'view': 'changes', 'title': 'Changes'},
     {'label': 'change_acknowledge', 'view': 'change_acknowledge', 'title': ''},
     {'label': 'stat', 'view': 'stat', 'title': ''},
+    {'label': 'portlog', 'view': 'portlog', 'title': 'Portlog'},
 ]
 
 commands = [
