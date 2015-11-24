@@ -28,7 +28,6 @@ def create_formset(Model):
             'password': PasswordInput(),
         }
     )
-    print(modelformset_factory.__class__, type(FormSet), FormSet)
     return FormSet
 
 
@@ -62,15 +61,14 @@ def sfilter(model, request):
         for key, value in request.GET.items():
             if value:
                 key = '{}__contains'.format(key)
-                value = value.replace(' ', '').replace('+', '')
+                value = value.replace('+', ' ')
                 if '&&' in value or '||' in value:
                     query.add(
-                        set_op(or_, key, [set_op(and_, key, z) for z in [x.split('&&') for x in value.split('||')]]),
+                        set_op(or_, key, [set_op(and_, key, z) for z in [[ i.strip() for i in x.split('&&')] for x in value.split('||')]]),
                         Q.AND)
                 else:
                     query.add(Q((key, value)), Q.AND)
 
-        print(query)
         objects = model.objects.filter(query)#[:limit]
                     
     else:
