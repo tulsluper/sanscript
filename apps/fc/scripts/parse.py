@@ -10,7 +10,7 @@ from defs import dump_data, load_data
 def sort_records(records):
     if records and type(records[0]) == dict:
         if 'Switch' in records[0].keys():
-            names = load_data(os.path.join(JSONDIR, 'sorted_switchnames.json'), [])
+            names = load_data(os.path.join(JSONDIR, 'sorted_systems'), [])
             indexes = {name: num for num, name in enumerate(names)}
             records.sort(key=lambda x: indexes.get(x['Switch'], 0))
     return records
