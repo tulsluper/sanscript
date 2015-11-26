@@ -83,40 +83,52 @@ $(function () {
         series: [
         {
             name: 'RESERVE',
-            data: [{% for value in fieldsvalues.RESERVE %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.RESERVE %}{{ value }}, {% endfor %}],
+            visible: {% if 'RESERVE' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'RESERVE_OVERUSED',
-            data: [{% for value in fieldsvalues.RESERVE_OVERUSED %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.RESERVE_OVERUSED %}{{ value }}, {% endfor %}],
+            visible: {% if 'RESERVE_OVERUSED' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'USED',
-            data: [{% for value in fieldsvalues.USED %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.USED %}{{ value }}, {% endfor %}],
+            visible: {% if 'USED' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'FREE',
-            data: [{% for value in fieldsvalues.FREE %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.FREE %}{{ value }}, {% endfor %}],
+            visible: {% if 'FREE' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'OVERPROVISIONED',
-            data: [{% for value in fieldsvalues.OVERPROVISIONED %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.OVERPROVISIONED %}{{ value }}, {% endfor %}],
+            visible: {% if 'OVERPROVISIONED' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'reserve_used',
-            data: [{% for value in fieldsvalues.reserve_used %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.reserve_used %}{{ value }}, {% endfor %}],
+            visible: {% if 'reserve_used' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'reserve_free',
-            data: [{% for value in fieldsvalues.reserve_free %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.reserve_free %}{{ value }}, {% endfor %}],
+            visible: {% if 'reserve_free' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'full',
-            data: [{% for value in fieldsvalues.full %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.full %}{{ value }}, {% endfor %}],
+            visible: {% if 'full' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'cpvv',
-            data: [{% for value in fieldsvalues.cpvv %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.cpvv %}{{ value }}, {% endfor %}],
+            visible: {% if 'cpvv' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'tpvv_used',
-            data: [{% for value in fieldsvalues.tpvv_used %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.tpvv_used %}{{ value }}, {% endfor %}],
+            visible: {% if 'tpvv_used' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'tpvv_free',
-            data: [{% for value in fieldsvalues.tpvv_free %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.tpvv_free %}{{ value }}, {% endfor %}],
+            visible: {% if 'tpvv_free' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'copy',
-            data: [{% for value in fieldsvalues.copy %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.copy %}{{ value }}, {% endfor %}],
+            visible: {% if 'copy' in visible_series %}true{% else %}false{% endif %},
         }]
     });
 });
