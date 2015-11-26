@@ -42,6 +42,7 @@ def capacity_history(request):
         'storages': storages,
         'dates': dates,
         'fieldsvalues': fieldsvalues,
+        'visible_series': ['FormattedUsed'],
     }
     return render(request, 'da/capacity_history.html', data)
 
@@ -64,6 +65,7 @@ def capacity_3par_history(request):
         'storages': storages,
         'dates': dates,
         'fieldsvalues': fieldsvalues,
+        'visible_series': ['tpvv_used', 'tpvv_free'],
     }
     return render(request, 'da/capacity_3par_history.html', data)
 

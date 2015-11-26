@@ -83,34 +83,44 @@ $(function () {
         series: [
         {
             name: 'RawTotal',
-            data: [{% for value in fieldsvalues.RawTotal %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.RawTotal %}{{ value }}, {% endfor %}],
+            visible: {% if 'RawTotal' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'RawData',
-            data: [{% for value in fieldsvalues.RawData %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.RawData %}{{ value }}, {% endfor %}],
+            visible: {% if 'RawData' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'RawSpare',
-            data: [{% for value in fieldsvalues.RawSpare %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.RawSpare %}{{ value }}, {% endfor %}],
+            visible: {% if 'RawSpare' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'RawAllocated',
-            data: [{% for value in fieldsvalues.RawAllocated %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.RawAllocated %}{{ value }}, {% endfor %}],
+            visible: {% if 'RawAllocated' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'RawFree',
-            data: [{% for value in fieldsvalues.RawFree %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.RawFree %}{{ value }}, {% endfor %}],
+            visible: {% if 'RawFree' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'FormattedTotal',
-            data: [{% for value in fieldsvalues.FormattedTotal %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.FormattedTotal %}{{ value }}, {% endfor %}],
+            visible: {% if 'FormattedTotal' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'FormattedUsed',
-            data: [{% for value in fieldsvalues.FormattedUsed %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.FormattedUsed %}{{ value }}, {% endfor %}],
+            visible: {% if 'FormattedUsed' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'FormattedPresented',
-            data: [{% for value in fieldsvalues.FormattedPresented %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.FormattedPresented %}{{ value }}, {% endfor %}],
+            visible: {% if 'FormattedPresented' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'FormattedNotPresented',
-            data: [{% for value in fieldsvalues.FormattedNotPresented %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.FormattedNotPresented %}{{ value }}, {% endfor %}],
+            visible: {% if 'FormattedNotPresented' in visible_series %}true{% else %}false{% endif %},
         }, {
             name: 'FormattedAvailable',
-            data: [{% for value in fieldsvalues.FormattedAvailable %}{{ value }}, {% endfor %}]
+            data: [{% for value in fieldsvalues.FormattedAvailable %}{{ value }}, {% endfor %}],
+            visible: {% if 'FormattedAvailable' in visible_series %}true{% else %}false{% endif %},
         }]
     });
 });
