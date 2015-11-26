@@ -28,6 +28,12 @@ def fix_items(items, line):
         items[3] = new
         items[4] = port[len(new):]
 
+    event = items[2]
+    if event == 'debug':
+        items[5] = items[4]
+        items[4] = ''
+        print(items)
+
     return items
 
 
