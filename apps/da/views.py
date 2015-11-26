@@ -19,6 +19,7 @@ def capacity(request):
         'objs': objs,
         'sum_row': sum_row,
         'integer': 'TB',
+        'visible_series': ['FormattedPresented', 'FormattedNotPresented', 'FormattedAvailable'],
     }
     return render(request, 'da/capacity.html', data)
 
