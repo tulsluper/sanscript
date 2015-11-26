@@ -93,8 +93,14 @@
 
   </div>
 
+  {% if objs %}
+  <div id="container" style="width: 100%; margin-bottom: 1em;"></div>
+  {% endif %}
+
 </div>
 </div>
+
+
 
 {% endblock %}
 
@@ -111,6 +117,91 @@
     $(".export").on('click', function (event) {
       exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'_'+$('#last_update').text()+'.csv']);
     });
+
+$(function () { 
+
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+        },
+        title: {
+            text: 'Capacity, TB'
+        },
+        xAxis: {
+            categories: [{% for obj in objs %}'{{ obj.Storage }}', {% endfor %}]
+        },
+        yAxis: {
+            title: {
+                text: null,
+            },
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            reversed: true
+        },
+        tooltip: {
+            hideDelay: 100,
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y:.2f} TB</b> ({point.percentage:.0f}%)<br>',
+            shared: true,
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                //shadow: false,
+                //borderWidth: 0,
+                dataLabels: {
+                    enabled: true, 
+                    style: {
+                        fontWeight: 'normal',
+                        textShadow: 'none',
+                    },
+                    formatter: function() {
+                        if (this.percentage < 1) {
+                            return  '';
+                        } else {
+                            return  Highcharts.numberFormat(this.percentage, 0)+'%';
+                        }
+                    },
+                },
+            },
+
+        },
+        series: [{
+            name: 'RawFree',
+            //color: '#2CA8C2',
+            stack: 'Raw',
+            data: [{% for obj in objs %}{% if obj.RawFree %}{{ obj.RawFree }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'RawFree' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'RawAllocated',
+            //color: '#2CA8C2',
+            stack: 'Raw',
+            data: [{% for obj in objs %}{% if obj.RawAllocated %}{{ obj.RawAllocated }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'RawAllocated' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'FormattedAvailable',
+            color: '#98CB4A',
+            stack: 'Formatted',
+            data: [{% for obj in objs %}{% if obj.FormattedAvailable %}{{ obj.FormattedAvailable }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'FormattedAvailable' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'FormattedNotPresented',
+            color: '#F76D3C',
+            stack: 'Formatted',
+            data: [{% for obj in objs %}{% if obj.FormattedNotPresented %}{{ obj.FormattedNotPresented }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'FormattedNotPresented' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'FormattedPresented',
+            color: '#F15F74',
+            stack: 'Formatted',
+            data: [{% for obj in objs %}{% if obj.FormattedPresented %}{{ obj.FormattedPresented }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'FormattedPresented' in visible_series %}true{% else %}false{% endif %}
+        }]
+    });
+});
+
 
 </script>
 {% endblock %}
