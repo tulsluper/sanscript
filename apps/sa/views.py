@@ -67,6 +67,24 @@ def home(request):
         return render(request, 'home.html', {})
 
 
+def settings_view(request):
+    custom_f = os.path.join(BASE_DIR, 'sanscript/custom_settings.py')
+    if request.POST:
+        lines = request.POST.get('text', '')
+        with open(custom_f, 'w') as f:
+            f.write(lines) 
+    if os.path.isfile(custom_f) and os.path.getsize(custom_f) > 0:
+        with open(custom_f) as f:
+            lines = f.readlines() 
+    else:
+        with open(os.path.join(BASE_DIR, 'sanscript/custom_settings.tl')) as f:
+            lines = f.readlines()
+    data = {
+        'lines': lines,
+    }
+    return render(request, 'settings.html', data)
+
+
 @staff_member_required
 @csrf_protect
 def v_configs(request, item_label=None):

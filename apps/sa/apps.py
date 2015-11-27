@@ -2,6 +2,7 @@ import os
 from django.apps import AppConfig
 
 pages = [
+    {'label': 'settings', 'view': 'settings_view', 'title': 'settings'},
 ]
 admin_pages = [
     {'label': 'configs', 'view': 'v_configs', 'title': 'configs'},
