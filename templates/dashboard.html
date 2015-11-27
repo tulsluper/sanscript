@@ -21,55 +21,67 @@
   </div>
 
   <div class="columns large-4 medium-4 left">
-    <div class="panel" style="background:#FF5454">
-    <div class="row">
-       <div class="columns large-6" style="border-right:2px solid white; opacity: 0.6;">
-         <div class="icon text-center">
-           <h3>Storages</h3>
-           <i class="fi-cloud"></i>
-         </div>
-       </div>
-       <div class="columns large-6" style="opacity: 0.8; font-weight: bold">
-         <div class="text text-right">
-           <h3><span>f. used</span> {{ FormattedUsed }}<span> TB</span></h3>
-           <h3><span>f. free</span> {{ FormattedAvailable }}<span> TB</span></h3>
-         </div>
-       </div>
-    </div>
+    <div class="panel" style="background:#FF5454;">
+      <a href="/da/">
+      <div class="row icon text-center" style="opacity: 0.8;">
+         <h3>Storages</h3>
+         <i class="fi-cloud"></i>
+         <h3>{{ FormattedUsed }}<span> TB</span></h3>
+         <p>f. used</p>
+         <h3>{{ FormattedAvailable }}<span> TB</span></h3>
+         <p>f. free</p>
+      </div>
+      </a>
     </div>
   </div>
+
   <div class="columns large-4 medium-4 left">
-    <div class="panel" style="background:#67C2EF">
-    <div class="row">
-       <div class="columns large-6" style="border-right:2px solid white; opacity: 0.6;">
-         <div class="icon text-center">
-           <h3>Switches</h3>
-           <i class="fi-arrow-right"></i>
-         </div>
-       </div>
-       <div class="columns large-6" style="opacity: 0.8; font-weight: bold">
-         <div class="text text-right">
-           <h3><span>switches</span> {{ SwitchesCount }}</h3>
-           <h3><span>ports</span> {{ PortsCount }}</h3>
-         </div>
-       </div>
+    <div class="panel" style="background:#67C2EF;">
+      <a href="/fc/">
+      <div class="row icon text-center" style="opacity: 0.8;">
+         <h3>Switches</h3>
+         <i class="fi-arrow-right"></i>
+         <h3>{{ SwitchesCount }}</h3>
+         <p>switches</p>
+         <h3>{{ PortsCount }}</h3>
+         <p>ports</p>
+      </div>
+      </a>
     </div>
+  </div>
 
+  <div class="columns large-4 medium-4 left">
+    <div class="panel" style="background:#FABB3D;">
+      <a href="/bc/">
+      <div class="row icon text-center" style="opacity: 0.8;">
+         <h3>BCounters</h3>
+         <i class="fi-target-two"></i>
+         <h3>&nbsp;</h3>
+         <p>&nbsp;</p>
+         <h3>&nbsp;</h3>
+         <p>&nbsp;</p>
+      </div>
+      </a>
+    </div>
+  </div>
 
+  <!--
+
+  <div class="columns large-4 medium-4 left">
+    <div class="panel" style="background:#79C447;">
+      <div class="row icon text-center" style="opacity: 0.8;">
+         <h3>in progress</h3>
+         <i class="fi-target-two"></i>
+         <h3>&nbsp;</h3>
+         <p>&nbsp;</p>
+         <h3>&nbsp;</h3>
+         <p>&nbsp;</p>
+      </div>
     </div>
   </div>
-<!--
-  <div class="columns large-4 medium-4">
-    <div class="panel" style="background:#FABB3D">
-       <i class="fi-cloud"></i>
-    </div>
-  </div>
-  <div class="columns large-4 medium-4">
-    <div class="panel" style="background:#79C447">
-       <i class="fi-cloud"></i>
-    </div>
-  </div>
--->
+
+  -->
+
 </div>
 </div>
 
