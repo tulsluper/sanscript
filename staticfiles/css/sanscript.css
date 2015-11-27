@@ -211,3 +211,5 @@ html, body {
 .t_added {color: #699C40}
 .t_removed {color: #D01217}
 .t_changed {color: orange}
+
+.decimal {display:block; text-align:right}

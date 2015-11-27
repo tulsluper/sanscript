@@ -8,6 +8,7 @@ from django.forms import PasswordInput
 from operator import or_, and_
 from django.db.models import Q
 from django.db.models import Sum
+from decimal import Decimal
 
 
 def create_formset(Model):
@@ -102,6 +103,12 @@ def stable(model, objects, fields=None):
                 value = ''
             if field == 'password':
                 value = ''
+
+            if type(value) == Decimal:
+                value = '<span class="decimal">{}</span>'.format(value)
+            elif type(value) == list:
+                value = ', '.join(value)
+
             row.append(value)
         rows.append(row)
     return fields, rows
@@ -130,6 +137,36 @@ def sum_by_field(model, objects, fields=None):
         except:
             value = None
         row[field] = value
+    return row
+
+
+def sum_by_field_to_list(model, objects, fields=None):
+    """
+    | Calculates sums of fields values of objects by each field.
+    | If fields are not specified gets all fields except 'Id'.
+
+    Args:
+        model (django.db.models.base.ModelBase): Model instance.
+        objects (django.db.models.query.QuerySet): Set of model objects.
+        fields (list): Fields names. Defaults to None.
+
+    Returns:
+        dict: Sums of fields values.
+    """
+
+    row = []
+
+    table_fields = [f.name for f in model._meta.fields][1:]
+    row = ['' for _ in table_fields]
+    if fields is None:
+        fields = table_fields
+    for field in fields:
+        try:
+            value = list(objects.aggregate(Sum(field)).values())[0]
+            value = '<span class="decimal">{}</span>'.format(value)
+        except:
+            value = None
+        row[table_fields.index(field)] = value
     return row
 
 
