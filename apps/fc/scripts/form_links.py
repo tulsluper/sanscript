@@ -96,7 +96,7 @@ def f_etrunk():
                 lines = f.readlines()
                 prevTrunkId = None
                 for line in lines:
-                    if line != '\n' and not 'Error:' in line:
+                    if line != '\n' and not 'Error:' in line and not 'No trunk' in line:
                         TrunkId = line[:3].strip()
                         port1 = line[4:7].strip()
                         port2 = line[9:12].strip()
@@ -179,7 +179,6 @@ def f_ftrunk():
                             sw2 = port2record.get('Switch', '')
                             speed = port2record.get('Speed', '').replace('G','').replace('N','').replace('A','')
                             speed = int(speed) if speed else None
-                            print(speed)
                             record_direct = {
                                 'Switch1': sw1,
                                 'Port1': int(port1),
