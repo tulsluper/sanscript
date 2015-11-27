@@ -25,9 +25,15 @@ def vars(request):
         if app in appslist:
             if sa_flag:
                 sa_app = apps.get_app_config('sa')
-                app_pages = sa_app.admin_pages
+                if app_label == 'sa':
+                    app_pages = sa_app.pages
+                else:
+                    app_pages = sa_app.admin_pages
             else:
-                app_pages = app.pages
+                if app_label == 'sa':
+                    app_pages = []
+                else:
+                    app_pages = app.pages
         else:
             app_pages = []
     except LookupError:
