@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
-from apps.sa.defs import sfilter, stable, sum_by_field
+from apps.sa.defs import sfilter, stable, sum_by_field, sum_by_field_to_list
 from django.db.models import Sum
 from .models import *
 from .forms import *
@@ -101,9 +101,11 @@ def hosts(request):
 def hosts_capacity(request):
     objects = sfilter(HostCapacity, request)
     cols, rows = stable(HostCapacity, objects)
+    sum_row = sum_by_field_to_list(HostCapacity, objects, ['Size'])
     data = {
         'cols': cols,
         'rows': rows,
+        'sum_row':sum_row,
     }
     return render(request, 'table.html', data)
 

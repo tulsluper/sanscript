@@ -37,9 +37,12 @@ function exportTableToCSV($table, filename) {
             return $cols.map(function (j, col) {
                 var $col = $(col), text;
                 $col.find("br").replaceWith("<div>{{BR_MARKER}}</div>"); // <br> to line_break
-                text = $col.text().replace(/{{BR_MARKER}}/g, "\r\n"); // <br> to line_break
+                text = $col.text().replace(/{{BR_MARKER}}/g, "\r\n");    // <br> to line_break
                 text = text.trim()
                 text = text.replace('"', '""'); // escape double quotes
+                if (isNaN(text) == false) {
+                    text = text.replace('.', ',');
+                };
                 return text
             }).get().join(tmpColDelim);
         }).get().join(tmpRowDelim)
