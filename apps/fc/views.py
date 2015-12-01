@@ -248,33 +248,68 @@ def change_acknowledge(request):
 def portlog(request):
 
     if request.GET.get('dt') is None:
-        dt10 = str(datetime.now()-timedelta(minutes=10))[:18]
+        dt10 = str(datetime.now()-timedelta(minutes=10))[:17]
         return redirect('/fc/portlog/?dt={}'.format(dt10))
 
     objs = sfilter(Portlog, request)
     cols, rows = stable(Portlog, objs)
 
+    matrix = {}
+    dts = set()
+    for obj in objs:
+        swport = '{} {}'.format(obj.switch, obj.port)
+        if not swport in matrix:
+            matrix[swport] = set()
+        dt = obj.dt.replace(microsecond=0)
+        matrix[swport].add(dt)
+        dts.add(dt)
+    
+    period = [min(dts)+timedelta(seconds=s) for s in range((max(dts)-min(dts)).seconds)]
+    xlist = []
+    for swport, values in matrix.items():
+        xlist.append([swport, ['x' if s in values else '' if s in dts else '-' for s in period]])
+
+    secdict = {}
+    for sec in period:
+        minute = sec.replace(second=0)
+        if not minute in secdict:
+            secdict[minute] = []
+        secdict[minute].append(sec.second)
+    seclist = [[minute, secdict[minute]] for minute in sorted(secdict.keys())]
+
+
+    """
     xdict = {}
     sp_dict = {}
     dt_list = set()
     for obj in objs:
         swport = '{} {}'.format(obj.switch, obj.port)
-        dt = obj.dt.replace(second=0, microsecond=0)
+        dt = obj.dt.replace(microsecond=0)
         dt_list.add(dt)
         if not swport in sp_dict:
             sp_dict[swport] = set()
         sp_dict[swport].add(dt)
 
-    minutes = sorted(dt_list)
+    seconds = sorted(dt_list)
+    xdict = {}
     xlist = []
     for swport, dts in sp_dict.items():
-        xlist.append([swport, ['x' if dt in dts else '' for dt in minutes]])
+        xlist.append([swport, ['x' if dt in dts else '' for dt in seconds]])
+
+    secdict = {}
+    for sec in seconds:
+        minute = sec.replace(second=0)
+        if not minute in secdict:
+            secdict[minute] = []
+        secdict[minute].append(sec.second)
+    seclist = [[minute, secdict[minute]] for minute in sorted(secdict.keys())]
+    """
 
     data = {
         'cols': cols,
         'rows': rows,
         'xlist': xlist,
-        'minutes': minutes,
+        'minutes': seclist,
         'warning': 'no data for this select',
     }
     
