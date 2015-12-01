@@ -46,6 +46,10 @@ class SDicts(models.Model):
     date = models.DateField()
     values = JSONField()
 
+class FDicts(models.Model):
+    date = models.DateField()
+    values = JSONField()
+
 class Integers(models.Model):
     date = models.DateField()
     values = JSONField()

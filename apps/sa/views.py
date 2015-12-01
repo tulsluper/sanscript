@@ -17,6 +17,7 @@ from .defs import create_formset, sfilter, stable
 from django.views.decorators.csrf import csrf_protect
 from apps.da.models import Capacity
 from apps.fc.models import SwitchCommon, PortCommon
+from apps.bc.models import CDicts, PortConfig
 from django.db.models import Sum
 
 
@@ -35,14 +36,25 @@ def prevent_password_save(sender, instance, **kwargs):
 
 
 def dashboard(request):
+    # da
     objs = Capacity.objects.all()
     if objs:
         FormattedUsed = int(list(objs.aggregate(Sum('FormattedUsed')).values())[0])
         FormattedAvailable = int(list(objs.aggregate(Sum('FormattedAvailable')).values())[0])
     else:
         FormattedUsed, FormattedAvailable = 0, 0
+    # fc
     SwitchesCount = SwitchCommon.objects.count()
     PortsCount = PortCommon.objects.count()
+    # bc
+    counters = CDicts.objects.last() 
+    ports = PortConfig.objects.all()
+    tx = counters.values.get('TxElements', {})
+    for swport, values in tx:
+        pass
+    
+    print(tx)
+
     data = {
         'FormattedUsed': FormattedUsed,
         'FormattedAvailable': FormattedAvailable,

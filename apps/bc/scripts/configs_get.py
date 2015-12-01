@@ -15,7 +15,7 @@ connections = load_data(os.path.join(dirpath, 'SwitchConnection.json'), [])
 
 counters = {
     '1.3.6.1.3.94.1.10.1.3': 'connUnitPortType',
-    '1.3.6.1.3.94.1.10.1.17': 'connUnitPortName'
+    '1.3.6.1.3.94.1.10.1.17': 'connUnitPortName',
 }
 
 names =  [x['name'] for x in connections]
@@ -107,8 +107,6 @@ def main():
 
     names =  [x['name'] for x in connections]
     records.sort(key=lambda x: (names.index(x['switchname']), int(x['portindex'])))
-
-    print(records)
 
     dump_data(os.path.join(JSONDIR, 'configs'), records)
 
