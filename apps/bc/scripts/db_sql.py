@@ -6,7 +6,7 @@ import json
 import logging
 from collections import defaultdict
 from datetime import datetime
-from settings import SCALES, INTEGERS, APPNAME, DIFFSDIR
+from settings import SCALES, INTEGERS, APPNAME, DIFFSDIR, BASEDIR
 from defs import load_data, dump_data
 from math import log10, floor
 from san_env import get_apps
@@ -77,6 +77,34 @@ def calc_dicts(udiffs, deltas):
         sdicts[counter] = to_scale(values, deltas, counter, 's')
     return cdicts, pdicts, sdicts
 
+def sum_f_ports(cdicts):
+    #f_list = []
+    #ports = load_data(os.path.join(BASEDIR, 'data/fc/json/port'), [])
+    #for port in ports:
+    #    if port['Type'] == 'F-Port' and not 'NPIV' in port['Comment'] and not 'Trunk' in port['Comment']:
+    #        f_list.append('{} {}'.format(port['Switch'], port['Index']))
+    recs = load_data(os.path.join(BASEDIR, 'data/fc/json/port'), [])
+    f_ports = ['{} {}'.format(r['Switch'], r['Index']) for r in recs if r['Type'] == 'F-Port']
+
+    recs = load_data(os.path.join(BASEDIR, 'data/fc/json/link'), [])
+    link_ports = ['{} {}'.format(r['Switch1'], r['Port1']) for r in recs]
+
+
+    fdicts = {}
+    for counter, swportvalues in cdicts.items():
+        if not counter in fdicts:
+            fdicts[counter] = []
+        for swport, values in swportvalues.items():
+            if swport in f_ports and not swport in link_ports:
+                fdicts[counter].append(values)
+
+    for counter, values in fdicts.items():
+        fdicts[counter] = [sum(x) for x in zip(*values)]
+
+    print(fdicts)
+
+    return fdicts
+
 
 def main():
 
@@ -90,6 +118,8 @@ def main():
     udiffs, xtimes, deltas = sum_udiffs(dirpath)
     cdicts, pdicts, sdicts = calc_dicts(udiffs, deltas)
 
+    fdicts = sum_f_ports(cdicts)
+
     date = datetime.now().date()
     apps = get_apps()
     appname = 'bc'
@@ -99,6 +129,7 @@ def main():
         [cdicts, 'CDicts'],
         [pdicts, 'PDicts'],
         [sdicts, 'SDicts'],
+        [fdicts, 'FDicts'],
         [INTEGERS, 'Integers'],
     ]:
         model = apps.get_model(app_label=APPNAME, model_name=modelname)
