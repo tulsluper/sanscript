@@ -32,7 +32,6 @@ def fix_items(items, line):
     if event == 'debug':
         items[5] = items[4]
         items[4] = ''
-        print(items)
 
     return items
 
@@ -80,7 +79,8 @@ def to_items_fab(switch, lines, last_dt):
 
 def main():
 
-    null_dt = datetime.now()-timedelta(hours=1)
+    p_null_dt = datetime.now()-timedelta(hours=1)
+    f_null_dt = datetime.now()-timedelta(days=365)
     last_dates = load_data(os.path.join(TEMPDIR, 'last_dates'), {})
     portlog = []
     fabriclog = []
@@ -95,7 +95,7 @@ def main():
 
                 last_dt_str = last_dates.get(filename)
                 if last_dt_str is None:
-                    last_dt = null_dt
+                    last_dt = p_null_dt if command == 'portlogdump' else f_null_dt
                 else:
                     last_dt = datetime.strptime(last_dt_str, "%Y-%m-%d %H:%M:%S")
 
@@ -109,6 +109,7 @@ def main():
             dt_str = None if xdate is None else xdate.strftime("%Y-%m-%d %H:%M:%S")
             last_dates['{}.{}'.format(system, command)] = dt_str
     print(len(portlog))
+    print(len(fabriclog))
     dump_data(os.path.join(TEMPDIR, 'last_dates'), last_dates)
     dump_data(os.path.join(JSONDIR, 'portlog'), portlog)
     dump_data(os.path.join(JSONDIR, 'fabriclog'), fabriclog)
