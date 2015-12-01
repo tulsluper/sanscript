@@ -13,6 +13,7 @@ scripts = [
     'logs_collect',
     'logs_parse',
     'logs_save',
+    'logs_clear',
 ]
 
 

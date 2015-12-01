@@ -248,10 +248,30 @@ def change_acknowledge(request):
 def portlog(request):
 
     if request.GET.get('dt') is None:
-        dt10 = str(datetime.now()-timedelta(minutes=10))[:17]
+        try:
+            dt10 = str(Portlog.objects.last().dt)[:16]
+        except:
+            dt10 = '2016-01-01 00:00'
         return redirect('/fc/portlog/?dt={}'.format(dt10))
 
     objs = sfilter(Portlog, request)
+    cols, _ = stable(Portlog, [])
+
+    if len(objs) > 10000:
+        data = {
+            'cols': cols,
+            'warning': 'More than 10000 records. Please refine select.',
+        }
+        return render(request, 'fc/portlog.html', data)
+
+    if not objs:
+        data = {
+            'cols': cols,
+            'warning': 'No data for this select. Please refine select.',
+        }
+    
+        return render(request, 'fc/portlog.html', data)
+
     cols, rows = stable(Portlog, objs)
 
     matrix = {}
@@ -264,7 +284,7 @@ def portlog(request):
         matrix[swport].add(dt)
         dts.add(dt)
     
-    period = [min(dts)+timedelta(seconds=s) for s in range((max(dts)-min(dts)).seconds)]
+    period = [min(dts)+timedelta(seconds=s) for s in range((max(dts)-min(dts)).seconds+1)]
     xlist = []
     for swport, values in matrix.items():
         xlist.append([swport, ['x' if s in values else '' if s in dts else '-' for s in period]])
@@ -278,39 +298,20 @@ def portlog(request):
     seclist = [[minute, secdict[minute]] for minute in sorted(secdict.keys())]
 
 
-    """
-    xdict = {}
-    sp_dict = {}
-    dt_list = set()
-    for obj in objs:
-        swport = '{} {}'.format(obj.switch, obj.port)
-        dt = obj.dt.replace(microsecond=0)
-        dt_list.add(dt)
-        if not swport in sp_dict:
-            sp_dict[swport] = set()
-        sp_dict[swport].add(dt)
-
-    seconds = sorted(dt_list)
-    xdict = {}
-    xlist = []
-    for swport, dts in sp_dict.items():
-        xlist.append([swport, ['x' if dt in dts else '' for dt in seconds]])
-
-    secdict = {}
-    for sec in seconds:
-        minute = sec.replace(second=0)
-        if not minute in secdict:
-            secdict[minute] = []
-        secdict[minute].append(sec.second)
-    seclist = [[minute, secdict[minute]] for minute in sorted(secdict.keys())]
-    """
-
     data = {
         'cols': cols,
         'rows': rows,
         'xlist': xlist,
         'minutes': seclist,
-        'warning': 'no data for this select',
     }
     
     return render(request, 'fc/portlog.html', data)
+
+def fabriclog(request):
+    objs = sfilter(Fabriclog, request)
+    cols, rows = stable(Fabriclog, objs)
+    data = {
+        'cols': cols,
+        'rows': rows,
+    }
+    return render(request, 'table.html', data)
