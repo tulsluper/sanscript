@@ -20,6 +20,7 @@ pages = [
     {'label': 'change_acknowledge', 'view': 'change_acknowledge', 'title': ''},
     {'label': 'stat', 'view': 'stat', 'title': ''},
     {'label': 'portlog', 'view': 'portlog', 'title': 'Portlog'},
+    {'label': 'fabriclog', 'view': 'fabriclog', 'title': 'Fabriclog'},
 ]
 
 commands = [

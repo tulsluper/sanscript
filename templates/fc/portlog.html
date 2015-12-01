@@ -7,8 +7,11 @@ table tr td {padding: 0;}
 
 
 <div class="row fullWidth withTop">
+<div class="columns">
+
 {% if xlist %}
-<table>
+<p><a href="#" id="matrix_button">show matrix</a></p>
+<table id="matrix" style="display:none">
   <tr>
   <td></td>
   {% for minute in minutes %}<td colspan="{{ minute.1|length }}">{{ minute.0 }}</td>{% endfor%}
@@ -103,6 +106,7 @@ table tr td {padding: 0;}
 
 
 </div>
+</div>
 {% endblock %}
 
 {% block script %}
@@ -115,6 +119,12 @@ table tr td {padding: 0;}
     $(".export").on('click', function (event) {
       exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'_'+$('#last_update').text()+'.csv']);
     });
+// show/hide matrix
+    $("#matrix_button").click(function() {
+      $("#matrix").toggle( "slow" );
+      return false;
+    });
+
 </script>
 {% endblock %}
 
