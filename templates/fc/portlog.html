@@ -11,8 +11,14 @@ table tr td {padding: 0;}
 <table>
   <tr>
   <td></td>
-  {% for minute in minutes %}<td>{{ minute }}</td>{% endfor%}
+  {% for minute in minutes %}<td colspan="{{ minute.1|length }}">{{ minute.0 }}</td>{% endfor%}
   </tr>
+
+  <tr>
+  <td></td>
+  {% for minute in minutes %}{% for second in minute.1 %}<td>{{ second }}</td>{% endfor%}{% endfor%}
+  </tr>
+
 {% for row in xlist %}
   <tr>
     <td>{{ row.0 }}</td>
