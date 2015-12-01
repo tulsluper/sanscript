@@ -308,6 +308,13 @@ def portlog(request):
     return render(request, 'fc/portlog.html', data)
 
 def fabriclog(request):
+    if request.GET.get('dt') is None:
+        try:
+            dt10 = str(Portlog.objects.last().dt)[:7]
+        except:
+            dt10 = str(datetime.now())[:7]
+        return redirect('/fc/fabriclog/?dt={}'.format(dt10))
+
     objs = sfilter(Fabriclog, request)
     cols, rows = stable(Fabriclog, objs)
     data = {
