@@ -47,13 +47,6 @@ def dashboard(request):
     SwitchesCount = SwitchCommon.objects.count()
     PortsCount = PortCommon.objects.count()
     # bc
-    counters = CDicts.objects.last() 
-    ports = PortConfig.objects.all()
-    tx = counters.values.get('TxElements', {})
-    for swport, values in tx:
-        pass
-    
-    print(tx)
 
     data = {
         'FormattedUsed': FormattedUsed,
