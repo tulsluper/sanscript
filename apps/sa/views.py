@@ -17,7 +17,7 @@ from .defs import create_formset, sfilter, stable
 from django.views.decorators.csrf import csrf_protect
 from apps.da.models import Capacity
 from apps.fc.models import SwitchCommon, PortCommon
-from apps.bc.models import CDicts, PortConfig
+from apps.bc.models import SDicts, CDicts, PortConfig, Integers
 from django.db.models import Sum
 
 
@@ -46,13 +46,27 @@ def dashboard(request):
     # fc
     SwitchesCount = SwitchCommon.objects.count()
     PortsCount = PortCommon.objects.count()
+
     # bc
+    try:
+        tx_elements = SDicts.objects.last().values.get('TxElements', [])[-1]
+        integer = Integers.objects.last().values['s']['TxElements']
+        
+        ports_values = CDicts.objects.last().values.get('TxElements')
+        active_ports_number = len([1 for xlist in ports_values.values() if xlist[-1]])
+    except:
+        tx_elements = None
+        integer = None
+        active_ports_number = None
 
     data = {
         'FormattedUsed': FormattedUsed,
         'FormattedAvailable': FormattedAvailable,
         'SwitchesCount': SwitchesCount,
         'PortsCount': PortsCount,
+        'tx_elements': tx_elements,
+        'integer': integer,
+        'active_ports_number': active_ports_number,
     }
     return render(request, 'dashboard.html', data)
 
