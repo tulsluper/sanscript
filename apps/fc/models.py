@@ -1,12 +1,19 @@
 from django.db import models
 from jsonfield import JSONField
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 # ==============================================================================
 
+def spacecheck(value):
+    if ' ' in value:
+        raise ValidationError('Field cannot contain spaces')
+
+# ==============================================================================
+
 class FabricConnection(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30, unique=True, validators=[spacecheck])
     address = models.CharField(max_length=256, unique=True)
     username = models.CharField(max_length=40)
     password = models.CharField(max_length=40, null=True, blank=True)
@@ -18,7 +25,7 @@ class FabricConnection(models.Model):
 
 
 class SwitchConnection(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30, unique=True, validators=[spacecheck])
     address = models.CharField(max_length=256, unique=True)
     username = models.CharField(max_length=40)
     password = models.CharField(max_length=40, null=True, blank=True)
