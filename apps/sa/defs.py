@@ -61,8 +61,12 @@ def sfilter(model, request):
         query = Q()
         for key, value in request.GET.items():
             if value:
-                key = '{}__contains'.format(key)
                 value = value.replace('+', ' ')
+                if value[0] == '[' and value[-1] == ']':
+                    value = value[1:-1]
+                else:
+                    key = '{}__contains'.format(key)
+
                 if '&&' in value or '||' in value:
                     query.add(
                         set_op(or_, key, [set_op(and_, key, z) for z in [[ i.strip() for i in x.split('&&')] for x in value.split('||')]]),
