@@ -1,9 +1,6 @@
 {% extends "base.html" %}
-{% load extras %}
 {% block content %}
-<style>
-table tr td {padding: 0;}
-</style>
+<div id="item_name" style="display: none">{{ item_name }}</div>
 
 <div class="row fullWidth withTop">
 <div class="large-6 columns">
@@ -14,33 +11,10 @@ table tr td {padding: 0;}
 </div>
 </div>
 
-
 <div class="row fullWidth withTop">
 <div class="columns">
-
-{% if xlist %}
-<p><a href="#" id="matrix_button">show matrix</a></p>
-<table id="matrix" style="display:none">
-  <tr>
-  <td></td>
-  {% for minute in minutes %}<td colspan="{{ minute.1|length }}">{{ minute.0 }}</td>{% endfor%}
-  </tr>
-
-  <tr>
-  <td></td>
-  {% for minute in minutes %}{% for second in minute.1 %}<td>{{ second }}</td>{% endfor%}{% endfor%}
-  </tr>
-
-{% for row in xlist %}
-  <tr>
-    <td>{{ row.0 }}</td>
-  {% for cell in row.1 %}
-    <td>{% if cell %}{{ cell }}{% else %}&nbsp;{% endif %}</td>
-  {% endfor %}
-  </tr>
-{% endfor %}
-</table>
-{% endif %}
+  <div id="page_label" style="display:none">{{ page_label }}</div>
+  <div id="last_update" style="display:none">{{ last_update|date:"Y-m-d-H:i"}}</div>
 
 
 {% if cols %}
@@ -112,10 +86,10 @@ table tr td {padding: 0;}
   </div>
 {% endif %}
 
-
-
 </div>
 </div>
+
+
 {% endblock %}
 
 {% block script %}
@@ -128,11 +102,7 @@ table tr td {padding: 0;}
     $(".export").on('click', function (event) {
       exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'_'+$('#last_update').text()+'.csv']);
     });
-// show/hide matrix
-    $("#matrix_button").click(function() {
-      $("#matrix").toggle( "slow" );
-      return false;
-    });
+
 
     $('#container1').highcharts({
         chart: {
@@ -164,7 +134,7 @@ table tr td {padding: 0;}
             name: "Brands",
             colorByPoint: true,
             data: [
-              {% for rec in events %}
+              {% for rec in actions %}
               {
                 name: "{{ rec.0 }}",
                 y: {{ rec.1 }}
@@ -182,7 +152,7 @@ table tr td {padding: 0;}
             type: 'pie'
         },
         title: {
-            text: 'Actions'
+            text: 'Ports'
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -217,4 +187,5 @@ table tr td {padding: 0;}
 
 </script>
 {% endblock %}
+
 

@@ -274,6 +274,20 @@ def portlog(request):
 
     cols, rows = stable(Portlog, objs)
 
+
+    events = {}
+    swports = {}
+    for obj in objs:
+        event = '{} {}'.format(obj.task, obj.event)
+        swport = '{} {}'.format(obj.switch, obj.port)
+        if not event in events:
+            events[event] = 0
+        events[event] += 1
+        if not swport in swports:
+            swports[swport] = 0
+        swports[swport] += 1
+
+
     matrix = {}
     dts = set()
     for obj in objs:
@@ -303,10 +317,13 @@ def portlog(request):
         'rows': rows,
         'xlist': xlist,
         'minutes': seclist,
+        'events': sorted(list(events.items()), key=itemgetter(1), reverse=True),
+        'swports': sorted(list(swports.items()), key=itemgetter(1), reverse=True),
     }
     
     return render(request, 'fc/portlog.html', data)
 
+from operator import itemgetter
 def fabriclog(request):
     if request.GET.get('dt') is None:
         try:
@@ -317,8 +334,23 @@ def fabriclog(request):
 
     objs = sfilter(Fabriclog, request)
     cols, rows = stable(Fabriclog, objs)
+
+    actions = {}
+    swports = {}
+    for obj in objs:
+        action = obj.action.split(';')[0]
+        swport = '{} {}'.format(obj.switch, obj.Port)
+        if not action in actions:
+            actions[action] = 0
+        actions[action] += 1
+        if not swport in swports:
+            swports[swport] = 0
+        swports[swport] += 1
+
     data = {
         'cols': cols,
         'rows': rows,
+        'actions': sorted(list(actions.items()), key=itemgetter(1), reverse=True),
+        'swports': sorted(list(swports.items()), key=itemgetter(1), reverse=True),
     }
-    return render(request, 'table.html', data)
+    return render(request, 'fc/fabriclog.html', data)
