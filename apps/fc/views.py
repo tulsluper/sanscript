@@ -311,6 +311,13 @@ def portlog(request):
         secdict[minute].append(sec.second)
     seclist = [[minute, secdict[minute]] for minute in sorted(secdict.keys())]
 
+    for swport in swports.copy():
+        try:
+            switch, index = swport.split()
+            portname = PortCommon.objects.get(Switch=switch, Index=index).portName
+            swports['{} {}'.format(swport, portname)] = swports.pop(swport)
+        except:
+            pass
 
     data = {
         'cols': cols,
@@ -333,6 +340,14 @@ def fabriclog(request):
         return redirect('/fc/fabriclog/?dt={}'.format(dt10))
 
     objs = sfilter(Fabriclog, request)
+    cols, _ = stable(Portlog, [])
+
+    if not objs:
+        data = {
+            'cols': cols,
+            'warning': 'No data for this select. Please refine select.',
+        }
+
     cols, rows = stable(Fabriclog, objs)
 
     actions = {}
@@ -346,6 +361,14 @@ def fabriclog(request):
         if not swport in swports:
             swports[swport] = 0
         swports[swport] += 1
+    
+    for swport in swports.copy():
+        try:
+            switch, index = swport.split()
+            portname = PortCommon.objects.get(Switch=switch, Index=index).portName
+            swports['{} {}'.format(swport, portname)] = swports.pop(swport)
+        except:
+            pass
 
     data = {
         'cols': cols,

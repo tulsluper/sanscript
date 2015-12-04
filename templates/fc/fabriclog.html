@@ -2,6 +2,7 @@
 {% block content %}
 <div id="item_name" style="display: none">{{ item_name }}</div>
 
+{% if actions or swports %}
 <div class="row fullWidth withTop">
 <div class="large-6 columns">
 <div id="container1"></div>
@@ -10,6 +11,7 @@
 <div id="container2"></div>
 </div>
 </div>
+{% endif %}
 
 <div class="row fullWidth withTop">
 <div class="columns">
