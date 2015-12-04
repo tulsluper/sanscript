@@ -249,7 +249,7 @@ def portlog(request):
 
     if request.GET.get('dt') is None:
         try:
-            dt10 = str(Portlog.objects.last().dt)[:16]
+            dt10 = str(Portlog.objects.last().dt)[:19]
         except:
             dt10 = '2016-01-01 00:00'
         return redirect('/fc/portlog/?dt={}'.format(dt10))
