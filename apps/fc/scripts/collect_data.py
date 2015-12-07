@@ -12,6 +12,7 @@ logfile = basepath + '.log'
 scripts = [
     'prepare_data_dirs',
     'sort_systems',
+    'clean_old_files',
 
     'collect',
     'collect_ports',
