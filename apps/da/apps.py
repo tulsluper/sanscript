@@ -21,6 +21,7 @@ pages = [
     {'label': 'hosts_capacity', 'view': 'hosts_capacity', 'title': 'HostsCapacity'},
     {'label': 'changes', 'view': 'changes', 'title': 'Changes'},
     {'label': 'change_acknowledge', 'view': 'change_acknowledge', 'title': ''},
+    {'label': 'change_delete', 'view': 'change_delete', 'title': ''},
 ]
 
 commands = [

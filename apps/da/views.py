@@ -152,3 +152,12 @@ def change_acknowledge(request):
     }
     return render(request, 'da/change_acknowledge.html', data)
 
+
+@csrf_protect
+def change_delete(request):
+    id = request.GET.get('id')
+    obj = VolumeChange.objects.get(id=id)
+    objs = VolumeChange.objects.filter(Storage=obj.Storage, Uid=obj.Uid, From=obj.From, Till=obj.Till)
+    objs.delete()
+    return redirect('/da/changes/')
+
