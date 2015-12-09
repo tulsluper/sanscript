@@ -11,13 +11,6 @@ from defs import load_data, dump_data
 from settings import PROCESSES, TEMPFILE, DIFFSDIR
 
 import logging
-logpath = os.path.join(os.path.dirname(__file__), 'run.log')
-logformat = '%(asctime)s %(levelname)s %(message)s'
-logging.basicConfig(
-    filename=logpath,
-    level=logging.INFO,
-    format=logformat
-)
 
 
 dirpath = os.path.dirname(os.path.realpath(__file__))
@@ -71,6 +64,7 @@ def snmpwalk(connection, counters=counters):
                     value = value.prettyPrint()
                     value = int(value.replace(' ', ''), 16)
                     values['%s %s %s' %(name, port, counter)] = value
+
     return values
 
 
@@ -79,7 +73,7 @@ def multisnmpwalk(oids, connections, processes):
     run snmpwalk processes and concatenate results;
     """
     pool = Pool(processes=processes)
-    values = pool.map(snmpwalk, connections)
+    values = pool.map(snmpwalk, connections,)
     values = dict(chain(*map(dict.items, values)))
     return time(), values
 
