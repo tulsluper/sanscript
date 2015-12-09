@@ -3,7 +3,7 @@
 <div class="row fullWidth withTop">
 <div class="columns">
   <form action="." method="post">{% csrf_token %}
-    <textarea name="text">{% for line in lines %}{{ line }}{% endfor %}</textarea>
+    <textarea name="text" style="height:200px">{% for line in lines %}{{ line }}{% endfor %}</textarea>
     <input type="submit" value="Save" class="button small">
   </form>
 </div>
