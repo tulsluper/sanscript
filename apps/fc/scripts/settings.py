@@ -38,6 +38,7 @@ S_COMMANDS = [
     ['trunkshow', 'trunkshow'],
     ['porttrunkarea', 'porttrunkarea --show trunk'],
     ['nsshow', 'nsshow -r -t'],
+    ['licenseport', 'licenseport --show'],
 ]
 P_COMMANDS = [
     ['portshow', 'portshow'],
@@ -53,7 +54,8 @@ PARSERS = {
     'version': ['version'],
     'nsshow': ['name'],
     'sfpshow': ['sfp'],
-    'portshow': ['portshow']
+    'portshow': ['portshow'],
+    'licenseport': ['licenseport'],
 }
 
 MODELS = [
