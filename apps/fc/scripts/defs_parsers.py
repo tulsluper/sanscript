@@ -225,3 +225,52 @@ def p_portshow(switch, lines):
                     record[key].append(value)
     records.append(record)
     return records
+
+
+def p_licenseport(lines, system):
+
+    license = {'Switch': system}
+
+    if len(lines) == 1:
+        return license
+
+    assigned_flag = False
+    ports_assigned = []
+    not_assigned_flag = False
+    not_assigned_ports = []
+
+    reservations = ''
+    assignments_offline = ''
+
+    for line in lines:
+
+        if assigned_flag == True:
+            if not 'None' in line:
+                ports_assigned += [x.strip() for x in line.split(',')]
+            assigned_flag = False
+
+        if 'Ports assigned' in line:
+            assigned_flag = True
+
+        if not_assigned_flag == True:
+            if not 'None' in line:
+                not_assigned_ports += [x.strip() for x in line.split(',')]
+            not_assigned_flag = False
+
+        if 'Ports not assigned' in line:
+            not_assigned_flag = True
+
+        words = line.split()
+        if len(words) > 1:
+            if words[1] == 'license':
+                if words[2] == 'reservations':
+                    reservations = words[0]
+                if words[2] == 'assignments':
+                    assignments_offline = words[0]
+
+    license['ports_assigned'] = ports_assigned
+    license['not_assigned_ports'] = not_assigned_ports
+    license['reservations'] = reservations
+    license['assignments_offline'] = assignments_offline
+
+    return [license,]
