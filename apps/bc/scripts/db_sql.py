@@ -101,8 +101,6 @@ def sum_f_ports(cdicts):
     for counter, values in fdicts.items():
         fdicts[counter] = [sum(x) for x in zip(*values)]
 
-    print(fdicts)
-
     return fdicts
 
 
