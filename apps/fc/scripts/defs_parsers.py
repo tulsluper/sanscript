@@ -227,12 +227,12 @@ def p_portshow(switch, lines):
     return records
 
 
-def p_licenseport(lines, system):
+def p_licenseport(system, lines):
 
     license = {'Switch': system}
 
     if len(lines) == 1:
-        return license
+        return [license]
 
     assigned_flag = False
     ports_assigned = []
@@ -273,4 +273,4 @@ def p_licenseport(lines, system):
     license['reservations'] = reservations
     license['assignments_offline'] = assignments_offline
 
-    return [license,]
+    return [license]
