@@ -42,7 +42,7 @@ def capacity_history(request):
         'storages': storages,
         'dates': dates,
         'fieldsvalues': fieldsvalues,
-        'visible_series': ['FormattedUsed'],
+        'visible_series': ['FormattedPresented'],
     }
     return render(request, 'da/capacity_history.html', data)
 
