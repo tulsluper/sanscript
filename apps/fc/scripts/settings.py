@@ -23,7 +23,7 @@ logging.basicConfig(
     format='%(asctime)s %(module)s %(levelname)s %(message)s'
 )
 
-PROCESSES = 4 # number of processes for multiprocessing
+PROCESSES = 16 # number of processes for multiprocessing
 
 F_COMMANDS = [
     ['zoneshow', 'zoneshow'],
