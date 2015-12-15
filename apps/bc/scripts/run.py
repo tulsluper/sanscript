@@ -73,7 +73,7 @@ def multisnmpwalk(oids, connections, processes):
     run snmpwalk processes and concatenate results;
     """
     pool = Pool(processes=processes)
-    values = pool.map(snmpwalk, connections,)
+    values = pool.imap(snmpwalk, connections,)
     values = dict(chain(*map(dict.items, values)))
     return time(), values
 
