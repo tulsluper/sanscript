@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row fullWidth withTop">
+<div class="columns">
+  {% if message %}
+  <div data-alert class="alert-box {{ message.type }} radius">
+    {{ message.text }}
+    <a href="#" class="close">&times;</a>
+  </div>
+  {% endif %}
+  <form action="." method="post">{% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Send" class="button small">
+  </form>
+</div>
+</div>
+{% endblock %}
