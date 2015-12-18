@@ -120,7 +120,7 @@ def test_email_view(request):
     else:
         form = EmailForm(request.POST)
         if form.is_valid():
-            to_email = form.cleaned_data['from_email']
+            to_email = form.cleaned_data['to_email']
             from_email = form.cleaned_data['from_email']
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
