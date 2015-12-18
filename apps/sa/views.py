@@ -19,6 +19,10 @@ from apps.da.models import Capacity
 from apps.fc.models import SwitchCommon, PortCommon
 from apps.bc.models import SDicts, CDicts, PortConfig, Integers
 from django.db.models import Sum
+from .forms import *
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 
 
 def prevent_password_save(sender, instance, **kwargs):
@@ -102,6 +106,29 @@ def settings_view(request):
         'lines': lines,
     }
     return render(request, 'settings.html', data)
+
+
+@staff_member_required
+def test_email_view(request):
+    message = None
+    if request.method == 'GET':
+        form = EmailForm(initial={
+            'from_email': settings.DEFAULT_FROM_EMAIL,
+            'subject': 'SANscript test email',
+            'message': 'Hello!',
+        })
+    else:
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['admin@example.com'])
+                message = {'text': 'email sent successfully', 'type': 'success'}
+            except Exception as e:
+                message = {'text': 'Exception: {}'.format(e), 'type': 'warning'}
+    return render(request, "test_email.html", {'form': form, 'message': message})
 
 
 @staff_member_required

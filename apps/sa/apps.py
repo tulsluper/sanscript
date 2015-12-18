@@ -3,6 +3,7 @@ from django.apps import AppConfig
 
 pages = [
     {'label': 'settings', 'view': 'settings_view', 'title': 'settings'},
+    {'label': 'test_email', 'view': 'test_email_view', 'title': 'test email'},
 ]
 admin_pages = [
     {'label': 'configs', 'view': 'v_configs', 'title': 'configs'},
