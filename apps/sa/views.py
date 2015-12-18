@@ -120,11 +120,12 @@ def test_email_view(request):
     else:
         form = EmailForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
+            to_email = form.cleaned_data['from_email']
             from_email = form.cleaned_data['from_email']
+            subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email, ['admin@example.com'])
+                send_mail(subject, message, from_email, [to_email])
                 message = {'text': 'email sent successfully', 'type': 'success'}
             except Exception as e:
                 message = {'text': 'Exception: {}'.format(e), 'type': 'warning'}
