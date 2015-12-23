@@ -56,7 +56,7 @@ class Switch(models.Model):
     Switch = models.CharField(max_length=30)
     switchName = models.CharField(max_length=30)
     switchType = models.CharField(max_length=5)
-    switchState = models.CharField(max_length=6)
+    switchState = models.CharField(max_length=7)
     switchMode = models.CharField(max_length=19)
     switchRole = models.CharField(max_length=11)
     switchDomain = models.CharField(max_length=3)
