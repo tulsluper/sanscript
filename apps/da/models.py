@@ -183,7 +183,7 @@ class TPARVLUN(models.Model):
     IsSubLUN = models.CharField(max_length=8)
     Lun = models.CharField(max_length=8)
     MonIntervalSecs = models.CharField(max_length=4)
-    Multipathing = models.CharField(max_length=8)
+    Multipathing = models.CharField(max_length=16)
     Port = models.CharField(max_length=5)
     Status = models.CharField(max_length=8)
     Type = models.CharField(max_length=8)
