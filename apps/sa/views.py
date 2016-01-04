@@ -53,15 +53,12 @@ def dashboard(request):
 
     # bc
     try:
-        tx_elements = SDicts.objects.last().values.get('TxElements', [])[-1]
-        integer = Integers.objects.last().values['s']['TxElements']
-        
-        ports_values = CDicts.objects.last().values.get('TxElements')
-        active_ports_number = len([1 for xlist in ports_values.values() if xlist[-1]])
+        data = Last.objects.last()
     except:
-        tx_elements = None
-        integer = None
-        active_ports_number = None
+        data = {}
+    tx_elements = data.get('tx_elements')
+    integer = data.get('integer')
+    active_ports_number = data.get('active_ports_number')
 
     data = {
         'FormattedUsed': FormattedUsed,
