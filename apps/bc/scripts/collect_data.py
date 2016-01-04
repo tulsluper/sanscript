@@ -12,6 +12,7 @@ logfile = basepath + '.log'
 scripts = [
     'run',
     'db_sql',
+    'sum_records',
 ]
 
 @run_with_locker(lockfile)

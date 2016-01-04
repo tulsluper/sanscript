@@ -60,3 +60,6 @@ class PortConfig(models.Model):
     portname = models.CharField(max_length=60)
     porttype = models.IntegerField()
 
+
+class Last(models.Model):
+    values = JSONField()
