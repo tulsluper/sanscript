@@ -17,7 +17,7 @@ from .defs import create_formset, sfilter, stable
 from django.views.decorators.csrf import csrf_protect
 from apps.da.models import Capacity
 from apps.fc.models import SwitchCommon, PortCommon
-from apps.bc.models import SDicts, CDicts, PortConfig, Integers
+from apps.bc.models import SDicts, CDicts, PortConfig, Integers, Last
 from django.db.models import Sum
 from .forms import *
 from django.core.mail import send_mail, BadHeaderError
