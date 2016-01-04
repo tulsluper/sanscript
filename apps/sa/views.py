@@ -53,12 +53,12 @@ def dashboard(request):
 
     # bc
     try:
-        data = Last.objects.last()
+        obj = Last.objects.last()
     except:
-        data = {}
-    tx_elements = data.get('tx_elements')
-    integer = data.get('integer')
-    active_ports_number = data.get('active_ports_number')
+        obj = {}
+    tx_elements = obj.values.get('tx_elements')
+    integer = obj.values.get('integer')
+    active_ports_number = obj.values.get('active_ports_number')
 
     data = {
         'FormattedUsed': FormattedUsed,
