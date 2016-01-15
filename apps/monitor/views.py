@@ -37,9 +37,8 @@ def home(request):
     return render(request, 'home.html')
 
 
-def san_send_email(to_email):
+def san_send_email(to_email, message):
     subject = "SANscript Monitor"
-    message = "Hello"
     from_email = settings.DEFAULT_FROM_EMAIL
     try:
         send_mail(subject, message, from_email, [to_email])
@@ -51,8 +50,7 @@ def san_send_email(to_email):
     return success, message
 
 
-def san_write_log(filepath):
-    message = "Hello"
+def san_write_log(filepath), message:
     if not filepath.startswith('/'):
         filepath = os.path.join('apps/monitor/logs', filepath)
     try:
@@ -74,9 +72,9 @@ def perform_actions(actions, message):
         target = action.target
         success = 'success'
         if method == 'email':
-            success, message = san_send_email(target)
+            success, message = san_send_email(target, message)
         elif method == 'log':
-            success, message = san_write_log(target)
+            success, message = san_write_log(target, message)
 
         results.append({
             'method': method,
