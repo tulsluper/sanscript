@@ -97,14 +97,9 @@
       Objects
       <hr>
 
-      {% if object_filter_terms %}
       <div>MODEL: {{ rule.object_item.table }}; FILTER: {{ object_filter_terms }}; OPERATOR: {{ rule.object_terms_oper }}</div>
       <br>
       <div class="callout alert-box {% if object_hits %}success{% else %}secondary{% endif %}">MATCHES: {{ object_hits }}</div>
-      {% else %}
-      <div class="callout alert-box warning">No object terms (&uarr;)</div>
-
-      {% endif %}
 
 
 

@@ -67,12 +67,12 @@ def san_write_log(filepath):
     return success, message
 
 
-def perform_actions(actions):
+def perform_actions(actions, message):
     results = []
     for action in actions:
         method = action.method
         target = action.target
-        message, success = 'xxx', 'success'
+        success = 'success'
         if method == 'email':
             success, message = san_send_email(target)
         elif method == 'log':
@@ -88,6 +88,8 @@ def perform_actions(actions):
 
 object_conditions = [
     ('', ''),
+    ('gt', 'greater than'),
+    ('lt', 'less than'),
     ('exact', 'exact'),
     ('iexact', 'iexact'),
     ('contains', 'contains'),
@@ -224,12 +226,17 @@ def rule_check(rule):
     data = {}
     objs = None
 
-    if rule.object_item and rule.objectterm_set.count():
-        objs, filters = filter_by_terms(
-            apps.get_model(*rule.object_item.table.split()).objects,
-            rule.objectterm_set.all(),
-            rule.object_terms_oper,
-        )
+    if rule.object_item:
+        if rule.objectterm_set.count():
+            objs, filters = filter_by_terms(
+                apps.get_model(*rule.object_item.table.split()).objects,
+                rule.objectterm_set.all(),
+                rule.object_terms_oper,
+            )
+        else:
+            objs = apps.get_model(*rule.object_item.table.split()).objects.all()
+            filters = None
+
         data.update({
             'object_filter_terms': filters,
             'object_hits': objs.count(),
@@ -254,11 +261,10 @@ def rule_check(rule):
         data.update({
             'check_message': message,
         })
-
     
  
     if objs and rule.action_set.count():
-        actions = perform_actions(rule.action_set.all())
+        actions = perform_actions(rule.action_set.all(), message)
         data.update({
             'actions': actions,
         })
