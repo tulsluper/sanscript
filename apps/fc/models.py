@@ -182,6 +182,9 @@ class Sfp(models.Model):
     State_transitions = models.CharField(max_length=3)
     Last_poll_time = models.CharField(max_length=28)
 
+    def __str__(self):
+        return '{} {}'.format(self.Switch, self.uPort)
+
 
 class Name(models.Model):
     Switch = models.CharField(max_length=30)
