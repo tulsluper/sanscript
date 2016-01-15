@@ -50,7 +50,7 @@ def san_send_email(to_email, message):
     return success, message
 
 
-def san_write_log(filepath), message:
+def san_write_log(filepath, message):
     if not filepath.startswith('/'):
         filepath = os.path.join('apps/monitor/logs', filepath)
     try:
