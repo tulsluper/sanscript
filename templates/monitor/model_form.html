@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="columns">
+    <form method="post" action="">{% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="button small" value="Save">
+      {% if model %}
+      <a href="/monitor/model_unregister?id={{ model.id }}" class="button small alert right">Unregister</a>
+      {% endif %}
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+

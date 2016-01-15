@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="columns">
+    <a href="/monitor/model_register/" class="button small">Register model</a>
+    {% for obj in objectitems %}
+        <p><a href="/monitor/model_edit?id={{ obj.id }}">{{ obj.name }} = {{ obj.table }}</a></p>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+

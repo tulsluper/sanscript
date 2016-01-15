@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <style>
+      body, input, select {font-size: 85%}
+      table tr:nth-of-type(even) {
+        background-color: transparent !important;
+      }
+      tr td {padding: 3px}
+      td select,
+      td input[type='radio'],
+      td input[type='text'],
+      td input[type='number'] {margin-bottom:0; font-size:100%; height:2rem;}
+
+      .s0 {background:red;} /* Emergency */
+      .s1 {background:red;} /* Alert */
+      .s2 {background:orange;} /* Critical */
+      .s3 {background:orange;} /* Error */
+      .s4 {background:yellow;} /* Warning */
+      .s5 {background:blue;} /* Notice */
+      .s6 {background:green;} /* Informational */
+      .s7 {background:green;} /* Debug */
+    </style>
+
+<div class="row">
+  <div class="columns">
+    <a href="/monitor/rule_empty/" class="button small">Create rule</a>
+
+{% for rule in rules %}
+  <p>
+      <a href="/{{ app_label }}/rule?id={{ rule.id }}">{% if rule.name %}{{ rule.name }}{% else %}{{ rule.id }}{% endif %}</a>
+  </p>
+{% endfor %}
+  </div>
+</div>
+
+{% endblock %}
