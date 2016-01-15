@@ -55,10 +55,10 @@ def dashboard(request):
     try:
         obj = Last.objects.last()
     except:
-        obj = {}
-    tx_elements = obj.values.get('tx_elements')
-    integer = obj.values.get('integer')
-    active_ports_number = obj.values.get('active_ports_number')
+        obj = None
+    tx_elements = obj.values.get('tx_elements') if obj else None
+    integer = obj.values.get('integer') if obj else None
+    active_ports_number = obj.values.get('active_ports_number') if obj else None
 
     data = {
         'FormattedUsed': FormattedUsed,
