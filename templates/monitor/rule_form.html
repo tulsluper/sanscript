@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <style>
+      body, input, select {font-size: 85%}
+      table tr:nth-of-type(even) {
+        background-color: transparent !important;
+      }
+      tr td{padding: 2px; vertical-align:bottom; text-align:center}
+      td select,
+      td input[type='radio'],
+      td input[type='text'],
+      td input[type='number'] {margin-bottom:0; font-size:100%; height:2rem;}
+
+      td input[type='checkbox'] {margin-bottom:0; font-size:100%; height:1.2rem; margin:0 auto;}
+
+      ul {margin-bottom:0}
+
+      ul li { display: inline; }
+      ul li { display: inline-block; }
+      #id_rule-name {margin-bottom:0 }
+    </style>
+
+
+
+<form method="post" action="">{% csrf_token %}
+
+<div class="row fullWidth">
+  <div class="columns">
+    {{ rule_form.non_form_errors.as_ul }}
+    {{ rule_form.management_form }}
+    {{ rule_form.id }}
+    {{ rule_form.name }}
+  </div>
+</div>
+
+<hr>
+
+<div class="row fullWidth">
+  <div class="large-4 medium-6 columns">
+    <div class="callout">
+    Objects
+    <hr>
+    {{ rule_form.object_item }}
+    {% with formset1 as formset %}
+      {% include 'monitor/formset.html' %}
+    {% endwith %}
+    <div class="callout">
+      {{ rule_form.object_terms_oper }}
+    </div>
+    </div>
+  </div>
+  <div class="large-4 medium-6 columns">
+    <div class="callout">
+    Triggers
+    <hr>
+    {{ rule_form.trigger_item }}
+    {% with formset2 as formset %}
+      {% include 'monitor/formset.html' %}
+    {% endwith %}
+    {{ rule_form.trigger_terms_oper }}
+    </div>
+  </div>
+  <div class="large-4 medium-6 columns">
+    <div class="callout">
+    Actions
+    <hr>
+    {{ rule_form.severity }}
+    {% with action_formset as formset %}
+      {% include 'monitor/formset.html' %}
+    {% endwith %}
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row fullWidth noBottom">
+  <div class="columns">
+    <input type="submit" class="button small noBottom" value="Save"> 
+    <a href="/monitor/rule?id={{ rule.id }}&check=true#x" id="check" class="button small noBottom">Check</a>
+    <a href="delete" class="button small noBottom alert right">Delete</a>
+  </div>
+</div>
+
+
+</form>
+
+{% if check_flag %}
+
+<hr>
+<a name="x"></a>
+<div class="row fullWidth">
+  <div class="large-4 medium-6 columns">
+    <div class="callout">
+      Objects
+      <hr>
+
+      {% if object_filter_terms %}
+      <div>MODEL: {{ rule.object_item.table }}; FILTER: {{ object_filter_terms }}; OPERATOR: {{ rule.object_terms_oper }}</div>
+      <br>
+      <div class="callout alert-box {% if object_hits %}success{% else %}secondary{% endif %}">MATCHES: {{ object_hits }}</div>
+      {% else %}
+      <div class="callout alert-box warning">No object terms (&uarr;)</div>
+
+      {% endif %}
+
+
+
+    </div>
+  </div>
+
+  <div class="large-4 medium-6 columns">
+    <div class="callout">
+      Triggers
+      <hr>
+      {% if trigger_filter_terms %}
+      <div>MODEL: {{ rule.trigger_item.table }}; FILTER: {{ trigger_filter_terms }}; OPERATOR: {{ rule.trigger_terms_oper }}</div>
+      <br>
+      <div class="callout alert-box {% if trigger_hits %}success{% else %}secondary{% endif %}">MATCHES: {{ trigger_hits }}</div>
+      {% endif %}
+
+      {% if not object_hits  %}
+      <div class="callout alert-box warning">No object matches (&larr;)</div>
+      {% endif %}
+
+      {% if not rule.triggerterm_set.count %}
+      <div class="callout alert-box warning">No trigger terms (&uarr;)</div>
+      {% endif %}
+
+    </div>
+  </div>
+
+  <div class="large-4 medium-6 columns">
+    <div class="callout">
+      Actions
+      <hr>
+
+      {% if check_message  %}
+      <div >{{ check_message }}</div>
+      <br>
+      {% endif %}
+
+      {% if not trigger_hits  %}
+      <div class="callout alert-box warning">No trigger matches (&larr;)</div>
+      {% endif %}
+
+      {% if not rule.action_set.count %}
+      <div class="callout alert-box warning">No actions (&uarr;)</div>
+      {% endif %}
+
+      {% for action in actions %}
+        <div class="callout alert-box {{ action.success }}">{{ action.method }} {{ action.target }} - {{ action.message }}</div>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endif %}
+
+<br>
+
+{% csrf_token %}
+{% endblock %}
+
+
+{% block script %}
+<script>
+$('select[name="rule-object_item"]').each(function() {
+    //Store old value
+    $(this).data('lastValue', $(this).val());
+});
+$('select[name="rule-object_item"]').on('change', function(e) {
+    var lastRole = $(this).data('lastValue');
+    if (confirm("All terms will be removed")) {
+    $.ajax({
+        type: "POST",
+        url: "/monitor/rule?id={{ rule_id }}",
+        data: {
+            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+            object_id: this.value,
+        },
+        success: function(data) {
+            window.location.replace("/monitor/rule?id={{ rule_id }}");
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            alert("Error: "+errorThrown+xhr.status+xhr.responseText);
+        }
+    });
+    }
+    else {
+        $(this).val(lastRole);
+    };
+});
+$('select[name="rule-trigger_item"]').each(function() {
+    //Store old value
+    $(this).data('lastValue', $(this).val());
+});
+$('select[name="rule-trigger_item"]').on('change', function(e) {
+    var lastRole = $(this).data('lastValue');
+    if (confirm("All terms will be removed")) {
+    $.ajax({
+        type: "POST",
+        url: "/monitor/rule?id={{ rule_id }}",
+        data: {
+            csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value,
+            trigger_id: this.value,
+        },
+        success: function(data) {
+            window.location.replace("/monitor/rule?id={{ rule_id }}");
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            alert("Error: "+errorThrown+xhr.status+xhr.responseText);
+        }
+    });
+    }
+    else {
+        $(this).val(lastRole);
+    };
+});
+
+</script>
+
+{% endblock %}
