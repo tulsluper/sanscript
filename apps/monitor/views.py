@@ -253,8 +253,8 @@ def rule_check(rule):
 
     message = ''
     if objs:
-        message = '{} - {} - {} - {} matches'.format(
-            str(datetime.now())[:19], SEVERITY_NAMES[rule.severity], rule.name, objs.count(),
+        message = '{} - {} - {} - {} matches ({})'.format(
+            str(datetime.now())[:19], SEVERITY_NAMES[rule.severity], rule.name, objs.count(), objs
         )
         data.update({
             'check_message': message,
