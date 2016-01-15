@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'apps.da',
     'apps.fc',
     'apps.bc',
+    'apps.monitor',
 )
 
 MIDDLEWARE_CLASSES = (

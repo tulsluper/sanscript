@@ -61,6 +61,7 @@ def get_n_link_ports():
     n_link_ports_list = []
     filepath = os.path.join(JSONDIR, 'port')
     records = load_data(filepath, [])
+    print(records)
     for record in records:
         if record['Type'] == 'N-Port' and not 'Trunk' in record['Comment']:
             n_link_ports_list.append(record)
