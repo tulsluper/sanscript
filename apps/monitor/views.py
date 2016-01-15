@@ -72,14 +72,14 @@ def perform_actions(actions, message):
         target = action.target
         success = 'success'
         if method == 'email':
-            success, message = san_send_email(target, message)
+            success, result_message = san_send_email(target, message)
         elif method == 'log':
-            success, message = san_write_log(target, message)
+            success, result_message = san_write_log(target, message)
 
         results.append({
             'method': method,
             'target': target,
-            'message': message,
+            'message': result_message,
             'success': success,
         })
     return results
