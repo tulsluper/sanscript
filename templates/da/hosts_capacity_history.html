@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row fullWidth withTop">
+<div class="large-3 columns">
+  <div id="dvData">
+  <table>
+
+    <thead>
+        <tr class="service">
+        <td colspan="{{ cols|length }}">
+              {% if datetime %}<span>{{ datetime }}</span>{% endif %}
+              <span>{{ rows|length }} records</span>
+              {% if integer %}<span>integer: {{ integer }}</span>{% endif %}
+              {% if request.GET|length %}<span><a href="{{ request.path }}" class="clear_filter">clear filter</a></span>{% endif %}
+              <span><a href="{{ request.build_absolute_uri }}">page link</a></span>
+        </td>
+        </tr>
+
+    <tr>
+        {% for cell in cols %}
+            <th>
+                {{ cell }}
+            </th>
+        {% endfor %}
+    </tr>
+
+    <form action="." method="get">
+      <tr class="filter">
+      {% for cell in cols %}
+        <th>
+        <input type="text" id="{{ cell }}" name="{{ cell }}")>
+        </th>
+      {% endfor %}
+      </tr>
+      <input type="submit" value="OK" class="filter_submit">
+    </form>
+
+    </thead>
+
+    <tbody>
+
+    {% for row in rows %}
+      <tr>
+        {% for cell in row %}
+          <td>
+            {{ cell|safe }}
+          </td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+
+    </tbody>
+
+
+  </table>
+  </div>
+
+</div>
+<div class="large-9 columns">
+    <div id="container" style="width:100%; height:500px;"></div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+$(function () { 
+    $('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: '',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: [{% for date in dates %}'{{ date }}', {% endfor %}]
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: 'TB'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [
+        {
+            name: 'Size',
+            data: [{% for value in fieldsvalues.Size %}{{ value }}, {% endfor %}],
+            visible: {% if 'Size' in visible_series %}true{% else %}false{% endif %},
+        }]
+    });
+});
+
+// set filter values
+    $( ".filter input" ).each(function( index ) {
+      $(this).val(getUrlParameter(this.name));
+    });
+</script>
+{% endblock %}
+
+

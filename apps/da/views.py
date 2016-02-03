@@ -110,6 +110,40 @@ def hosts_capacity(request):
     return render(request, 'table.html', data)
 
 
+def hosts_capacity_history(request):
+    objs = sfilter(HostCapacityHistory, request)
+    fields = HostCapacityHistory._meta.get_all_field_names()
+    fields.remove('id')
+    fields.remove('Storage')
+    fields.remove('Date')
+
+    cols, rows_ = stable(HostCapacityHistory, objs, fields=['Storage', 'Hosts'])
+
+    rows = []
+    for row in rows_:
+        if not row in rows:
+            rows.append(row)
+
+    fieldsvalues = {x: [] for x in fields}
+    dates = sorted([x[0] for x in objs.values_list('Date').distinct()])
+    storages = sorted([x[0] for x in objs.values_list('Storage').distinct()])
+    for date in dates:
+        date_objs = objs.filter(Date__contains=date)
+        for field in fields:
+            value = list(date_objs.aggregate(Sum(field)).values())[0]
+            fieldsvalues[field].append(value)
+    print(dates)
+    data = {
+        'storages': storages,
+        'dates': dates,
+        'fieldsvalues': fieldsvalues,
+        'visible_series': ['Size'],
+        'cols': cols,
+        'rows': rows,
+    }
+    return render(request, 'da/hosts_capacity_history.html', data)
+
+
 def changes(request):
     def ch_format(old, new):
         return '<del>{}</del> <span style class="t_red">>></span> <strong>{}</strong>'.format(old, new)
