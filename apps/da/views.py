@@ -129,7 +129,7 @@ def hosts_capacity_history(request):
     storages = sorted([x[0] for x in objs.values_list('Storage').distinct()])
     for date in dates:
         date_objs = objs.filter(Date__contains=date)
-        for field in fields:
+        for field in ['Size',]:
             value = list(date_objs.aggregate(Sum(field)).values())[0]
             fieldsvalues[field].append(value)
     print(dates)
