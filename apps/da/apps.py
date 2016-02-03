@@ -19,6 +19,7 @@ pages = [
     {'label': 'volumes', 'view': 'volumes', 'title': 'Volumes'},
     {'label': 'hosts', 'view': 'hosts', 'title': 'Hosts'},
     {'label': 'hosts_capacity', 'view': 'hosts_capacity', 'title': 'HostsCapacity'},
+    {'label': 'hosts_capacity_history', 'view': 'hosts_capacity_history', 'title': 'HostsCapacityHistory'},
     {'label': 'changes', 'view': 'changes', 'title': 'Changes'},
     {'label': 'change_acknowledge', 'view': 'change_acknowledge', 'title': ''},
     {'label': 'change_delete', 'view': 'change_delete', 'title': ''},
