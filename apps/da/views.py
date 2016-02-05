@@ -112,6 +112,7 @@ def hosts_capacity(request):
 
 def hosts_capacity_history(request):
     objs = sfilter(HostCapacityHistory, request)
+    objs = objs.exclude(Hosts__startswith='[]')
     fields = HostCapacityHistory._meta.get_all_field_names()
     fields.remove('id')
     fields.remove('Storage')
