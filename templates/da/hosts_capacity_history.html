@@ -105,7 +105,7 @@ $(function () {
         series: [
         {
             name: 'Size',
-            data: [{% for value in fieldsvalues.Size %}{{ value }}, {% endfor %}],
+            data: [{% for value in fieldsvalues.Size %}{{ value|floatformat:2 }}, {% endfor %}],
             visible: {% if 'Size' in visible_series %}true{% else %}false{% endif %},
         }]
     });
