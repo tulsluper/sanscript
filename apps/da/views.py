@@ -134,7 +134,6 @@ def hosts_capacity_history(request):
             value = list(date_objs.aggregate(Sum(field)).values())[0]
             value = value/1024
             fieldsvalues[field].append(value)
-    print(dates)
     data = {
         'storages': storages,
         'dates': dates,

@@ -62,7 +62,11 @@ def sfilter(model, request):
         for key, value in request.GET.items():
             if value:
                 value = value.replace('+', ' ')
-                if value[0] == '[' and value[-1] == ']':
+                if value[:2] == '[[' and value[-2:] == ']]':
+                    value = value[2:-2].replace(',','')
+                    value = '["'+'","'.join(value.split())+'"]'
+                    key = '{}__contains'.format(key)
+                elif value[0] == '[' and value[-1] == ']':
                     value = value[1:-1]
                 else:
                     key = '{}__contains'.format(key)
