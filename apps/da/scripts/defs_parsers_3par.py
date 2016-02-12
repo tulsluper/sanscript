@@ -53,7 +53,8 @@ def p_vlun(systemname, lines):
 def p_host(systemname, lines):
     records = []
     keys = lines[0].split()
-    keys[keys.index('-WWN/iSCSI_Name-')] = 'WWN_or_Name'
+    keys = [key.replace('-', '') for key in keys]
+    keys[keys.index('WWN/iSCSI_Name')] = 'WWN_or_Name'
     keys[keys.index('Id')] = 'HostId'
     for line in lines[1:-2]:
         items = line.split()
