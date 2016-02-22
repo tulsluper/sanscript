@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'apps.da',
     'apps.fc',
     'apps.bc',
+    'apps.en',
     'apps.monitor',
 )
 
