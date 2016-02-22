@@ -24,7 +24,7 @@ class Mezzanine(models.Model):
     Server_Bay = models.CharField(max_length=64)
     Mezz_Name = models.CharField(max_length=64)
     Enclosure_Name = models.CharField(max_length=64)
-    Ports = models.CharField(max_length=64)
+    Ports = models.CharField(max_length=300)
     Server_SN = models.CharField(max_length=64)
 
 #{'Location': 5, 'Enclosure Name': 11, 'Enclosure SN': 10}
