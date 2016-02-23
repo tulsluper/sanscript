@@ -52,6 +52,8 @@ def parse(data):
                           addresses.append({
                               port['WWPN']
                           })
+                  addresses = '; '.join([list(a)[0] for a in addresses])
+
                   mezzanines.append({
                       'Enclosure_Name': data['RIMP']['INFRA2']['ENCL'],
                       'Server_Bay': blade['BAY']['CONNECTION'],
@@ -94,7 +96,7 @@ def main():
                      ks[key] = 0
                 if len(value) > ks[key]:
                     ks[key] = len(value)
-        print(filepath, ks)
+        print(ks)
           
  
 
