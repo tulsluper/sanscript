@@ -33,6 +33,7 @@ scripts = [
     'collect',
     'parse',
     'save_into_db',
+    'save_app_info',
 ]
 
 @run_with_locker(lockfile)
