@@ -12,6 +12,9 @@ def samevalues(names):
 
 
 pages = [
+    {'label': 'enclosures', 'view': 'enclosures', 'title': 'Enclosures'},
+    {'label': 'servers', 'view': 'servers', 'title': 'Servers'},
+    {'label': 'mezzanines', 'view': 'mezzanines', 'title': 'Mezzanine'},
 ]
 
 commands = [
