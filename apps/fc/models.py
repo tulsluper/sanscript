@@ -67,6 +67,7 @@ class Switch(models.Model):
     FC_Router = models.CharField(max_length=3)
     FC_Router_BB_Fabric_ID = models.CharField(max_length=3)
     Address_Mode = models.CharField(max_length=1)
+    HIF_Mode = models.CharField(max_length=3)
 
 
 class SwitchCommon(models.Model):
