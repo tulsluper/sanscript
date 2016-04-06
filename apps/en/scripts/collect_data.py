@@ -32,6 +32,7 @@ rootLogger.setLevel(logging.INFO)
 scripts = [
     'collect',
     'parse',
+    'parse2',
     'save_into_db',
     'save_app_info',
 ]
