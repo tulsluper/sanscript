@@ -160,7 +160,7 @@ def main():
         enc_bays[enc_name].append(bay_number)
 
     new_info = {}
-    for con in CONNECTIONS[:2]:
+    for con in CONNECTIONS:
         enc_name, enc_fqdn = con['name'], con['address']
         bays = enc_bays.get(enc_name, [])
 
