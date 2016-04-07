@@ -176,7 +176,7 @@ def main():
             new_info['{}.{}'.format(enc_name, bay_number)] = {
                 'CPU_type': cpu_type,
                 'CPU_cores': cpu_cores,
-                'CPU_count:': cpu_count,
+                'CPU_count': cpu_count,
                 'RAM_size': ram_size,
             }
 
