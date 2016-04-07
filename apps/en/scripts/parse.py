@@ -29,7 +29,7 @@ def parse(data):
             'Server_Model': blade['SPN'],
             'Server_SN': blade['BSN'],
             'Server_iLO': blade['MGMTIPADDR']if 'MGMTIPADDR' in blade else '',
-            'Server_NAME': blade['NAME'] if 'NAME' in blade else '',
+            'Server NAME': blade['NAME'] if 'NAME' in blade and blade['NAME'] != 'Status is not available' else '',
             'Power_state': blade['POWER']['POWERSTATE']
           })
   
