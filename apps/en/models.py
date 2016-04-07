@@ -12,16 +12,16 @@ class Enclosure(models.Model):
     Enclosure_SN = models.CharField(max_length=64)
     
 class Server(models.Model):
+    Enclosure_Name = models.CharField(max_length=64)
     Server_Bay = models.CharField(max_length=64)
     Server_NAME = models.CharField(max_length=64)
-    Enclosure_Name = models.CharField(max_length=64)
     Power_state = models.CharField(max_length=64)
     Server_SN = models.CharField(max_length=64)
     Server_iLO = models.CharField(max_length=64)
     Server_Model = models.CharField(max_length=64)
-    CPU_cores = models.CharField(max_length=64)
-    CPU_count =models.CharField(max_length=64)
     RAM_size = models.CharField(max_length=64)
+    CPU_count =models.CharField(max_length=64)
+    CPU_cores = models.CharField(max_length=64)
     CPU_type = models.CharField(max_length=256)
 
 
