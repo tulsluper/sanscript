@@ -60,6 +60,7 @@ def sfilter(model, request):
     if ''.join(list(request.GET.values())) != '':
         query = Q()
         for key, value in request.GET.items():
+            key = key.replace(' ', '_')
             if value:
                 value = value.replace('+', ' ')
                 if value[:2] == '[[' and value[-2:] == ']]':
