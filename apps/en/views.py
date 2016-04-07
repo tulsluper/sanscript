@@ -24,7 +24,7 @@ def servers(request):
         'cols': cols,
         'rows': rows,
     }
-    return render(request, 'table.html', data)
+    return render(request, 'en/table.html', data)
 
 
 def mezzanines(request):
