@@ -14,6 +14,6 @@ CONNECTIONS = os.path.join(os.path.dirname(__file__), 'Connection.json')
 
 MODELS = [
     ['enclosures', 'Enclosure', {'before_delete_all': True}],
-    ['servers', 'Server', {'before_delete_all': True}],
+    ['servers2', 'Server', {'before_delete_all': True}],
     ['mezzanines', 'Mezzanine', {'before_delete_all': True}],
 ]
