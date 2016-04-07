@@ -19,10 +19,10 @@ class Server(models.Model):
     Server_SN = models.CharField(max_length=64)
     Server_iLO = models.CharField(max_length=64)
     Server_Model = models.CharField(max_length=64)
-    CPU_type = models.CharField(max_length=256)
     CPU_cores = models.CharField(max_length=64)
     CPU_count =models.CharField(max_length=64)
     RAM_size = models.CharField(max_length=64)
+    CPU_type = models.CharField(max_length=256)
 
 
 class Mezzanine(models.Model):
