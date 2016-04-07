@@ -22,7 +22,7 @@ def servers(request):
     cols, rows = stable(Server, objs)
     cols0 = [col.replace('_', ' ') for col in cols]
     data = {
-        'cols': cols0,
+        'cols0': cols0,
         'cols': cols,
         'rows': rows,
     }
