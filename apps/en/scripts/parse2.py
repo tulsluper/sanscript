@@ -13,9 +13,6 @@ import xml.etree.ElementTree as ET
 import datetime
 
 
-dirpath = os.path.dirname(os.path.realpath(__file__))
-filepath = os.path.join(dirpath, 'Connection.json')
-CONNECTIONS = load_data(filepath, [])
 
 
 #from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -159,9 +156,11 @@ def main():
             enc_bays[enc_name] = []
         enc_bays[enc_name].append(bay_number)
 
+
+
     new_info = {}
-    for con in CONNECTIONS:
-        enc_name, enc_fqdn = con['name'], con['address']
+    encurls = load_data(os.path.join(JSONDIR, 'encurls'))
+    for enc_name, enc_fqdn in encurls.items():
         bays = enc_bays.get(enc_name, [])
 
         try:

@@ -70,6 +70,13 @@ def main():
     all_servers = []
     all_mezzanines = []
 
+
+    dirpath = os.path.dirname(os.path.realpath(__file__))
+    filepath = os.path.join(dirpath, 'Connection.json')
+    CONNECTIONS = load_data(filepath, [])
+    name_addr = {con['name']: con['address'] for con in CONNECTIONS} 
+    encurls = {}
+
     for filename in os.listdir(TEXTDIR):
         filepath = os.path.join(TEXTDIR, filename)
         system, command = filename.split('.')
@@ -80,6 +87,11 @@ def main():
             all_enclosures += [enclosure]
             all_servers += servers
             all_mezzanines += mezzanines
+
+            url = name_addr.get(system)
+            encurls[enclosure['Enclosure_Name']] = url
+
+    print(encurls)
 
     for name, records in (
         ('enclosures', all_enclosures),
@@ -96,9 +108,8 @@ def main():
                      ks[key] = 0
                 if len(value) > ks[key]:
                     ks[key] = len(value)
-        print(ks)
-          
- 
+
+    dump_data(os.path.join(JSONDIR, 'encurls'), encurls)
 
 
 if __name__ == '__main__':
