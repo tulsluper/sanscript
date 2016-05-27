@@ -55,14 +55,8 @@ def sfilter(model, request):
             elm0 = xs[0] if type(xs[0]) == Q else Q((key, xs[0]))
             return op(elm0, set_op(op, key, xs[1:]))
 
-#    limit = 3000
-    objects = []
-    if ''.join(list(request.GET.values())) != '':
-        query = Q()
-        for key, value in request.GET.items():
-            key = key.replace(' ', '_')
-            if value:
-                value = value.replace('+', ' ')
+    def xxx_value(key, value, query):
+                value=value.strip()
                 if value[:2] == '[[' and value[-2:] == ']]':
                     value = value[2:-2].replace(',','')
                     value = '["'+'","'.join(value.split())+'"]'
@@ -74,12 +68,34 @@ def sfilter(model, request):
 
                 if '&&' in value or '||' in value:
                     query.add(
-                        set_op(or_, key, [set_op(and_, key, z) for z in [[ i.strip() for i in x.split('&&')] for x in value.split('||')]]),
-                        Q.AND)
+                        set_op(or_, key, [set_op(and_, key, z) for z in [[ i.strip() for i in x.split('&&')] for x in value.split('||')]]), Q.AND)
                 else:
                     query.add(Q((key, value)), Q.AND)
+                return query
 
-        objects = model.objects.filter(query)#[:limit]
+
+
+#    limit = 3000
+    objects = []
+    if ''.join(list(request.GET.values())) != '':
+        query = Q()
+        ex_query = Q()
+        for key, value in request.GET.items():
+            key = key.replace(' ', '_')
+            if value:
+                value = value.replace('+', ' ')
+                ex_value = None
+                if '!' in value:
+                    value, ex_value = value.split('!', 1)
+
+                query = xxx_value(key, value, query)
+
+                if ex_value:
+                    ex_query = xxx_value(key, ex_value, ex_query)
+
+
+        objects = model.objects.filter(query)#.exclude(ex_query)#[:limit]
+        objects = objects.exclude(ex_query)
                     
     else:
         objects = model.objects.all()#[:limit]
