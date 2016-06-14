@@ -134,7 +134,12 @@ def get_blade_info(enc_fqdn, oaSessionKey, bayNumber):
 
     cpu_cores = xml_tree.find('SOAP-ENV:Body/hpoa:getBladeInfoResponse/hpoa:bladeInfo/hpoa:extraData[@hpoa:name="procCores1"]', ns)
     if cpu_cores == None:
-        cpu_cores = ''
+        if 'Dual-Core' in cpu_type:
+            cpu_cores = '2'
+        elif 'Quad-Core' in cpu_type:
+            cpu_cores = '4'
+        elif 'Six-Core' in cpu_type:
+            cpu_cores = '6'
     else: cpu_cores = cpu_cores.text
 
     return ram_size, cpu_count, cpu_type, cpu_cores
