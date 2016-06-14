@@ -150,7 +150,7 @@ class TPARVV(models.Model):
     Snp_Used_MB = models.CharField(max_length=8)
     Snp_Used_Perc = models.CharField(max_length=8)
     Snp_Zn = models.CharField(max_length=8)
-    SnpCPG = models.CharField(max_length=8)
+    SnpCPG = models.CharField(max_length=24)
     SpaceCalcTime = models.CharField(max_length=24)
     SPT = models.CharField(max_length=8)
     State = models.CharField(max_length=8)
