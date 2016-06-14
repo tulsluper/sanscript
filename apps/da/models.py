@@ -169,7 +169,7 @@ class TPARVV(models.Model):
     VV_WWN = models.CharField(max_length=32)
     Warn_Snp_Perc = models.CharField(max_length=8)
     Warn_Usr_Perc = models.CharField(max_length=8)
-    Comment = models.CharField(max_length=128)
+    Comment = models.CharField(max_length=512)
 
 
 class TPARVLUN(models.Model):
