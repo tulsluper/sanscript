@@ -97,7 +97,7 @@ def counter_view(request):
         return HttpResponse(json.dumps(data))
 
     counter = request.GET.get('counter', '')
-    sort = request.GET.get('sort', 'sum')
+    sort = request.GET.get('sort', '')
     port = request.GET.get('filter', '')
     quantity = request.GET.get('quantity', 10)
 
@@ -118,17 +118,20 @@ def counter_view(request):
         else:
             records.append([key, values, port_name])
 
-    if '-' in sort:
-        index = ['-'.join(x)[:len(sort)] for x in xtimes].index(sort)
-        sort = '-'.join(xtimes[index])
-        function = lambda items, index=index: items[index]
-    elif sort == 'max':
-        function = max
-    elif sort == 'median':
-        function = median
-    elif sort == 'sum':
-        function = sum
-    records.sort(key=lambda x: function(x[1]), reverse=True)
+    if sort:
+        if '-' in sort:
+            index = ['-'.join(x)[:len(sort)] for x in xtimes].index(sort)
+            sort = '-'.join(xtimes[index])
+            function = lambda items, index=index: items[index]
+        elif sort == 'max':
+            function = max
+        elif sort == 'median':
+            function = median
+        elif sort == 'sum':
+            function = sum
+        records.sort(key=lambda x: function(x[1]), reverse=True)
+    else:
+        records.sort(key=lambda x: x[0])
 
     try:
         quantity = int(quantity)
