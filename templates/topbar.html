@@ -32,11 +32,25 @@
     <ul class="left">
     <li class="divider"></li>
     {% for a in appslist %}
-        <li {% if a == app %}class="active"{% endif %}>
+        <li class="has-dropdown{% if a == app %} active{% endif %}">
           <a href="/{{ a.label }}{% if sa %}-sa{% endif %}/">
             {% if not a.label == "sa" %}
               {{ a.verbose_name }}
             {% endif %}</a>
+
+          <ul class="dropdown">
+      {% for page in a.pages %}
+      <li>
+        {% if page.title %}
+        <a href="/{{ a.label }}{% if sa %}-sa{% endif %}/{{ page.label }}/"
+           class="{% if page.label == page_label %}active{% endif %}">
+            {{ page.title }}
+        </a>
+        {% endif %}
+        </li>
+      {% endfor %}
+          </ul>
+
         </li>
     {% endfor %}
     <li class="divider"></li>
