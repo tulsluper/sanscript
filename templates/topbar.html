@@ -40,10 +40,9 @@
 
           <ul class="dropdown">
       {% for page in a.pages %}
-      <li>
+      <li class="{% if page.label == page_label %}active{% endif %}">
         {% if page.title %}
-        <a href="/{{ a.label }}{% if sa %}-sa{% endif %}/{{ page.label }}/"
-           class="{% if page.label == page_label %}active{% endif %}">
+        <a href="/{{ a.label }}{% if sa %}-sa{% endif %}/{{ page.label }}/">
             {{ page.title }}
         </a>
         {% endif %}

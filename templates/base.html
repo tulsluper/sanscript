@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SANscript</title>
+    <title>SANscript - {{ app.verbose_name }}{% for page in app.pages %}{% if page.label == page_label %} - {{ page.title }}{% endif %}{% endfor %}</title>
     <link rel="stylesheet" href="{% static "foundation-5.5.2/css/foundation.css" %}" />
     <link rel="stylesheet" href="{% static "foundation-icons/foundation-icons.css" %}" />
     <link rel="stylesheet" href="{% static "chosen/chosen.min.css" %}" />
