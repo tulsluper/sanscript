@@ -57,8 +57,17 @@ def main():
         reserve_used = raw_alloc/2 - REAL
         
         reserve_overused = 0
-        if RESERVE > reserve_used:
+        print(RESERVE,reserve_used)
+
+        if reserve_used < 0:
+            reserve_overused = reserve_used
+            reserve_used = RESERVE
+            reserve_free = 0
+ 
+
+        elif RESERVE > reserve_used:
             reserve_free = RESERVE - reserve_used
+        
         else:
             reserve_overused = reserve_used - RESERVE
             reserve_free = 0
