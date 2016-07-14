@@ -5,3 +5,5 @@ jsonfield
 paramiko
 pysnmp
 ldap3
+pyasn1
+cryptography
