@@ -3,6 +3,8 @@ db.sqlite3
 migrations
 
 # SANscript
+static
+sanscript/db_settings.py
 sanscript/custom_settings.py
 apps/*/scripts/*Connection.json
 apps/da/scripts/cli/SNM2/Linux_CLI/log/
