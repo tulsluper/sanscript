@@ -21,6 +21,9 @@ def parse(data):
         cod = collections.OrderedDict()
         servers = []
         mezzanines = []
+
+        if not 'BLADE' in data['RIMP']['INFRA2']['BLADES']:
+            return enclosure, servers, mezzanines
   
         for blade in data['RIMP']['INFRA2']['BLADES']['BLADE']:
           servers.append({
