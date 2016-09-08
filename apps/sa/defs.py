@@ -55,7 +55,7 @@ def sfilter(model, request):
             elm0 = xs[0] if type(xs[0]) == Q else Q((key, xs[0]))
             return op(elm0, set_op(op, key, xs[1:]))
 
-    def xxx_value(key, value, query):
+    def xxx_value(key, value, query, ex=False):
                 value=value.strip()
                 if value[:2] == '[[' and value[-2:] == ']]':
                     value = value[2:-2].replace(',','')
@@ -70,7 +70,10 @@ def sfilter(model, request):
                     query.add(
                         set_op(or_, key, [set_op(and_, key, z) for z in [[ i.strip() for i in x.split('&&')] for x in value.split('||')]]), Q.AND)
                 else:
-                    query.add(Q((key, value)), Q.AND)
+                    if ex:
+                      query.add(Q((key, value)), Q.OR)
+                    else:
+                      query.add(Q((key, value)), Q.AND)
                 return query
 
 
@@ -91,8 +94,8 @@ def sfilter(model, request):
                 if value:
                     query = xxx_value(key, value, query)
 
-                elif ex_value:
-                    ex_query = xxx_value(key, ex_value, ex_query)
+                if ex_value:
+                    ex_query = xxx_value(key, ex_value, ex_query, ex=True)
 
 
         objects = model.objects.filter(query)#.exclude(ex_query)#[:limit]
