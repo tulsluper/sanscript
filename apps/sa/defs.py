@@ -88,9 +88,10 @@ def sfilter(model, request):
                 if '!' in value:
                     value, ex_value = value.split('!', 1)
 
-                query = xxx_value(key, value, query)
+                if value:
+                    query = xxx_value(key, value, query)
 
-                if ex_value:
+                elif ex_value:
                     ex_query = xxx_value(key, ex_value, ex_query)
 
 
