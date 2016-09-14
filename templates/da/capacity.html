@@ -17,7 +17,7 @@
 
   <div id="dvData">
 
-  <table>
+  <table class="sortable tablesorter">
     <thead>
         <tr class="service">
           <td colspan="11">
@@ -31,30 +31,30 @@
         </tr>
         <tr class="fields2">
           <th class="delimiter">Storage</th>
-          <td>R&nbsp;Total</td>
-          <td>R&nbsp;Data</td>
-          <td>R&nbsp;Spare</td>
-          <td>R&nbsp;Allocated</td>
-          <td class="delimiter">R&nbsp;Free</td>
-          <td>F&nbsp;Total</td>
-          <td class="hlight">F&nbsp;Used</td>
-          <td>F&nbsp;Presented</td>
-          <td>F&nbsp;NotPresented</td>
-          <td class="hlight">F&nbsp;Available</td>
+          <th>R&nbsp;Total</th>
+          <th>R&nbsp;Data</th>
+          <th>R&nbsp;Spare</th>
+          <th>R&nbsp;Allocated</th>
+          <th class="delimiter">R&nbsp;Free</th>
+          <th>F&nbsp;Total</th>
+          <th class="hlight">F&nbsp;Used</th>
+          <th>F&nbsp;Presented</th>
+          <th>F&nbsp;NotPresented</th>
+          <th class="hlight">F&nbsp;Available</th>
         </tr>
         <tr class="filter">
       <form action="." method="get">
-          <th><input type="text" id="Storage" name="Storage"></th>
-          <th><input type="text" id="RawTotal" name="RawTotal"></th>
-          <th><input type="text" id="RawData" name="RawData"></th>
-          <th><input type="text" id="RawSpare" name="RawSpare"></th>
-          <th><input type="text" id="RawAllocated" name="RawAllocated"></th>
-          <th><input type="text" id="RawFree" name="RawFree"></th>
-          <th><input type="text" id="FormattedTotal" name="FormattedTotal"></th>
-          <th><input type="text" id="FormattedUsed" name="FormattedUsed"></th>
-          <th><input type="text" id="FormattedPresented" name="FormattedPresented"></th>
-          <th><input type="text" id="FormattedNotPresented" name="FormattedNotPresented"></th>
-          <th><input type="text" id="FormattedAvailable" name="FormattedAvailable"></th>
+          <td><input type="text" id="Storage" name="Storage"></td>
+          <td><input type="text" id="RawTotal" name="RawTotal"></td>
+          <td><input type="text" id="RawData" name="RawData"></td>
+          <td><input type="text" id="RawSpare" name="RawSpare"></td>
+          <td><input type="text" id="RawAllocated" name="RawAllocated"></td>
+          <td><input type="text" id="RawFree" name="RawFree"></td>
+          <td><input type="text" id="FormattedTotal" name="FormattedTotal"></td>
+          <td><input type="text" id="FormattedUsed" name="FormattedUsed"></td>
+          <td><input type="text" id="FormattedPresented" name="FormattedPresented"></td>
+          <td><input type="text" id="FormattedNotPresented" name="FormattedNotPresented"></td>
+          <td><input type="text" id="FormattedAvailable" name="FormattedAvailable"></td>
         <input type="submit" value="OK" class="filter_submit">
       </form>
         </tr>
@@ -202,6 +202,7 @@ $(function () {
     });
 });
 
+$(".sortable").tablesorter();
 
 </script>
 {% endblock %}

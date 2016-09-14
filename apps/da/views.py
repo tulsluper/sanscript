@@ -82,6 +82,11 @@ def capacity_3par(request):
 def volumes(request):
     objects = sfilter(Volume, request)
     cols, rows = stable(Volume, objects)
+    for row in rows:
+        #for value in row:
+            value = row[2]
+            if value.startswith('.'):
+                row[2] = value.replace('.', '_')
     data = {
         'cols': cols,
         'rows': rows,

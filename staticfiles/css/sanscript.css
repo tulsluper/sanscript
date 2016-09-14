@@ -66,7 +66,7 @@ html, body {
 /* =========================================================================+ */
 /* filter */
 
-.filter th {
+.filter td {
     padding: 1px;
 }
 .filter input[type="text"] {
@@ -213,3 +213,19 @@ html, body {
 .t_changed {color: orange}
 
 .decimal {display:block; text-align:right}
+
+th.sortable{
+    font-weight: bold;
+    cursor:pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+th.headerSortUp {
+    background: url("up.png") right center no-repeat;
+    padding-right: 15px;
+}
+th.headerSortDown {
+    background: url("down.png") right center no-repeat;
+    padding-right: 15px;
+}

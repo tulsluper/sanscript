@@ -10,7 +10,7 @@
 {% if cols %}
 
   <div id="dvData">
-  <table>
+  <table class="sortable tablesorter">
     <thead>
 
     <tr class="service">
@@ -27,7 +27,7 @@
     <tr>
         {% for cell in cols %}
             <th>
-                {{ cell }}
+                {{ cell }}<span></span>
             </th>
         {% endfor %}
     </tr>
@@ -35,9 +35,9 @@
     <form action="." method="get">
       <tr class="filter">
       {% for cell in cols %}
-        <th>
+        <td>
         <input type="text" id="{{ cell }}" name="{{ cell }}")>
-        </th>
+        </td>
       {% endfor %}
       </tr>
       <input type="submit" value="OK" class="filter_submit">
@@ -91,6 +91,7 @@
     $(".export").on('click', function (event) {
       exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'_'+$('#last_update').text()+'.csv']);
     });
+    $(".sortable").tablesorter(); 
 </script>
 {% endblock %}
 
