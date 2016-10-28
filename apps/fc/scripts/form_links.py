@@ -220,7 +220,7 @@ def form_f_links():
             'Switch1': port1['Switch'],
             'Port1': int(port1['Index']),
             'Switch2': port2.get('Switch', 'x'),
-            'Port2': int(port2.get('Index', -1)),
+            'Port2': int(port2.get('Index', 999)),
             'Speed': port1['Speed'].replace('G','').replace('N','').replace('A',''),
             'TrunkId': None,
             'Master': None,
@@ -231,10 +231,10 @@ def form_f_links():
         }
         record_reverse = {
             'Switch1': port2.get('Switch', 'x'),
-            'Port1': int(port2.get('Index', -1)),
+            'Port1': int(port2.get('Index', 999)),
             'Switch2': port1['Switch'],
             'Port2': int(port1['Index']),
-            'Speed': port2.get('Speed', '-1').replace('G','').replace('N','').replace('A',''),
+            'Speed': port2.get('Speed', '999').replace('G','').replace('N','').replace('A',''),
             'TrunkId': None,
             'Master': None,
             'E_Trunk': None,
