@@ -201,3 +201,101 @@ def change_delete(request):
     objs.delete()
     return redirect('/da/changes/')
 
+
+
+def pd_types_capacity(request):
+    storages_all = list(StorageConnection.objects.values_list('name', flat=True))
+    storages_selected = request.GET.getlist('Storage', storages_all)
+    storages_filter = [[s, s in storages_selected] for s in storages_all]
+
+    pdtypes_all = ['SSD', 'FC', 'NL']
+    pdtypes_selected = request.GET.getlist('Type', pdtypes_all)
+    pdtypes_filter = [[s, s in pdtypes_selected] for s in pdtypes_all]
+
+    records = PDTypesCapacity.objects.filter(
+        Storage__in=storages_selected, Type__in=pdtypes_selected)
+
+    total = records.aggregate(
+            Sum('Size_MB'), Sum('Volume_MB'), Sum('Free_MB'), Sum('Spare_MB'),)
+
+    storage_records = []
+    for storage in storages_selected:
+        record = records.filter(Storage=storage).aggregate(
+            Sum('Size_MB'), Sum('Volume_MB'), Sum('Free_MB'), Sum('Spare_MB'),)
+
+        if record['Size_MB__sum']:
+            record.update({'Storage': storage})
+            storage_records.append(record)
+
+    pdtype_records = []
+    pdtypes = []
+    for pdtype in pdtypes_selected:
+        record = records.filter(Type=pdtype).aggregate(
+            Sum('Size_MB'), Sum('Volume_MB'), Sum('Free_MB'), Sum('Spare_MB'),)
+        record.update({'Type': pdtype})
+        pdtype_records.append(record)
+
+    max_value = max(storage_records + pdtype_records, key=lambda x:x['Size_MB__sum'])
+    max_value = max(x['Size_MB__sum'] for x in storage_records + pdtype_records)
+
+
+    records = sorted(records, key=lambda x: (storages_selected.index(x.Storage), pdtypes_selected.index(x.Type)))
+
+    return render(request, 'da/pd_types_capacity.html', {
+        'storage_records': storage_records,
+        'pdtype_records': pdtype_records,
+        'records': records,
+        'total': total,
+        'filters': [
+            ['Storage', storages_filter],
+            ['Type', pdtypes_filter],
+        ],
+        'max_value': max_value,
+    })
+
+def pd_types_quantity(request):
+    storages_all = list(StorageConnection.objects.values_list('name', flat=True))
+    storages_selected = request.GET.getlist('Storage', storages_all)
+    storages_filter = [[s, s in storages_selected] for s in storages_all]
+
+    pdtypes_all = ['SSD', 'FC', 'NL']
+    pdtypes_selected = request.GET.getlist('Type', pdtypes_all)
+    pdtypes_filter = [[s, s in pdtypes_selected] for s in pdtypes_all]
+
+    records = PDTypesQuantity.objects.filter(
+        Storage__in=storages_selected, Type__in=pdtypes_selected)
+
+
+    total = records.aggregate(
+            Sum('Number'))
+
+    storage_records = []
+    for storage in storages_selected:
+        record = records.filter(Storage=storage).aggregate(
+            Sum('Number'))
+        if record['Number__sum']:
+            record.update({'Storage': storage})
+            storage_records.append(record)
+
+    pdtype_records = []
+    pdtypes = []
+    for pdtype in pdtypes_selected:
+        record = records.filter(Type=pdtype).aggregate(
+            Sum('Number'))
+        record.update({'Type': pdtype})
+        pdtype_records.append(record)
+
+    records = sorted(records, key=lambda x: (storages_selected.index(x.Storage), pdtypes_selected.index(x.Type)))
+
+    return render(request, 'da/pd_types_quantity.html', {
+        'storage_records': storage_records,
+        'pdtype_records': pdtype_records,
+        'records': records,
+        'total': total,
+        'filters': [
+            ['Storage', storages_filter],
+            ['Type', pdtypes_filter],
+        ],
+    })
+
+

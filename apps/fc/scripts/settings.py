@@ -39,9 +39,16 @@ S_COMMANDS = [
     ['porttrunkarea', 'porttrunkarea --show trunk'],
     ['nsshow', 'nsshow -r -t'],
     ['licenseport', 'licenseport --show'],
+#    ['supportftp', 'supportftp -s -h 10.1.24.84 -u admin -p password -d tracedump -l ftp; supportftp -e; supportftp -S']
+#    ['date', 'date'],
+#    ['tsclockserver', 'tsclockserver'],
+#    ['tstimezone', 'tstimezone'],
+#    ['statsclear', 'statsclear'],
+#    ['supportshow', 'supportshow'],
 ]
 P_COMMANDS = [
     ['portshow', 'portshow'],
+    ['portcfgshow', 'portcfgshow'],
 ]
 
 

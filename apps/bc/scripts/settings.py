@@ -20,7 +20,7 @@ logging.basicConfig(
 
 
 # processes for multiprocessing
-PROCESSES = 4
+PROCESSES = 8 
 
 SCALES = {
     'pcs': 1,

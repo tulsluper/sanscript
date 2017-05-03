@@ -35,7 +35,7 @@
     {% for record in records %}
     <div class="row fullWidth withBottom">
         <div class="columns">
-            <div id="container{{ forloop.counter }}">
+            <div class="contclass" id="container{{ forloop.counter }}">
             </div>
         </div>
     </div>
@@ -58,6 +58,7 @@
     <script src="{% static "highcharts/js/highcharts.js" %}"></script>
     <script src="{% static "highcharts/js/modules/exporting.js" %}"></script>
 {% endblock %}
+
 
 {% block script %}
     <script>
@@ -86,8 +87,16 @@
             xAxis: {
                 startOnTick: true,
                 tickmarkPlacement: 'on',
-                categories: [{% for xtime in xtimes %}'{{ xtime|join:':'|slice:":5" }}', {% endfor %}],
-                tickInterval: {{ xtimes|length }}/12|0,
+                //categories: [{% for xtime in xtimes %}'{{ xtime|join:':'|slice:":5" }}', {% endfor %}],
+                categories: [{% for xtime in xtimes %}'{{ datestring }} {{ xtime|join:':' }}', {% endfor %}],
+                //tickInterval: {{ xtimes|length }}/12|0,
+                tickInterval: 1,
+                labels: {
+                    rotation: 270,
+                    style: {
+                        fontSize: '9px',
+                    },
+                },
             },
             yAxis: {
                 title: {

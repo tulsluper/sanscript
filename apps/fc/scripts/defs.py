@@ -29,7 +29,9 @@ def run_with_locker(lockfile):
                 open(lockfile, 'w').close()
                 try:
                     function(*args, **kwargs)
-                except:
+                except Exception as e:
+                    logging.warning('Exception: %s' %e)
+                    logging.warning('EXIT')
                     pass
                 os.remove(lockfile)
         return wrapper

@@ -40,13 +40,13 @@ class SwitchConnection(models.Model):
 class Serial(models.Model):
     Switch = models.CharField(max_length=30)
     Part_Num = models.CharField(max_length=13)
-    Serial_Num = models.CharField(max_length=10)
+    Serial_Num = models.CharField(max_length=20)
 
 
 class Version(models.Model):
     Switch = models.CharField(max_length=30)
     Kernel = models.CharField(max_length=8)
-    Fabric_OS = models.CharField(max_length=7)
+    Fabric_OS = models.CharField(max_length=8) # no in repo
     Made_on = models.CharField(max_length=24)
     Flash = models.CharField(max_length=24)
     BootProm = models.CharField(max_length=6)
@@ -76,9 +76,9 @@ class SwitchCommon(models.Model):
     switchType = models.CharField(max_length=5)
     switchMode = models.CharField(max_length=6)
     switchRole = models.CharField(max_length=11)
-    Fabric_OS = models.CharField(max_length=7)
+    Fabric_OS = models.CharField(max_length=8) # no in repo
     Part_Num = models.CharField(max_length=13)
-    Serial_Num = models.CharField(max_length=10)
+    Serial_Num = models.CharField(max_length=20)
 
 
 class Port(models.Model):
@@ -181,7 +181,7 @@ class Sfp(models.Model):
     RX_Power = models.CharField(max_length=17)
     TX_Power = models.CharField(max_length=17)
     State_transitions = models.CharField(max_length=3)
-    Last_poll_time = models.CharField(max_length=28)
+    Last_poll_time = models.CharField(max_length=32)
 
     def __str__(self):
         return '{} {}'.format(self.Switch, self.uPort)

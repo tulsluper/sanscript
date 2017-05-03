@@ -7,7 +7,9 @@ static
 sanscript/db_settings.py
 sanscript/custom_settings.py
 apps/*/scripts/*Connection.json
+apps/*/scripts/*.lock
 apps/da/scripts/cli/SNM2/Linux_CLI/log/
+apps/fc/scripts/configs_get_rfc.py
 
 !apps/da/scripts/cli/SNM2/Linux_CLI/lib/
 !apps/da/scripts/cli/SNM2/Linux_CLI/lib/*.so
