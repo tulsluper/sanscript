@@ -47,19 +47,14 @@ def main():
         raw_total = raw_total_sizes.get(storage)
         raw_alloc = raw_alloc_sizes.get(storage)
 
-        if storage == '3PAR7KT':
-            raid_ratio = 1.5
-        else:
-            raid_ratio = 2
-
-        TOTAL = raw_total/raid_ratio*0.95
-        RESERVE = raw_total/raid_ratio*0.05
+        TOTAL = raw_total/2*0.95
+        RESERVE = raw_total/2*0.05
 
         USED = stordict['full'] + stordict['cpvv'] + stordict['tpvv'] + stordict['copy']
         FREE = TOTAL - USED
 
         REAL = stordict['full'] + stordict['cpvv'] + stordict['tpvv_used']
-        reserve_used = raw_alloc/raid_ratio - REAL
+        reserve_used = raw_alloc/2 - REAL
         
         reserve_overused = 0
         print(RESERVE,reserve_used)

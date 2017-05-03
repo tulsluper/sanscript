@@ -62,3 +62,24 @@ def p_host(systemname, lines):
         record['Storage'] = systemname
         records.append(record)
     return records
+
+
+def simpleparse(systemname, lines):
+    cols = lines[0].split()
+    cols = ['sId' if c == 'Id' else c for c in cols]
+    time_ids = [n for n, c in enumerate(cols) if 'Time' in c]
+    records = []
+    for line in lines[1:-2]:
+        items = line.split()
+        for i in time_ids:
+            if items[i] != '--':
+                items[i:i+3] = [' '.join(items[i:i+3])]
+        items[len(cols)-1:] = [' '.join(items[len(cols)-1:])]
+        record = dict(zip(cols, items))
+        record['Storage'] = systemname
+        records.append(record)
+    return(records)
+
+def p_showpd(systemname, lines):
+    return simpleparse(systemname, lines)
+

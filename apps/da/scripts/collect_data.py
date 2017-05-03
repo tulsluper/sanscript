@@ -15,7 +15,7 @@ scripts = [
     'form_models',
     'collect_3par',
     'collect_eva',
-    'collect_hds',
+#    'collect_hds',
     'parse_3par',
     'parse_eva',
     'parse_hds',
@@ -23,6 +23,8 @@ scripts = [
     'form_hosts',
     'form_hosts_capacity',
     'form_capacity_3par',
+    'form_ph_disks_capacity_3par',
+    'form_ph_disks_quantity_3par',
     'form_capacity',
 
     'save_into_db',
@@ -42,3 +44,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

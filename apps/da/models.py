@@ -350,3 +350,26 @@ class HostCapacityHistory(models.Model):
     Hosts = JSONField()
     Size = models.DecimalField(max_digits=8, decimal_places=2)
     Date = models.DateField(auto_now_add=True)
+
+
+
+
+class PDTypesCapacity(models.Model):
+    Storage = models.CharField(max_length=64)
+    Type = models.CharField(max_length=3)
+    Size_MB = models.IntegerField()
+    Volume_MB = models.IntegerField()
+    Free_MB = models.IntegerField()
+    Unavail_MB = models.IntegerField()
+    Failed_MB = models.IntegerField()
+    Spare_MB = models.IntegerField()
+
+
+class PDTypesQuantity(models.Model):
+    Storage = models.CharField(max_length=64)
+    Type = models.CharField(max_length=3)
+    MediaType = models.CharField(max_length=16)
+    Capacity = models.IntegerField()
+    RPM = models.IntegerField()
+    Number = models.IntegerField()
+

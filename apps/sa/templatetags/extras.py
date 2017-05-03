@@ -3,6 +3,19 @@ from django.utils.safestring import mark_safe
 from django import template
 register = template.Library()
 
+@register.filter
+def convert(value, arg):
+    if value is None:
+        return None
+    else:
+        if arg == 'MiB-TiB':
+            return value/1024/1024
+    return None
+
+@register.filter
+def perc_of(value, arg):
+    return value/arg*100
+
 
 @register.filter
 def lookup(d, key):

@@ -11,13 +11,18 @@ def get_tpar_volume_hosts():
     data = load_data(filepath, [])
     xdict = {}
     for record in data:
-        wwn = record['VV_WWN']
+        wwn = record['Storage']+' '+record['VV_WWN']
         if not wwn in xdict:
             xdict[wwn] = set()
         xdict[wwn].add(record['HostName'])
     for key, val in xdict.items():
         xdict[key] = sorted(val)
     return xdict
+    #outdict = {}
+    #for key, val in xdict.items():
+    #    outdict['{} {}'.format(record['Storage'], key)] = sorted(val)
+    #    print('{} {}'.format(record['Storage'], key))
+    #return outdict
 
 
 def tpar_form_volumes(volume_hosts):
@@ -30,7 +35,7 @@ def tpar_form_volumes(volume_hosts):
             'Uid': record['VV_WWN'],
             'Name': record['Name'],
             'Size': int(record['VSize_MB'])/1024,
-            'Hosts': volume_hosts.get(record['VV_WWN'], []),
+            'Hosts': volume_hosts.get(record['Storage']+' '+record['VV_WWN'], []),
         }
         xlist.append(volume)
     return xlist

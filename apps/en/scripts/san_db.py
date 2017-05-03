@@ -7,7 +7,7 @@ from settings import JSONDIR
 from defs import load_data
 from san_env import get_apps
 
-debug_records_flag = False
+debug_records_flag = True
 
 
 def save(appname, relations):

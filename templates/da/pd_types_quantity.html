@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load extras %}
+{% block content %}
+
+<div class="row fullWidth withTop">
+<div class="columns">
+
+  <div id="page_label" style="display:none">{{ page_label }}</div>
+  <div id="last_update" style="display:none">{{ last_update|date:"Y-m-d-H:i"}}</div>
+
+  <style>
+    tbody tr td,
+    .fields2 td {text-align:right;}
+    .sum_row th {text-align:right; border-top:1px solid #999;}
+    .delimiter {border-right:1px solid #999;}
+    .hlight {background: #A0D3E8}
+  </style>
+
+  <div id="dvData">
+
+<h5>Total</h5>
+<table class="mdl-data-table mdl-js-data-table full-width">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric" style="width:120px"></th>
+      <th>Number</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% with total as record %}
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">{{ record.Storage }}</td>
+      <td>{{ record.Number__sum }}</td>
+    </tr>
+    {% endwith %}
+  </tbody>
+</table>
+
+
+<h5>by Storage</h5>
+<table class="mdl-data-table mdl-js-data-table full-width">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric" style="width:120px">Storage</th>
+      <th>Number</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in storage_records %}
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">{{ record.Storage }}</td>
+      <td>{{ record.Number__sum }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+<h5>by Type</h5>
+<table class="mdl-data-table mdl-js-data-table full-width">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric" style="width:120px">Type</th>
+      <th>Number</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in pdtype_records %}
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">{{ record.Type }}</td>
+      <td>{{ record.Number__sum }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+<h5>in detail</h5>
+<table class="mdl-data-table mdl-js-data-table full-width">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Storage</th>
+      <th class="mdl-data-table__cell--non-numeric">Type</th>
+      <th class="mdl-data-table__cell--non-numeric">MediaType</th>
+      <th>Capacity</td>
+      <th>RPM</td>
+      <th>Number</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in records %}
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">{{ record.Storage }}</td>
+      <td class="mdl-data-table__cell--non-numeric">{{ record.Type }}</td>
+      <td class="mdl-data-table__cell--non-numeric">{{ record.MediaType }}</td>
+      <td>{{ record.Capacity }}</td>
+      <td>{{ record.RPM }}</td>
+      <td>{{ record.Number }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+  </div>
+
+
+</div>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+
+    // set filter values
+    $( ".filter input" ).each(function( index ) {
+      $(this).val(getUrlParameter(this.name));
+    });
+
+    // export table to csv
+    $(".export").on('click', function (event) {
+      exportTableToCSV.apply(this, [$('#dvData>table'), $('#page_label').text()+'_'+$('#last_update').text()+'.csv']);
+    });
+
+$(function () { 
+
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+        },
+        title: {
+            text: 'Capacity, TB'
+        },
+        xAxis: {
+            categories: [{% for obj in objs %}'{{ obj.Storage }}', {% endfor %}]
+        },
+        yAxis: {
+            title: {
+                text: null,
+            },
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            reversed: true
+        },
+        tooltip: {
+            hideDelay: 100,
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y:.2f} TB</b> ({point.percentage:.0f}%)<br>',
+            shared: true,
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal',
+                //shadow: false,
+                //borderWidth: 0,
+                dataLabels: {
+                    enabled: true, 
+                    style: {
+                        fontWeight: 'normal',
+                        textShadow: 'none',
+                    },
+                    formatter: function() {
+                        if (this.percentage < 1) {
+                            return  '';
+                        } else {
+                            return  Highcharts.numberFormat(this.percentage, 0)+'%';
+                        }
+                    },
+                },
+            },
+
+        },
+        series: [{
+            name: 'RawFree',
+            //color: '#2CA8C2',
+            stack: 'Raw',
+            data: [{% for obj in objs %}{% if obj.RawFree %}{{ obj.RawFree }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'RawFree' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'RawAllocated',
+            //color: '#2CA8C2',
+            stack: 'Raw',
+            data: [{% for obj in objs %}{% if obj.RawAllocated %}{{ obj.RawAllocated }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'RawAllocated' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'FormattedAvailable',
+            color: '#98CB4A',
+            stack: 'Formatted',
+            data: [{% for obj in objs %}{% if obj.FormattedAvailable %}{{ obj.FormattedAvailable }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'FormattedAvailable' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'FormattedNotPresented',
+            color: '#F76D3C',
+            stack: 'Formatted',
+            data: [{% for obj in objs %}{% if obj.FormattedNotPresented %}{{ obj.FormattedNotPresented }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'FormattedNotPresented' in visible_series %}true{% else %}false{% endif %}
+        }, {
+            name: 'FormattedPresented',
+            color: '#F15F74',
+            stack: 'Formatted',
+            data: [{% for obj in objs %}{% if obj.FormattedPresented %}{{ obj.FormattedPresented }}{% else %}null{% endif %}, {% endfor %}],
+            visible: {% if 'FormattedPresented' in visible_series %}true{% else %}false{% endif %}
+        }]
+    });
+});
+
+$(".sortable").tablesorter();
+
+</script>
+{% endblock %}
+
+

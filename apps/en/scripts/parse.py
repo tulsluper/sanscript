@@ -104,6 +104,7 @@ def main():
         filepath = os.path.join(JSONDIR, name)
         dump_data(os.path.join(JSONDIR, name), records)
         logging.info('%s | %s records' %(name, len(records)))
+        """
         ks = {}
         for record in records:
             for key, value in record.items():
@@ -111,6 +112,7 @@ def main():
                      ks[key] = 0
                 if len(value) > ks[key]:
                     ks[key] = len(value)
+        """
 
     dump_data(os.path.join(JSONDIR, 'encurls'), encurls)
 
