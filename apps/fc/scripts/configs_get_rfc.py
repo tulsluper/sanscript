@@ -14,9 +14,9 @@ except:
 
 
 def itsm_request():
-    #url = "http://wsdlhpdp:wsdlhpdp@itsmtest.astelit.ukr:13777/SM/7/AstlhpdpIntegration.wsdl"
+    #url = "http://wsdlhpdp:password@itsmtest.astelit.ukr:13777/SM/7/AstlhpdpIntegration.wsdl"
     # uncomment below if wants to use prod itsm
-    url = "http://wsdlhpdp:D1az0l1n1313@itsm.astelit.ukr:13555/SM/7/AstlhpdpIntegration.wsdl"
+    url = "http://wsdlhpdp:password@itsm.astelit.ukr:13555/SM/7/AstlhpdpIntegration.wsdl"
     
     request = """\
 <?xml version="1.0" encoding="UTF-8"?>
