@@ -1,6 +1,6 @@
 # Install with: `pip3 install -r requirements.txt`
 
-django == 1.8
+django == 1.11.28
 jsonfield
 paramiko
 pysnmp
